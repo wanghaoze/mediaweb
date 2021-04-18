@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jingjusi.mediaweb.mapper.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.Course">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="speaker" jdbcType="VARCHAR" property="speaker" />
+    <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="index_image" jdbcType="VARCHAR" property="indexImage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, class_name, speaker, open_time, summary, remarks, index_image
+  </sql>
+  <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.CourseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jing_course_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jing_course_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jing_course_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jingjusi.mediaweb.common.domain.CourseExample">
+    delete from jing_course_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Course">
+    insert into jing_course_info (id, class_name, speaker, 
+      open_time, summary, remarks, 
+      index_image)
+    values (#{id,jdbcType=BIGINT}, #{className,jdbcType=VARCHAR}, #{speaker,jdbcType=VARCHAR}, 
+      #{openTime,jdbcType=TIMESTAMP}, #{summary,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{indexImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.Course">
+    insert into jing_course_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="speaker != null">
+        speaker,
+      </if>
+      <if test="openTime != null">
+        open_time,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="indexImage != null">
+        index_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="speaker != null">
+        #{speaker,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null">
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="indexImage != null">
+        #{indexImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jingjusi.mediaweb.common.domain.CourseExample" resultType="java.lang.Long">
+    select count(*) from jing_course_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jing_course_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.className != null">
+        class_name = #{record.className,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speaker != null">
+        speaker = #{record.speaker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openTime != null">
+        open_time = #{record.openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.summary != null">
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexImage != null">
+        index_image = #{record.indexImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jing_course_info
+    set id = #{record.id,jdbcType=BIGINT},
+      class_name = #{record.className,jdbcType=VARCHAR},
+      speaker = #{record.speaker,jdbcType=VARCHAR},
+      open_time = #{record.openTime,jdbcType=TIMESTAMP},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      index_image = #{record.indexImage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jingjusi.mediaweb.common.domain.Course">
+    update jing_course_info
+    <set>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="speaker != null">
+        speaker = #{speaker,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null">
+        open_time = #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="indexImage != null">
+        index_image = #{indexImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.Course">
+    update jing_course_info
+    set class_name = #{className,jdbcType=VARCHAR},
+      speaker = #{speaker,jdbcType=VARCHAR},
+      open_time = #{openTime,jdbcType=TIMESTAMP},
+      summary = #{summary,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      index_image = #{indexImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

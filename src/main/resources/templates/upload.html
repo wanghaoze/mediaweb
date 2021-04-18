@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .no-display{
+            display: none;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>净居寺云端讲堂 | 后台管理</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="../static/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="../static/index3.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <img src="../static/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Brad Diesel
+                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">Call me whenever you can...</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <img src="../static/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    John Pierce
+                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">I got your message bro</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <img src="../static/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Nora Silvester
+                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">The subject goes here</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
+            </li>
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">15</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">15 Notifications</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 4 new messages
+                        <span class="float-right text-muted text-sm">3 mins</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 8 friend requests
+                        <span class="float-right text-muted text-sm">12 hours</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-file mr-2"></i> 3 new reports
+                        <span class="float-right text-muted text-sm">2 days</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="../static/index3.html" class="brand-link elevation-4">
+            <img src="../static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="../static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Alexander Pierce</a>
+                </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                网络学习
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="upload.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>课程管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../static/index2.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>用户管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="upload.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>视频管理</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-male"></i>
+                            <p>
+                                人事管理
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>纪律管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>考勤管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/boxed.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>卫生管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>消防管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>接待管理</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="book-management.html" class="nav-link">
+                            <i class="nav-icon fas fa-book-open"></i>
+                            <p>
+                                图书管理
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-house-user"></i>
+                            <p>
+                                库房管理
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="pages/forms/general.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>仓储管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/forms/advanced.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>财务管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/forms/editors.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>基建管理</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tree"></i>
+                            <p>
+                                海会塔
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="pages/UI/general.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>General</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/icons.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Icons</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/buttons.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Buttons</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/sliders.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Sliders</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/modals.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Modals & Alerts</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/navbar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Navbar & Tabs</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/timeline.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Timeline</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/UI/ribbons.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ribbons</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>
+                                档案管理
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="pages/tables/simple.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>合同管理</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/tables/simple.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>票据管理</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>净居寺网络学习后台管理</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">主页</a></li>
+                            <li class="breadcrumb-item active">净居寺后台管理</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Default box -->
+                        <div class="col-lg-6" id="jjs_upload">
+                            <!--                                <div class="card">-->
+                            <!--                                    <div class="card-header">-->
+                            <!--                                        <h5 class="card-title m-0">Featured</h5>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="card-body">-->
+                            <!--                                        <h6 class="card-title">Special title treatment</h6>-->
+
+                            <!--                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+                            <!--                                        <a href="#" class="btn btn-primary">Go somewhere</a>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="card-title m-0">上传视频</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div  id="upload-video">
+                                        <div class="form-group mb-3">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="InputEmail1">视频命名</label>
+                                                    <input type="text" class="form-control" id="InputEmail1" placeholder="输入视频名字">
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label for="InputCourses">所属课程</label>
+                                                    <div id="InputCourses">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="中级班" id="course1">
+                                                            <label class="form-check-label" for="course1">净居寺云端讲堂 -- 中级班</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="讲经班" id="course2">
+                                                            <label class="form-check-label" for="course2">净居寺云端讲堂 -- 讲经班</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="研修班" id="course3">
+                                                            <label class="form-check-label" for="course3">净居寺云端讲堂 -- 研修班</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="随学班" id="course4">
+                                                            <label class="form-check-label" for="course4">净居寺云端讲堂 -- 随学班</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="初学班" id="course5">
+                                                            <label class="form-check-label" for="course5">净居寺云端讲堂 -- 初学班</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="公开课" id="course6">
+                                                            <label class="form-check-label" for="course6">净居寺云端讲堂 -- 公开课</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="course" value="以上全部" id="courseAll">
+                                                            <label class="form-check-label" for="courseAll">以上全部</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div>
+                                                    <label for="file_input">上传视频</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" id="file_input"
+                                                                   oninput="input_filename();"
+                                                                   accept="*/*">
+                                                            <label class="custom-file-label" id='file_input_lable1' for="file_input">选择视频</label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">浏览文件</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div>
+<!--                                                    <button onclick="upload('{{ request.url }}')" id="upload_btn"-->
+
+                                                    <button onclick="upload('http://localhost:8000/videoUpload')" id="upload_btn"
+                                                            class="btn btn-primary">提交</button>
+                                                    <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
+                                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                        上传中……
+                                                    </button>
+                                                    <button class="btn btn-secondary d-none" id="cancel_btn" type="button">取消上传</button>
+                                                </div>
+                                                <div id="progress_wrapper" class="d-none">
+                                                    <label id="progress_status">50% uploaded</label>
+                                                    <div class="progress mb-3">
+                                                        <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="25"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                                <div id="alert_wrapper"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0-rc
+        </div>
+        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../static/dist/js/demo.js"></script>
+<script src="../static/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="../static/index/js/dropzone.js"></script>
+
+</body>
+
+<script>
+    var progress = document.getElementById("progress");
+    var progress_wrapper = document.getElementById("progress_wrapper");
+    var progress_status = document.getElementById("progress_status");
+
+    var upload_btn = document.getElementById("upload_btn");
+    var loading_btn = document.getElementById("loading_btn");
+    var cancel_btn = document.getElementById("cancel_btn");
+
+    var alert_wrapper = document.getElementById("alert_wrapper")
+
+    var input = document.getElementById("file_input");
+    var input_lable1 = document.getElementById("file_input_lable1");
+
+
+        //获取复选框元素
+    var checkbox = document.all('course');
+    var checkall = document.getElementById('courseAll');
+
+    /*点击全选按钮全部选中的情况*/
+    checkall.addEventListener('click', function () {
+
+        if (checkbox.length == undefined) {//一个选项时
+            checkbox.checked = checkall.checked;
+        } else {
+            for (var i = 0; i < checkbox.length; i++) {//多个选项时
+                checkbox[i].checked = this.checked;
+            }
+        }
+    }, false);
+
+
+    //全部按钮什么时候被自动选中以及自动取消
+    if (checkbox.length == undefined) {//一个选项时
+        checkbox.addEventListener('click', function () {
+            checkall.checked = checkbox.checked;
+        }, false);
+    } else {
+        for (var i = 0; i < checkbox.length; i++) {//多个选项时
+            checkbox[i].addEventListener('click', function () {
+                for (var i = 0; i < checkbox.length; i++) {
+                    if (!checkbox[i].checked) {
+                        checkall.checked = false; //全选自动取消
+                        break;
+                    } else {
+                        if (i == checkbox.length - 1) {
+                            checkall.checked = true;
+                        }
+                        ; //全选自动勾选
+                    }
+                }
+            }, false);
+        }
+    }
+    // //打印您所有的选择
+    // document.getElementById('upload_btn').addEventListener('click',function() {
+    //
+    //     /*一个个去选择时的情况*/
+    //     var yourchoose = "您选择的爱好有：";
+    //     if (checkbox.length == undefined) {//一个选项时
+    //         if (checkbox.checked) yourchoose = yourchoose + checkbox.value;
+    //     }else{
+    //         for (var i = 0; i < checkbox.length; i++) {//多个选项时
+    //             if (checkbox[i].checked) yourchoose = yourchoose + checkbox[i].value + "、";
+    //         };
+    //     }
+    //     alert(yourchoose);
+    // },false);
+    //
+
+
+    function show_alert(message, alert) {
+        alert_wrapper.innerHTML = `
+            <div class="alert alert-${alert} alert-dismissible fade show" role="alert">
+                <span>${message}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        `;
+    };
+
+    function input_filename() {
+        input_lable1.innerText = input.files[0].name;
+    }
+
+    function upload(url) {
+        if (!input.value) {
+            show_alert("No file Selected", "warning");
+            return;
+        }
+        var data = new FormData();
+        var request = new XMLHttpRequest();
+        request.responseType = "json";
+        alert_wrapper.innerHTML = "";
+        input.disabled = true;
+        upload_btn.className = "btn btn-primary no-display-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ";
+        loading_btn.className = "btn btn-primary";
+        cancel_btn.className = "btn btn-secondary";
+        console.log("begin_progress_wrapper:",progress_wrapper.classList);
+        progress_wrapper.className = "";
+        console.log("remove_progress_wrapper:",progress_wrapper.classList);
+        var file = input.files[0]
+        var filename = file.name;
+        var filesize = file.size;
+        document.cookie = `filesize=${filesize}`;
+        data.append("file", file);
+        var my_chooses = "{";
+        var is_first = true;
+        if (checkbox.length == undefined) {//一个选项时
+            if (checkbox.checked) my_chooses = my_chooses + checkbox.value;
+        }else{
+            for (var i = 0; i < checkbox.length; i++) {//多个选项时
+                if (checkbox[i].checked) {
+                    if (is_first) {
+                        my_chooses = my_chooses + "\"" + i + "\": \"" + checkbox[i].value + "\"";
+                        is_first = false;
+                    } else {
+                        my_chooses = my_chooses + ", \"" + i + "\": \"" + checkbox[i].value + "\"";
+                    }
+                }
+            };
+        }
+        my_chooses = my_chooses + "}"
+        data.append("my_chooses", my_chooses);
+        request.upload.addEventListener("progress",function (e) {
+            var loaded = e.loaded;
+            var total = e.total;
+            var percentage_complete = (loaded / total) * 100;
+            console.log("progress_wrapper:",progress_wrapper.classList);
+            progress.setAttribute("style", `width: ${Math.floor(percentage_complete)}%`);
+            progress_status.innerText =  `${Math.floor(percentage_complete)}% 已上传`
+        })
+        request.addEventListener("load", function (e) {
+            if (request.status === 200) {
+                // show_alert(`${requset.response}`,"success");
+                show_alert(`${request.response.message}`, "success");
+                console.log(request.response.massage)
+            }
+            else {
+                show_alert(`上传文件失败`, "danger");
+            }
+            reset();
+        })
+        request.addEventListener("error",function (e) {
+            reset();
+            show_alert(`上传文件失败`, "danger");
+        })
+        request.open("post", url);
+        request.send(data);
+        cancel_btn.addEventListener("click",function (e) {
+            request.abort();
+            show_alert(`取消上传`,"warning");
+            reset();
+        })
+    }
+    function reset() {
+        input.value = null;
+        input.disabled = false;
+        cancel_btn.className="no-display";
+        loading_btn.className="no-display";
+        upload_btn.className = "btn btn-primary";
+        progress_wrapper.className="no-display";
+        progress.setAttribute("style", `with: 0%`);
+        input_lable1.innerText = "选择文件";
+    }
+</script>
+</html>

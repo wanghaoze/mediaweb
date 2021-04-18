@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jingjusi.mediaweb.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
+    <result column="roles" jdbcType="VARCHAR" property="roles" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="is_staff" jdbcType="BIT" property="isStaff" />
+    <result column="is_active" jdbcType="BIT" property="isActive" />
+    <result column="date_joined" jdbcType="TIMESTAMP" property="dateJoined" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, password, last_login, roles, username, first_name, last_name, email, number, 
+    is_staff, is_active, date_joined, level, remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jing_auth_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jing_auth_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jing_auth_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jingjusi.mediaweb.common.domain.UserExample">
+    delete from jing_auth_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.User">
+    insert into jing_auth_user (id, password, last_login, 
+      roles, username, first_name, 
+      last_name, email, number, 
+      is_staff, is_active, date_joined, 
+      level, remarks)
+    values (#{id,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{lastLogin,jdbcType=TIMESTAMP}, 
+      #{roles,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR}, 
+      #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{isStaff,jdbcType=BIT}, #{isActive,jdbcType=BIT}, #{dateJoined,jdbcType=TIMESTAMP}, 
+      #{level,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.User">
+    insert into jing_auth_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="lastLogin != null">
+        last_login,
+      </if>
+      <if test="roles != null">
+        roles,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="lastName != null">
+        last_name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="isStaff != null">
+        is_staff,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="dateJoined != null">
+        date_joined,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null">
+        #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roles != null">
+        #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isStaff != null">
+        #{isStaff,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="dateJoined != null">
+        #{dateJoined,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jingjusi.mediaweb.common.domain.UserExample" resultType="java.lang.Long">
+    select count(*) from jing_auth_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jing_auth_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogin != null">
+        last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.roles != null">
+        roles = #{record.roles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstName != null">
+        first_name = #{record.firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastName != null">
+        last_name = #{record.lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isStaff != null">
+        is_staff = #{record.isStaff,jdbcType=BIT},
+      </if>
+      <if test="record.isActive != null">
+        is_active = #{record.isActive,jdbcType=BIT},
+      </if>
+      <if test="record.dateJoined != null">
+        date_joined = #{record.dateJoined,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jing_auth_user
+    set id = #{record.id,jdbcType=BIGINT},
+      password = #{record.password,jdbcType=VARCHAR},
+      last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
+      roles = #{record.roles,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      first_name = #{record.firstName,jdbcType=VARCHAR},
+      last_name = #{record.lastName,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      is_staff = #{record.isStaff,jdbcType=BIT},
+      is_active = #{record.isActive,jdbcType=BIT},
+      date_joined = #{record.dateJoined,jdbcType=TIMESTAMP},
+      level = #{record.level,jdbcType=INTEGER},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jingjusi.mediaweb.common.domain.User">
+    update jing_auth_user
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogin != null">
+        last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roles != null">
+        roles = #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        last_name = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isStaff != null">
+        is_staff = #{isStaff,jdbcType=BIT},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="dateJoined != null">
+        date_joined = #{dateJoined,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.User">
+    update jing_auth_user
+    set password = #{password,jdbcType=VARCHAR},
+      last_login = #{lastLogin,jdbcType=TIMESTAMP},
+      roles = #{roles,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      is_staff = #{isStaff,jdbcType=BIT},
+      is_active = #{isActive,jdbcType=BIT},
+      date_joined = #{dateJoined,jdbcType=TIMESTAMP},
+      level = #{level,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

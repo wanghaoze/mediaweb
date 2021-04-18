@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jingjusi.mediaweb.mapper.VideoMapper">
+  <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.Video">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
+    <result column="video_size" jdbcType="VARCHAR" property="videoSize" />
+    <result column="video_width" jdbcType="INTEGER" property="videoWidth" />
+    <result column="video_height" jdbcType="INTEGER" property="videoHeight" />
+    <result column="video_time" jdbcType="TIME" property="videoTime" />
+    <result column="speaker" jdbcType="VARCHAR" property="speaker" />
+    <result column="ma_lv" jdbcType="DECIMAL" property="maLv" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="upload_user" jdbcType="VARCHAR" property="uploadUser" />
+    <result column="last_request" jdbcType="TIMESTAMP" property="lastRequest" />
+    <result column="cnt_visit" jdbcType="BIGINT" property="cntVisit" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, video_url, video_name, video_size, video_width, video_height, video_time, speaker, 
+    ma_lv, upload_time, upload_user, last_request, cnt_visit, remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.VideoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jing_video_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jing_video_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jing_video_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jingjusi.mediaweb.common.domain.VideoExample">
+    delete from jing_video_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Video">
+    insert into jing_video_info (id, video_url, video_name, 
+      video_size, video_width, video_height, 
+      video_time, speaker, ma_lv, 
+      upload_time, upload_user, last_request, 
+      cnt_visit, remarks)
+    values (#{id,jdbcType=BIGINT}, #{videoUrl,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{videoSize,jdbcType=VARCHAR}, #{videoWidth,jdbcType=INTEGER}, #{videoHeight,jdbcType=INTEGER}, 
+      #{videoTime,jdbcType=TIME}, #{speaker,jdbcType=VARCHAR}, #{maLv,jdbcType=DECIMAL}, 
+      #{uploadTime,jdbcType=TIMESTAMP}, #{uploadUser,jdbcType=VARCHAR}, #{lastRequest,jdbcType=TIMESTAMP}, 
+      #{cntVisit,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.Video">
+    insert into jing_video_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="videoUrl != null">
+        video_url,
+      </if>
+      <if test="videoName != null">
+        video_name,
+      </if>
+      <if test="videoSize != null">
+        video_size,
+      </if>
+      <if test="videoWidth != null">
+        video_width,
+      </if>
+      <if test="videoHeight != null">
+        video_height,
+      </if>
+      <if test="videoTime != null">
+        video_time,
+      </if>
+      <if test="speaker != null">
+        speaker,
+      </if>
+      <if test="maLv != null">
+        ma_lv,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="uploadUser != null">
+        upload_user,
+      </if>
+      <if test="lastRequest != null">
+        last_request,
+      </if>
+      <if test="cntVisit != null">
+        cnt_visit,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="videoUrl != null">
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSize != null">
+        #{videoSize,jdbcType=VARCHAR},
+      </if>
+      <if test="videoWidth != null">
+        #{videoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="videoHeight != null">
+        #{videoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="videoTime != null">
+        #{videoTime,jdbcType=TIME},
+      </if>
+      <if test="speaker != null">
+        #{speaker,jdbcType=VARCHAR},
+      </if>
+      <if test="maLv != null">
+        #{maLv,jdbcType=DECIMAL},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadUser != null">
+        #{uploadUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastRequest != null">
+        #{lastRequest,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cntVisit != null">
+        #{cntVisit,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jingjusi.mediaweb.common.domain.VideoExample" resultType="java.lang.Long">
+    select count(*) from jing_video_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jing_video_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoUrl != null">
+        video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoName != null">
+        video_name = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoSize != null">
+        video_size = #{record.videoSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoWidth != null">
+        video_width = #{record.videoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoHeight != null">
+        video_height = #{record.videoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoTime != null">
+        video_time = #{record.videoTime,jdbcType=TIME},
+      </if>
+      <if test="record.speaker != null">
+        speaker = #{record.speaker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maLv != null">
+        ma_lv = #{record.maLv,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uploadTime != null">
+        upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uploadUser != null">
+        upload_user = #{record.uploadUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastRequest != null">
+        last_request = #{record.lastRequest,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cntVisit != null">
+        cnt_visit = #{record.cntVisit,jdbcType=BIGINT},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jing_video_info
+    set id = #{record.id,jdbcType=BIGINT},
+      video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      video_name = #{record.videoName,jdbcType=VARCHAR},
+      video_size = #{record.videoSize,jdbcType=VARCHAR},
+      video_width = #{record.videoWidth,jdbcType=INTEGER},
+      video_height = #{record.videoHeight,jdbcType=INTEGER},
+      video_time = #{record.videoTime,jdbcType=TIME},
+      speaker = #{record.speaker,jdbcType=VARCHAR},
+      ma_lv = #{record.maLv,jdbcType=DECIMAL},
+      upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      upload_user = #{record.uploadUser,jdbcType=VARCHAR},
+      last_request = #{record.lastRequest,jdbcType=TIMESTAMP},
+      cnt_visit = #{record.cntVisit,jdbcType=BIGINT},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jingjusi.mediaweb.common.domain.Video">
+    update jing_video_info
+    <set>
+      <if test="videoUrl != null">
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoName != null">
+        video_name = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSize != null">
+        video_size = #{videoSize,jdbcType=VARCHAR},
+      </if>
+      <if test="videoWidth != null">
+        video_width = #{videoWidth,jdbcType=INTEGER},
+      </if>
+      <if test="videoHeight != null">
+        video_height = #{videoHeight,jdbcType=INTEGER},
+      </if>
+      <if test="videoTime != null">
+        video_time = #{videoTime,jdbcType=TIME},
+      </if>
+      <if test="speaker != null">
+        speaker = #{speaker,jdbcType=VARCHAR},
+      </if>
+      <if test="maLv != null">
+        ma_lv = #{maLv,jdbcType=DECIMAL},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadUser != null">
+        upload_user = #{uploadUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastRequest != null">
+        last_request = #{lastRequest,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cntVisit != null">
+        cnt_visit = #{cntVisit,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.Video">
+    update jing_video_info
+    set video_url = #{videoUrl,jdbcType=VARCHAR},
+      video_name = #{videoName,jdbcType=VARCHAR},
+      video_size = #{videoSize,jdbcType=VARCHAR},
+      video_width = #{videoWidth,jdbcType=INTEGER},
+      video_height = #{videoHeight,jdbcType=INTEGER},
+      video_time = #{videoTime,jdbcType=TIME},
+      speaker = #{speaker,jdbcType=VARCHAR},
+      ma_lv = #{maLv,jdbcType=DECIMAL},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      upload_user = #{uploadUser,jdbcType=VARCHAR},
+      last_request = #{lastRequest,jdbcType=TIMESTAMP},
+      cnt_visit = #{cntVisit,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
