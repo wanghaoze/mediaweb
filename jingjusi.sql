@@ -89,7 +89,7 @@ create table jing_course_info(
                                  id bigint not null auto_increment comment '主键',
                                  class_name varchar(64) comment '课程名',
                                  speaker varchar(64) comment '主讲人',
-                                 open_time timestamp comment '开设时间',
+                                 open_time timestamp comment '开设时间' default now(),
                                  summary varchar(1024) comment '课程简介',
                                  remarks varchar(256) comment '备注',
                                  index_image varchar(128) comment '图片url',

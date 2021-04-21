@@ -5,12 +5,18 @@ import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.*;
 import com.jingjusi.mediaweb.mapper.CourseMapper;
 import com.jingjusi.mediaweb.mapper.CourseUserMapper;
+import com.jingjusi.mediaweb.mapper.UserMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourceServiceImpl implements CourseService{
@@ -18,6 +24,8 @@ public class CourceServiceImpl implements CourseService{
     CourseMapper courseMapper;
     @Autowired
     CourseUserMapper courseUserMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public String addCourse(Course course) {
@@ -135,6 +143,12 @@ public class CourceServiceImpl implements CourseService{
     @Override
     public String addUserToCourse(Long userId, Long courseId, String role) {
         try {
+            CourseUserExample courseUserExample = new CourseUserExample();
+            courseUserExample.createCriteria().andUserIdEqualTo(userId).andCourseIdEqualTo(courseId);
+            List<CourseUser>courseUsers = courseUserMapper.selectByExample(courseUserExample);
+            if (!courseUsers.isEmpty()) {
+                return "用户已存在！";
+            }
             CourseUser courseUser= new CourseUser();
             courseUser.setCourseId(courseId);
             courseUser.setUserId(userId);
@@ -149,21 +163,97 @@ public class CourceServiceImpl implements CourseService{
 
     @Override
     public String deleteUserFromCourse(Long userId, Long courseId) {
-        return null;
+        try{
+            CourseUserExample courseUserExample = new CourseUserExample();
+            courseUserExample.createCriteria().andUserIdEqualTo(userId).andCourseIdEqualTo(courseId);
+            List<CourseUser> courseUsers =  new ArrayList<>(courseUserMapper.selectByExample(courseUserExample));
+            if (!courseUsers.isEmpty()) {
+                try{
+                    CourseUser courseUser = courseUsers.get(0);
+                    courseUserMapper.deleteByPrimaryKey(courseUser.getId());
+                } catch (Exception e) {
+                    System.out.println(e);
+                    return "数据存在但删除失败";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return "数据不存在，删除失败";
+        }
+        return "删除失败";
     }
 
     @Override
-    public String updateUserInCourse(Long userId, Long courseId, String role) {
-        return null;
+    public String updateUserInCourse(Long userId, Long courseId, String role, Boolean mode) {
+        //mode==true 为增， mode==false 为删
+        try {
+            CourseUserExample courseUserExample = new CourseUserExample();
+            courseUserExample.createCriteria().andCourseIdEqualTo(courseId).andUserIdEqualTo(userId);
+            List<CourseUser> courseUsers = new ArrayList<>(courseUserMapper.selectByExample(courseUserExample));
+            if (!courseUsers.isEmpty()) {
+                try{
+                    CourseUser courseUser = courseUsers.get(0);
+                    List<GrantedAuthority> authorities = Arrays.stream(courseUser.getRoles().split(","))
+                            .map(SimpleGrantedAuthority::new)
+                            .collect(Collectors.toList());
+                    if (mode) {
+                        authorities.add(new SimpleGrantedAuthority(role));
+                    } else {
+                        int index = authorities.indexOf(new SimpleGrantedAuthority(role));
+                        if (index!=-1) {
+                            authorities.remove(index);
+                        }
+                    }
+                    String roles = StringUtils.join(authorities,",");
+                    System.out.println(roles);
+                    courseUser.setRoles(roles);
+                    courseUserMapper.updateByPrimaryKey(courseUser);
+                    return "更新成功";
+                } catch (Exception e) {
+                    System.out.println(e);
+                    return "数据存在但更新失败";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return "更新失败";
+        }
+        return "更新失败";
     }
 
     @Override
-    public PageInfo<User> findCourseByUser(Long userId, Integer pageNo, Integer pageSize) {
-        return null;
+    public PageInfo<Course> findCourseByUser(Long userId, Integer pageNo, Integer pageSize) {
+        try{
+            PageHelper.startPage(pageNo,pageSize);
+            CourseUserExample courseUserExample = new CourseUserExample();
+            courseUserExample.createCriteria().andUserIdEqualTo(userId);
+            List<CourseUser> courseUsers = new ArrayList<>(courseUserMapper.selectByExample(courseUserExample));
+            List<Course> courses = new ArrayList<>();
+            for (CourseUser courseUser:courseUsers) {
+                courses.add(courseMapper.selectByPrimaryKey(courseUser.getCourseId()));
+            }
+            return new PageInfo<>(courses);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @Override
     public PageInfo<User> findUserByCourseRole(Long courseId, String role, Integer pageNo, Integer pageSize) {
-        return null;
+        try{
+            PageHelper.startPage(pageNo,pageSize);
+            CourseUserExample courseUserExample = new CourseUserExample();
+            courseUserExample.createCriteria().andCourseIdEqualTo(courseId);
+            List<CourseUser> courseUsers = new ArrayList<>(courseUserMapper.selectByExample(courseUserExample));
+            List<User> users = new ArrayList<>();
+            for (CourseUser courseUser:courseUsers) {
+                users.add(userMapper.selectByPrimaryKey(courseUser.getUserId()));
+            }
+            return new PageInfo<>(users);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 }

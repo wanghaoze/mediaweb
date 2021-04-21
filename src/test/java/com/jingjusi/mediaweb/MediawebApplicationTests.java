@@ -3,6 +3,7 @@ package com.jingjusi.mediaweb;
 import com.jingjusi.mediaweb.common.domain.User;
 import com.jingjusi.mediaweb.mapper.UserMapper;
 import com.jingjusi.mediaweb.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MediawebApplicationTests {
     @Autowired
     UserMapper userMapper;
+    @Test
+    void tt() {
+        String [] a={"abc","d","ef"};
+        String str= StringUtils.join(a,",");
+        System.out.println(str);
+    }
     @Test
     void contextLoads() {
     }

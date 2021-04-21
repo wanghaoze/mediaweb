@@ -42,17 +42,39 @@ public class ImageServiceImpl implements ImageService{
 
     @Override
     public PageInfo<Image> getImageByName(String imName, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        try {
+            ImageExample imageExample = new ImageExample();
+            imageExample.createCriteria().andImageNameLike("%"+imName+"%");
+            return new PageInfo<>(new ArrayList<Image>(imageMapper.selectByExample(imageExample)));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return null;
     }
 
     @Override
     public String deleteImageById(Long imageID) {
-        return null;
+        try {
+            imageMapper.deleteByPrimaryKey(imageID);
+            return "删除成功";
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "删除失败";
     }
 
     @Override
     public String updateImageById(Long imageID, Image image) {
-        return null;
+        try {
+            ImageExample imageExample = new ImageExample();
+            imageExample.createCriteria().andIdEqualTo(imageID);
+            imageMapper.updateByExampleSelective(image,imageExample);
+            return "更新成功";
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "更新失败";
     }
 
     @Override

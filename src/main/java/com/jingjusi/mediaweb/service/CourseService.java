@@ -21,7 +21,7 @@ public interface CourseService {
     public PageInfo<Course> findCourseBySummary(String summary, Integer pageNo, Integer pageSize);
     public String addUserToCourse(Long userId, Long courseId, String role);
     public String deleteUserFromCourse(Long userId, Long courseId);
-    public String updateUserInCourse(Long userId, Long courseId, String role);
-    public PageInfo<User> findCourseByUser(Long userId, Integer pageNo, Integer pageSize);
+    public String updateUserInCourse(Long userId, Long courseId, String role, Boolean mode);
+    public PageInfo<Course> findCourseByUser(Long userId, Integer pageNo, Integer pageSize);
     public PageInfo<User> findUserByCourseRole(Long courseId, String role, Integer pageNo, Integer pageSize);
 }
