@@ -28,8 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/videos/add").hasRole("ADMIN")
+                .antMatchers("/videoUpload").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .and().formLogin();
+        http.cors().and().csrf().disable();
     }
 
     @Bean

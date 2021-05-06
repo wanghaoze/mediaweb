@@ -192,7 +192,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item">
+                    <li class="nav-item  menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -202,27 +202,27 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="upload.html" class="nav-link">
+                                <a href="/manage/courses" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>课程管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../static/index2.html" class="nav-link">
+                                <a href="/manage/users" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>用户管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="upload.html" class="nav-link">
+                                <a href="/manage/videos" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>视频管理</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-male"></i>
                             <p>
                                 人事管理
@@ -395,7 +395,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>净居寺网络学习后台管理</h1>
+                        <h1>净居寺网络学习后台管理 -- 视频管理</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -409,119 +409,39 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <!-- Default box -->
-                        <div class="col-lg-6" id="jjs_upload">
-                            <!--                                <div class="card">-->
-                            <!--                                    <div class="card-header">-->
-                            <!--                                        <h5 class="card-title m-0">Featured</h5>-->
-                            <!--                                    </div>-->
-                            <!--                                    <div class="card-body">-->
-                            <!--                                        <h6 class="card-title">Special title treatment</h6>-->
-
-                            <!--                                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
-                            <!--                                        <a href="#" class="btn btn-primary">Go somewhere</a>-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="card-title m-0">上传视频</h5>
+                    <div class="card card-success">
+                        <div><span ></span></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6 col-xl-4">
+                                    <div class="card mb-2 bg-gradient-dark">
+                                        <img class="card-img-top" src="../static/dist/img/newphoto.png" alt="Dist Photo 1">
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                            <!--                                            <h5 class="card-title text-primary text-white"><span th:text="${w.className}"></span></h5>-->
+                                            <!--                                            <p class="card-text text-white pb-2 pt-1"><span th:text="${w.summary}"></span></p>-->
+                                            <a href="/videos/add" class="card-title text-primary text-black-50">添加视频</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <div  id="upload-video">
-                                        <div class="form-group mb-3">
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="InputEmail1">视频命名</label>
-                                                    <input type="text" class="form-control" id="InputEmail1" placeholder="输入视频名字">
-                                                </div>
-                                                <div class="form-group">
-
-                                                    <label for="InputCourses">所属课程</label>
-                                                    <div id="InputCourses">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="中级班" id="course1">
-                                                            <label class="form-check-label" for="course1">净居寺云端讲堂 -- 中级班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="讲经班" id="course2">
-                                                            <label class="form-check-label" for="course2">净居寺云端讲堂 -- 讲经班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="研修班" id="course3">
-                                                            <label class="form-check-label" for="course3">净居寺云端讲堂 -- 研修班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="随学班" id="course4">
-                                                            <label class="form-check-label" for="course4">净居寺云端讲堂 -- 随学班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="初学班" id="course5">
-                                                            <label class="form-check-label" for="course5">净居寺云端讲堂 -- 初学班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="公开课" id="course6">
-                                                            <label class="form-check-label" for="course6">净居寺云端讲堂 -- 公开课</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="以上全部" id="courseAll">
-                                                            <label class="form-check-label" for="courseAll">以上全部</label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div>
-                                                    <label for="file_input">上传视频</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="file_input"
-                                                                   oninput="input_filename();"
-                                                                   accept="*/*">
-                                                            <label class="custom-file-label" id='file_input_lable1' for="file_input">选择视频</label>
-                                                        </div>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">浏览文件</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div>
-<!--                                                    <button onclick="upload('{{ request.url }}')" id="upload_btn"-->
-
-                                                    <button onclick="upload('/videoUpload')" id="upload_btn"
-                                                            class="btn btn-primary">提交</button>
-                                                    <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
-                                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                        上传中……
-                                                    </button>
-                                                    <button class="btn btn-secondary d-none" id="cancel_btn" type="button">取消上传</button>
-                                                </div>
-                                                <div id="progress_wrapper" class="d-none">
-                                                    <label id="progress_status">50% uploaded</label>
-                                                    <div class="progress mb-3">
-                                                        <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="25"
-                                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                                <div id="alert_wrapper"></div>
-                                            </div>
-                                            <div>
-                                            </div>
+                                <div class="col-md-12 col-lg-6 col-xl-4" th:each="w:${list_video}">
+                                    <div class="card mb-2 bg-gradient-dark">
+                                        <img class="card-img-top" src="../static/dist/img/photo1.jpg" alt="Dist Photo 1">
+                                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                            <h5 class="card-title text-primary text-white"><span th:text="${w.videoName}"></span></h5>
+                                            <p class="card-text text-white pb-2 pt-1"><span th:text="${w.videoTime}"></span></p>
+                                            <a href="#" class="text-white">删除视频</a>
+                                            <a onclick="" class="text-white">替换视频</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.card -->
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -569,7 +489,7 @@
     var input_lable1 = document.getElementById("file_input_lable1");
 
 
-        //获取复选框元素
+    //获取复选框元素
     var checkbox = document.all('course');
     var checkall = document.getElementById('courseAll');
 
@@ -678,7 +598,7 @@
             };
         }
         my_chooses = my_chooses + "}"
-        // data.append("my_chooses", my_chooses);
+        data.append("my_chooses", my_chooses);
         request.upload.addEventListener("progress",function (e) {
             var loaded = e.loaded;
             var total = e.total;

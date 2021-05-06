@@ -14,4 +14,5 @@ public interface VideoService {
     public PageInfo<Video> getVideosByCourse(Long courseId, Integer pageNo, Integer pageSize);
     public String addVideoToCourse(Long videoId, Long courseId);
     public String deleteVideoFromCourse(Long videoId, Long courseId);
+    public String updateVideoById(Long videoId, Video video);
 }

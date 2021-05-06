@@ -1,6 +1,5 @@
 package com.jingjusi.mediaweb.common.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Video {
@@ -12,15 +11,11 @@ public class Video {
 
     private String videoSize;
 
-    private Integer videoWidth;
-
-    private Integer videoHeight;
-
     private Date videoTime;
 
     private String speaker;
 
-    private BigDecimal maLv;
+    private String framePath;
 
     private Date uploadTime;
 
@@ -64,22 +59,6 @@ public class Video {
         this.videoSize = videoSize == null ? null : videoSize.trim();
     }
 
-    public Integer getVideoWidth() {
-        return videoWidth;
-    }
-
-    public void setVideoWidth(Integer videoWidth) {
-        this.videoWidth = videoWidth;
-    }
-
-    public Integer getVideoHeight() {
-        return videoHeight;
-    }
-
-    public void setVideoHeight(Integer videoHeight) {
-        this.videoHeight = videoHeight;
-    }
-
     public Date getVideoTime() {
         return videoTime;
     }
@@ -96,12 +75,12 @@ public class Video {
         this.speaker = speaker == null ? null : speaker.trim();
     }
 
-    public BigDecimal getMaLv() {
-        return maLv;
+    public String getFramePath() {
+        return framePath;
     }
 
-    public void setMaLv(BigDecimal maLv) {
-        this.maLv = maLv;
+    public void setFramePath(String framePath) {
+        this.framePath = framePath == null ? null : framePath.trim();
     }
 
     public Date getUploadTime() {

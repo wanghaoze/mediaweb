@@ -6,11 +6,9 @@
     <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
     <result column="video_name" jdbcType="VARCHAR" property="videoName" />
     <result column="video_size" jdbcType="VARCHAR" property="videoSize" />
-    <result column="video_width" jdbcType="INTEGER" property="videoWidth" />
-    <result column="video_height" jdbcType="INTEGER" property="videoHeight" />
     <result column="video_time" jdbcType="TIME" property="videoTime" />
     <result column="speaker" jdbcType="VARCHAR" property="speaker" />
-    <result column="ma_lv" jdbcType="DECIMAL" property="maLv" />
+    <result column="frame_path" jdbcType="VARCHAR" property="framePath" />
     <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
     <result column="upload_user" jdbcType="VARCHAR" property="uploadUser" />
     <result column="last_request" jdbcType="TIMESTAMP" property="lastRequest" />
@@ -76,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, video_url, video_name, video_size, video_width, video_height, video_time, speaker, 
-    ma_lv, upload_time, upload_user, last_request, cnt_visit, remarks
+    id, video_url, video_name, video_size, video_time, speaker, frame_path, upload_time, 
+    upload_user, last_request, cnt_visit, remarks
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.VideoExample" resultMap="BaseResultMap">
     select
@@ -111,15 +109,15 @@
   </delete>
   <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Video">
     insert into jing_video_info (id, video_url, video_name, 
-      video_size, video_width, video_height, 
-      video_time, speaker, ma_lv, 
-      upload_time, upload_user, last_request, 
-      cnt_visit, remarks)
+      video_size, video_time, speaker, 
+      frame_path, upload_time, upload_user, 
+      last_request, cnt_visit, remarks
+      )
     values (#{id,jdbcType=BIGINT}, #{videoUrl,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
-      #{videoSize,jdbcType=VARCHAR}, #{videoWidth,jdbcType=INTEGER}, #{videoHeight,jdbcType=INTEGER}, 
-      #{videoTime,jdbcType=TIME}, #{speaker,jdbcType=VARCHAR}, #{maLv,jdbcType=DECIMAL}, 
-      #{uploadTime,jdbcType=TIMESTAMP}, #{uploadUser,jdbcType=VARCHAR}, #{lastRequest,jdbcType=TIMESTAMP}, 
-      #{cntVisit,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR})
+      #{videoSize,jdbcType=VARCHAR}, #{videoTime,jdbcType=TIME}, #{speaker,jdbcType=VARCHAR}, 
+      #{framePath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{uploadUser,jdbcType=VARCHAR}, 
+      #{lastRequest,jdbcType=TIMESTAMP}, #{cntVisit,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.Video">
     insert into jing_video_info
@@ -136,20 +134,14 @@
       <if test="videoSize != null">
         video_size,
       </if>
-      <if test="videoWidth != null">
-        video_width,
-      </if>
-      <if test="videoHeight != null">
-        video_height,
-      </if>
       <if test="videoTime != null">
         video_time,
       </if>
       <if test="speaker != null">
         speaker,
       </if>
-      <if test="maLv != null">
-        ma_lv,
+      <if test="framePath != null">
+        frame_path,
       </if>
       <if test="uploadTime != null">
         upload_time,
@@ -180,20 +172,14 @@
       <if test="videoSize != null">
         #{videoSize,jdbcType=VARCHAR},
       </if>
-      <if test="videoWidth != null">
-        #{videoWidth,jdbcType=INTEGER},
-      </if>
-      <if test="videoHeight != null">
-        #{videoHeight,jdbcType=INTEGER},
-      </if>
       <if test="videoTime != null">
         #{videoTime,jdbcType=TIME},
       </if>
       <if test="speaker != null">
         #{speaker,jdbcType=VARCHAR},
       </if>
-      <if test="maLv != null">
-        #{maLv,jdbcType=DECIMAL},
+      <if test="framePath != null">
+        #{framePath,jdbcType=VARCHAR},
       </if>
       <if test="uploadTime != null">
         #{uploadTime,jdbcType=TIMESTAMP},
@@ -233,20 +219,14 @@
       <if test="record.videoSize != null">
         video_size = #{record.videoSize,jdbcType=VARCHAR},
       </if>
-      <if test="record.videoWidth != null">
-        video_width = #{record.videoWidth,jdbcType=INTEGER},
-      </if>
-      <if test="record.videoHeight != null">
-        video_height = #{record.videoHeight,jdbcType=INTEGER},
-      </if>
       <if test="record.videoTime != null">
         video_time = #{record.videoTime,jdbcType=TIME},
       </if>
       <if test="record.speaker != null">
         speaker = #{record.speaker,jdbcType=VARCHAR},
       </if>
-      <if test="record.maLv != null">
-        ma_lv = #{record.maLv,jdbcType=DECIMAL},
+      <if test="record.framePath != null">
+        frame_path = #{record.framePath,jdbcType=VARCHAR},
       </if>
       <if test="record.uploadTime != null">
         upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
@@ -274,11 +254,9 @@
       video_url = #{record.videoUrl,jdbcType=VARCHAR},
       video_name = #{record.videoName,jdbcType=VARCHAR},
       video_size = #{record.videoSize,jdbcType=VARCHAR},
-      video_width = #{record.videoWidth,jdbcType=INTEGER},
-      video_height = #{record.videoHeight,jdbcType=INTEGER},
       video_time = #{record.videoTime,jdbcType=TIME},
       speaker = #{record.speaker,jdbcType=VARCHAR},
-      ma_lv = #{record.maLv,jdbcType=DECIMAL},
+      frame_path = #{record.framePath,jdbcType=VARCHAR},
       upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
       upload_user = #{record.uploadUser,jdbcType=VARCHAR},
       last_request = #{record.lastRequest,jdbcType=TIMESTAMP},
@@ -300,20 +278,14 @@
       <if test="videoSize != null">
         video_size = #{videoSize,jdbcType=VARCHAR},
       </if>
-      <if test="videoWidth != null">
-        video_width = #{videoWidth,jdbcType=INTEGER},
-      </if>
-      <if test="videoHeight != null">
-        video_height = #{videoHeight,jdbcType=INTEGER},
-      </if>
       <if test="videoTime != null">
         video_time = #{videoTime,jdbcType=TIME},
       </if>
       <if test="speaker != null">
         speaker = #{speaker,jdbcType=VARCHAR},
       </if>
-      <if test="maLv != null">
-        ma_lv = #{maLv,jdbcType=DECIMAL},
+      <if test="framePath != null">
+        frame_path = #{framePath,jdbcType=VARCHAR},
       </if>
       <if test="uploadTime != null">
         upload_time = #{uploadTime,jdbcType=TIMESTAMP},
@@ -338,11 +310,9 @@
     set video_url = #{videoUrl,jdbcType=VARCHAR},
       video_name = #{videoName,jdbcType=VARCHAR},
       video_size = #{videoSize,jdbcType=VARCHAR},
-      video_width = #{videoWidth,jdbcType=INTEGER},
-      video_height = #{videoHeight,jdbcType=INTEGER},
       video_time = #{videoTime,jdbcType=TIME},
       speaker = #{speaker,jdbcType=VARCHAR},
-      ma_lv = #{maLv,jdbcType=DECIMAL},
+      frame_path = #{framePath,jdbcType=VARCHAR},
       upload_time = #{uploadTime,jdbcType=TIMESTAMP},
       upload_user = #{uploadUser,jdbcType=VARCHAR},
       last_request = #{lastRequest,jdbcType=TIMESTAMP},

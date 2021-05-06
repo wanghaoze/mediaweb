@@ -48,11 +48,9 @@ create table jing_video_info(
                                 video_url varchar(128) not null unique comment '视频url',
                                 video_name varchar(52) not null comment '视频名',
                                 video_size varchar(32) not null comment '视频大小',
-                                video_width int comment '视频宽度',
-                                video_height int comment '视频高度',
                                 video_time time not null comment '视频时长',
                                 speaker varchar(64) comment '主讲人',
-                                ma_lv decimal(3,2) comment '码率',
+                                framePath varchar(32) comment '视频预览图',
                                 upload_time timestamp comment '上传时间' default now(),
                                 upload_user varchar(32) comment '上传用户',
                                 last_request timestamp comment '上次访问时间' default now(),
@@ -118,3 +116,43 @@ create table jing_course_user_info(
                                          key idx_video(user_id)
 )engine = InnoDB comment '课程-用户信息表';
 
+create table jing_library_book(
+        `book_id` int(11) NOT NULL AUTO_INCREMENT,
+        `ISBN` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+        `location` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+        `state` int(11) NOT NULL,
+        `operator` int(11) NOT NULL,
+        PRIMARY KEY (`book_id`),
+        UNIQUE KEY `BID_UNIQUE` (`book_id`),
+        KEY `op2_idx` (`operator`),
+        KEY `bo_idx` (`ISBN`)
+)engine = InnoDB comment '书籍信息';
+
+CREATE TABLE `booklist` (
+                            `ISBN` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+                            `bname` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+                            `publisher` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+                            `writer` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+                            `ptime` date DEFAULT NULL,
+                            `number` int(11) NOT NULL DEFAULT '0',
+                            `operator` int(11) NOT NULL,
+                            `is_popular` int(11) NOT NULL DEFAULT '0',
+                            PRIMARY KEY (`ISBN`),
+                            UNIQUE KEY `ISBN_UNIQUE` (`ISBN`),
+                            KEY `op_idx` (`operator`)
+);
+
+CREATE TABLE `borrow` (
+                          `borrow_id` int(11) NOT NULL AUTO_INCREMENT,
+                          `book_id` int(11) NOT NULL,
+                          `user_id` int(11) NOT NULL,
+                          `btime` datetime NOT NULL,
+                          `deadline` datetime NOT NULL,
+                          `rtime` datetime DEFAULT NULL,
+                          `operator` int(11) DEFAULT NULL,
+                          PRIMARY KEY (`borrow_id`),
+                          UNIQUE KEY `BWID_UNIQUE` (`borrow_id`),
+                          KEY `boo_idx` (`book_id`),
+                          KEY `re_idx` (`user_id`),
+                          KEY `op3_idx` (`operator`)
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

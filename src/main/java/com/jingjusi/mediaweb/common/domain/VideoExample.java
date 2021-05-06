@@ -1,6 +1,5 @@
 package com.jingjusi.mediaweb.common.domain;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -403,126 +402,6 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andVideoWidthIsNull() {
-            addCriterion("video_width is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthIsNotNull() {
-            addCriterion("video_width is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthEqualTo(Integer value) {
-            addCriterion("video_width =", value, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthNotEqualTo(Integer value) {
-            addCriterion("video_width <>", value, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthGreaterThan(Integer value) {
-            addCriterion("video_width >", value, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("video_width >=", value, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthLessThan(Integer value) {
-            addCriterion("video_width <", value, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthLessThanOrEqualTo(Integer value) {
-            addCriterion("video_width <=", value, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthIn(List<Integer> values) {
-            addCriterion("video_width in", values, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthNotIn(List<Integer> values) {
-            addCriterion("video_width not in", values, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthBetween(Integer value1, Integer value2) {
-            addCriterion("video_width between", value1, value2, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoWidthNotBetween(Integer value1, Integer value2) {
-            addCriterion("video_width not between", value1, value2, "videoWidth");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightIsNull() {
-            addCriterion("video_height is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightIsNotNull() {
-            addCriterion("video_height is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightEqualTo(Integer value) {
-            addCriterion("video_height =", value, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightNotEqualTo(Integer value) {
-            addCriterion("video_height <>", value, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightGreaterThan(Integer value) {
-            addCriterion("video_height >", value, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightGreaterThanOrEqualTo(Integer value) {
-            addCriterion("video_height >=", value, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightLessThan(Integer value) {
-            addCriterion("video_height <", value, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightLessThanOrEqualTo(Integer value) {
-            addCriterion("video_height <=", value, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightIn(List<Integer> values) {
-            addCriterion("video_height in", values, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightNotIn(List<Integer> values) {
-            addCriterion("video_height not in", values, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightBetween(Integer value1, Integer value2) {
-            addCriterion("video_height between", value1, value2, "videoHeight");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoHeightNotBetween(Integer value1, Integer value2) {
-            addCriterion("video_height not between", value1, value2, "videoHeight");
-            return (Criteria) this;
-        }
-
         public Criteria andVideoTimeIsNull() {
             addCriterion("video_time is null");
             return (Criteria) this;
@@ -653,63 +532,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaLvIsNull() {
-            addCriterion("ma_lv is null");
+        public Criteria andFramePathIsNull() {
+            addCriterion("frame_path is null");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvIsNotNull() {
-            addCriterion("ma_lv is not null");
+        public Criteria andFramePathIsNotNull() {
+            addCriterion("frame_path is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvEqualTo(BigDecimal value) {
-            addCriterion("ma_lv =", value, "maLv");
+        public Criteria andFramePathEqualTo(String value) {
+            addCriterion("frame_path =", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvNotEqualTo(BigDecimal value) {
-            addCriterion("ma_lv <>", value, "maLv");
+        public Criteria andFramePathNotEqualTo(String value) {
+            addCriterion("frame_path <>", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvGreaterThan(BigDecimal value) {
-            addCriterion("ma_lv >", value, "maLv");
+        public Criteria andFramePathGreaterThan(String value) {
+            addCriterion("frame_path >", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("ma_lv >=", value, "maLv");
+        public Criteria andFramePathGreaterThanOrEqualTo(String value) {
+            addCriterion("frame_path >=", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvLessThan(BigDecimal value) {
-            addCriterion("ma_lv <", value, "maLv");
+        public Criteria andFramePathLessThan(String value) {
+            addCriterion("frame_path <", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("ma_lv <=", value, "maLv");
+        public Criteria andFramePathLessThanOrEqualTo(String value) {
+            addCriterion("frame_path <=", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvIn(List<BigDecimal> values) {
-            addCriterion("ma_lv in", values, "maLv");
+        public Criteria andFramePathLike(String value) {
+            addCriterion("frame_path like", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvNotIn(List<BigDecimal> values) {
-            addCriterion("ma_lv not in", values, "maLv");
+        public Criteria andFramePathNotLike(String value) {
+            addCriterion("frame_path not like", value, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("ma_lv between", value1, value2, "maLv");
+        public Criteria andFramePathIn(List<String> values) {
+            addCriterion("frame_path in", values, "framePath");
             return (Criteria) this;
         }
 
-        public Criteria andMaLvNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("ma_lv not between", value1, value2, "maLv");
+        public Criteria andFramePathNotIn(List<String> values) {
+            addCriterion("frame_path not in", values, "framePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFramePathBetween(String value1, String value2) {
+            addCriterion("frame_path between", value1, value2, "framePath");
+            return (Criteria) this;
+        }
+
+        public Criteria andFramePathNotBetween(String value1, String value2) {
+            addCriterion("frame_path not between", value1, value2, "framePath");
             return (Criteria) this;
         }
 

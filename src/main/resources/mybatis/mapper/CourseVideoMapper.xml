@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="course_id" jdbcType="BIGINT" property="courseId" />
     <result column="video_id" jdbcType="BIGINT" property="videoId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, course_id, video_id
+    id, course_id, video_id, num
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.CourseVideoExample" resultMap="BaseResultMap">
     select
@@ -98,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.CourseVideo">
-    insert into jing_course_video_info (id, course_id, video_id
-      )
-    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}
-      )
+    insert into jing_course_video_info (id, course_id, video_id, 
+      num)
+    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{videoId,jdbcType=BIGINT}, 
+      #{num,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.CourseVideo">
     insert into jing_course_video_info
@@ -115,6 +116,9 @@
       <if test="videoId != null">
         video_id,
       </if>
+      <if test="num != null">
+        num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -125,6 +129,9 @@
       </if>
       <if test="videoId != null">
         #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,6 +153,9 @@
       <if test="record.videoId != null">
         video_id = #{record.videoId,jdbcType=BIGINT},
       </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +165,8 @@
     update jing_course_video_info
     set id = #{record.id,jdbcType=BIGINT},
       course_id = #{record.courseId,jdbcType=BIGINT},
-      video_id = #{record.videoId,jdbcType=BIGINT}
+      video_id = #{record.videoId,jdbcType=BIGINT},
+      num = #{record.num,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +180,17 @@
       <if test="videoId != null">
         video_id = #{videoId,jdbcType=BIGINT},
       </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.CourseVideo">
     update jing_course_video_info
     set course_id = #{courseId,jdbcType=BIGINT},
-      video_id = #{videoId,jdbcType=BIGINT}
+      video_id = #{videoId,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

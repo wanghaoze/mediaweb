@@ -106,4 +106,16 @@ public class VideoServiceImpl implements VideoService{
         }
         return "删除视频失败";
     }
+
+    @Override
+    public String updateVideoById(Long videoId, Video video) {
+        try {
+            VideoExample videoExample = new VideoExample();
+            videoExample.createCriteria().andIdEqualTo(videoId);
+            videoMapper.updateByExampleSelective(video,videoExample);
+        } catch (Exception e) {
+        System.out.println(e);
+    }
+        return "更新视频失败";
+    }
 }

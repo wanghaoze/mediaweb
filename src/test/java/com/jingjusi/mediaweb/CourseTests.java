@@ -1,6 +1,7 @@
 package com.jingjusi.mediaweb;
 
 import com.jingjusi.mediaweb.common.domain.Course;
+import com.jingjusi.mediaweb.common.utils.VideoUtil;
 import com.jingjusi.mediaweb.mapper.CourseMapper;
 import com.jingjusi.mediaweb.service.CourseService;
 import org.junit.jupiter.api.Test;
@@ -16,13 +17,16 @@ public class CourseTests {
 
     @Test
     void addCourses(){
-        for (int i = 0; i < 10; i++) {
+        String[] courses = {"净居寺云端讲堂 -- 中级班","净居寺云端讲堂 -- 讲经班","净居寺云端讲堂 -- 研修班","净居寺云端讲堂 -- 随学班",
+        "净居寺云端讲堂 -- 初学班","净居寺云端讲堂 -- 公开课"};
+        String[] speakers = {"张三","王二","李红","陈一","张三","王二"};
+        for (int i = 0; i < 6; i++) {
             Course course = new Course();
-            course.setIndexImage("baidu.com");
-            course.setRemarks(i+"re");
-            course.setSummary(i+"sm");
-            course.setSpeaker("xiao"+i);
-            course.setClassName(i+"");
+            course.setIndexImage("../static/dist/img/photo"+(i%4+1)+".jpg");
+            course.setRemarks("（评论）测试");
+            course.setSummary(courses[i]);
+            course.setSpeaker(speakers[i]);
+            course.setClassName(courses[i]);
             courseService.addCourse(course);
         }
     }
@@ -33,4 +37,6 @@ public class CourseTests {
             courseService.addUserToCourse(123L+i,22L,"ROLE_STUDENT");
         }
     }
+
+
 }
