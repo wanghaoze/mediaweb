@@ -1,6 +1,7 @@
 package com.jingjusi.mediaweb;
 
 import com.jingjusi.mediaweb.common.domain.Course;
+import com.jingjusi.mediaweb.common.utils.FileUtils;
 import com.jingjusi.mediaweb.common.utils.VideoUtil;
 import com.jingjusi.mediaweb.mapper.CourseMapper;
 import com.jingjusi.mediaweb.service.CourseService;
@@ -38,5 +39,9 @@ public class CourseTests {
         }
     }
 
+    @Test
+    void delete() {
+        FileUtils.deleteFile("/static/video/01-项目演示.mp4");
+    }
 
 }

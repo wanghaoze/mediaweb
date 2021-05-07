@@ -171,7 +171,7 @@
                     <img src="../static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block"><span th:text="${user}"></span></a>
+                    <a href="#" class="d-block"><span th:text="${user.username}"></span></a>
                 </div>
             </div>
 
@@ -192,7 +192,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item">
+                    <li class="nav-item  menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -202,27 +202,27 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="upload.html" class="nav-link">
+                                <a href="/manage/courses" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>课程管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="../static/index2.html" class="nav-link">
+                                <a href="/manage/users" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>用户管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="upload.html" class="nav-link">
+                                <a href="/manage/videos" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>视频管理</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-male"></i>
                             <p>
                                 人事管理
@@ -441,35 +441,16 @@
                                                 <div class="form-group">
 
                                                     <label for="InputCourses">所属课程</label>
-                                                    <div id="InputCourses">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="中级班" id="course1">
-                                                            <label class="form-check-label" for="course1">净居寺云端讲堂 -- 中级班</label>
+                                                    <div id="InputCourses" th:each="w:${courses}">
+                                                        <div class="form-check" >
+                                                            <input class="form-check-input course" type="checkbox" name="course" th:value="${w.className}" th:id="'course'+${w.id}">
+                                                            <label class="form-check-label" th:attr="for='course'+${w.id}"><span th:text="${w.className}"></span></label>
                                                         </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="讲经班" id="course2">
-                                                            <label class="form-check-label" for="course2">净居寺云端讲堂 -- 讲经班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="研修班" id="course3">
-                                                            <label class="form-check-label" for="course3">净居寺云端讲堂 -- 研修班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="随学班" id="course4">
-                                                            <label class="form-check-label" for="course4">净居寺云端讲堂 -- 随学班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="初学班" id="course5">
-                                                            <label class="form-check-label" for="course5">净居寺云端讲堂 -- 初学班</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="公开课" id="course6">
-                                                            <label class="form-check-label" for="course6">净居寺云端讲堂 -- 公开课</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="course" value="以上全部" id="courseAll">
-                                                            <label class="form-check-label" for="courseAll">以上全部</label>
-                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="course" value="以上全部" id="courseAll">
+                                                        <label class="form-check-label" for="courseAll">以上全部</label>
                                                     </div>
 
                                                 </div>
@@ -492,7 +473,7 @@
                                                 <div>
 <!--                                                    <button onclick="upload('{{ request.url }}')" id="upload_btn"-->
 
-                                                    <button onclick="upload('/videoUpload')" id="upload_btn"
+                                                    <button onclick="uploadVideo('/videoUpload')" id="upload_btn"
                                                             class="btn btn-primary">提交</button>
                                                     <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
                                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -669,16 +650,16 @@
             for (var i = 0; i < checkbox.length; i++) {//多个选项时
                 if (checkbox[i].checked) {
                     if (is_first) {
-                        my_chooses = my_chooses + "\"" + i + "\": \"" + checkbox[i].value + "\"";
+                        my_chooses = my_chooses + "\"" + checkbox[i].id.split("course")[1] + "\": \"" + checkbox[i].value + "\"";
                         is_first = false;
                     } else {
-                        my_chooses = my_chooses + ", \"" + i + "\": \"" + checkbox[i].value + "\"";
+                        my_chooses = my_chooses + ", \"" + checkbox[i].id.split("course")[1] + "\": \"" + checkbox[i].value + "\"";
                     }
                 }
             };
         }
         my_chooses = my_chooses + "}"
-        // data.append("my_chooses", my_chooses);
+        data.append("my_chooses", my_chooses);
         request.upload.addEventListener("progress",function (e) {
             var loaded = e.loaded;
             var total = e.total;

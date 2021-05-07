@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @Api(value="用户controller",tags={"用户操作接口"})
 public class UserController {
@@ -23,7 +25,8 @@ public class UserController {
                                         @RequestParam(value = "email") String email,
                                         @RequestParam(value = "number") String number,
                                         @RequestParam(value = "firstname")String firstname,
-                                        @RequestParam(value = "lastname")String lastname
+                                        @RequestParam(value = "lastname")String lastname,
+                                        HttpServletRequest request
     ) {
         User new_user = new User();
         new_user.setUsername(username);
@@ -39,15 +42,16 @@ public class UserController {
         return new CommonResult<>(200,message, username);
     }
 
-    @RequestMapping(value = "/gateway", method = {RequestMethod.GET, RequestMethod.POST})
-    public CommonResult<String> checkUser(@RequestParam(value = "username")String username,
-                                          @RequestParam(value = "password")String password) {
-        User user = userService.findUser(username);
-        if (user.getPassword().equals(password)) {
-            return new CommonResult<>(200,username+"登录成功", username);
-        } else {
-            return new CommonResult<>(404, "用户名或密码错误", username);
-        }
-    }
+//    @RequestMapping(value = "/gateway", method = {RequestMethod.GET, RequestMethod.POST})
+//    public CommonResult<String> checkUser(@RequestParam(value = "username")String username,
+//                                          @RequestParam(value = "password")String password,
+//                                          HttpServletRequest request) {
+//        User user = userService.findUser(username);
+//        if (user.getPassword().equals(password)) {
+//            return new CommonResult<>(200,username+"登录成功", username);
+//        } else {
+//            return new CommonResult<>(404, "用户名或密码错误", username);
+//        }
+//    }
 
 }

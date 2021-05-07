@@ -32,6 +32,18 @@ public class VideoServiceImpl implements VideoService{
     }
 
     @Override
+    public String deleteVideo(Long videoID) {
+        try
+        {
+            videoMapper.deleteByPrimaryKey(videoID);
+            return "删除成功";
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    @Override
     public Video getVideoInfoById(Long videoID) {
         try {
             return videoMapper.selectByPrimaryKey(videoID);

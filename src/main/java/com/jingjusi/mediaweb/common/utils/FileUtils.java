@@ -1,12 +1,51 @@
 package com.jingjusi.mediaweb.common.utils;
 
+import com.jingjusi.mediaweb.common.domain.Image;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 
 public class FileUtils {
-    public static String saveVideo(MultipartFile file, String path) {
+    public static String deleteFile(String path) {
+        File file = new File("C:\\Users\\WangHaoze\\Desktop\\mediaweb\\src\\main\\resources"+path);
+        if(file.exists()) {
+            file.delete();
+            return "删除文件成功";
+        }
+        return "文件不存在";
+    }
+    public static Image saveImage(MultipartFile file, String path) throws IOException {
+        saveFile(file,path);
+        Image image = new Image();
+        image.setImageUrl(path);
+        image.setImageName(file.getOriginalFilename());
+        long filesize = file.getSize()/1024;
+        if (filesize<1024)
+            image.setImageSize(filesize+"KB");
+        else
+            image.setImageSize((filesize/1024)+"MB");
+
+        File picture = new File(path + file.getOriginalFilename());
+        BufferedImage sourceImg=ImageIO.read(new FileInputStream(picture));
+        image.setImageWidth(sourceImg.getWidth());
+        image.setImageHeight(sourceImg.getHeight());
+
+        Date now = new Date();
+        image.setUploadTime(now);
+        image.setUploadUser("uploadUser");
+        image.setLastRequest(now);
+        image.setCntVisit(0L);
+        image.setRemarks("");
+        image.setVideoId(-1L);
+        return image;
+    }
+    public static String saveFile(MultipartFile file, String path) {
         if (file.isEmpty()) {
             return "空文件";
         } else {

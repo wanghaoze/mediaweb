@@ -431,7 +431,7 @@
                                         <div class="card-img-overlay d-flex flex-column justify-content-end">
                                             <h5 class="card-title text-primary text-white"><span th:text="${w.videoName}"></span></h5>
                                             <p class="card-text text-white pb-2 pt-1"><span th:text="${w.videoTime}"></span></p>
-                                            <a href="#" class="text-white">删除视频</a>
+                                            <a th:id="${w.id}+'d'" onclick="deletevideo(this)" href="#" class="text-white">删除视频</a>
                                             <a onclick="" class="text-white">替换视频</a>
                                         </div>
                                     </div>
@@ -475,170 +475,26 @@
 </body>
 
 <script>
-    var progress = document.getElementById("progress");
-    var progress_wrapper = document.getElementById("progress_wrapper");
-    var progress_status = document.getElementById("progress_status");
-
-    var upload_btn = document.getElementById("upload_btn");
-    var loading_btn = document.getElementById("loading_btn");
-    var cancel_btn = document.getElementById("cancel_btn");
-
-    var alert_wrapper = document.getElementById("alert_wrapper")
-
-    var input = document.getElementById("file_input");
-    var input_lable1 = document.getElementById("file_input_lable1");
-
-
-    //获取复选框元素
-    var checkbox = document.all('course');
-    var checkall = document.getElementById('courseAll');
-
-    /*点击全选按钮全部选中的情况*/
-    checkall.addEventListener('click', function () {
-
-        if (checkbox.length == undefined) {//一个选项时
-            checkbox.checked = checkall.checked;
-        } else {
-            for (var i = 0; i < checkbox.length; i++) {//多个选项时
-                checkbox[i].checked = this.checked;
-            }
-        }
-    }, false);
-
-
-    //全部按钮什么时候被自动选中以及自动取消
-    if (checkbox.length == undefined) {//一个选项时
-        checkbox.addEventListener('click', function () {
-            checkall.checked = checkbox.checked;
-        }, false);
-    } else {
-        for (var i = 0; i < checkbox.length; i++) {//多个选项时
-            checkbox[i].addEventListener('click', function () {
-                for (var i = 0; i < checkbox.length; i++) {
-                    if (!checkbox[i].checked) {
-                        checkall.checked = false; //全选自动取消
-                        break;
-                    } else {
-                        if (i == checkbox.length - 1) {
-                            checkall.checked = true;
-                        }
-                        ; //全选自动勾选
-                    }
-                }
-            }, false);
-        }
-    }
-    // //打印您所有的选择
-    // document.getElementById('upload_btn').addEventListener('click',function() {
-    //
-    //     /*一个个去选择时的情况*/
-    //     var yourchoose = "您选择的爱好有：";
-    //     if (checkbox.length == undefined) {//一个选项时
-    //         if (checkbox.checked) yourchoose = yourchoose + checkbox.value;
-    //     }else{
-    //         for (var i = 0; i < checkbox.length; i++) {//多个选项时
-    //             if (checkbox[i].checked) yourchoose = yourchoose + checkbox[i].value + "、";
-    //         };
-    //     }
-    //     alert(yourchoose);
-    // },false);
-    //
-
-
-    function show_alert(message, alert) {
-        alert_wrapper.innerHTML = `
-            <div class="alert alert-${alert} alert-dismissible fade show" role="alert">
-                <span>${message}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        `;
-    };
-
-    function input_filename() {
-        input_lable1.innerText = input.files[0].name;
-    }
-
-    function upload(url) {
-        if (!input.value) {
-            show_alert("No file Selected", "warning");
-            return;
-        }
+    function deletevideo(a) {
+        var id = a.id.split("d")[0];
+        console.log(id);
         var data = new FormData();
+        data.append("id", id);
         var request = new XMLHttpRequest();
-        request.responseType = "json";
-        alert_wrapper.innerHTML = "";
-        input.disabled = true;
-        upload_btn.className = "btn btn-primary no-display-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ";
-        loading_btn.className = "btn btn-primary";
-        cancel_btn.className = "btn btn-secondary";
-        console.log("begin_progress_wrapper:",progress_wrapper.classList);
-        progress_wrapper.className = "";
-        console.log("remove_progress_wrapper:",progress_wrapper.classList);
-        var file = input.files[0]
-        var filename = file.name;
-        var filesize = file.size;
-        document.cookie = `filesize=${filesize}`;
-        data.append("file", file);
-        var my_chooses = "{";
-        var is_first = true;
-        if (checkbox.length == undefined) {//一个选项时
-            if (checkbox.checked) my_chooses = my_chooses + checkbox.value;
-        }else{
-            for (var i = 0; i < checkbox.length; i++) {//多个选项时
-                if (checkbox[i].checked) {
-                    if (is_first) {
-                        my_chooses = my_chooses + "\"" + i + "\": \"" + checkbox[i].value + "\"";
-                        is_first = false;
-                    } else {
-                        my_chooses = my_chooses + ", \"" + i + "\": \"" + checkbox[i].value + "\"";
-                    }
-                }
-            };
-        }
-        my_chooses = my_chooses + "}"
-        data.append("my_chooses", my_chooses);
-        request.upload.addEventListener("progress",function (e) {
-            var loaded = e.loaded;
-            var total = e.total;
-            var percentage_complete = (loaded / total) * 100;
-            console.log("progress_wrapper:",progress_wrapper.classList);
-            progress.setAttribute("style", `width: ${Math.floor(percentage_complete)}%`);
-            progress_status.innerText =  `${Math.floor(percentage_complete)}% 已上传`
-        })
+        request.open("post", "/manage/video/delete");
+        request.send(data);
         request.addEventListener("load", function (e) {
             if (request.status === 200) {
-                // show_alert(`${requset.response}`,"success");
-                show_alert(`${request.response.message}`, "success");
+                // alert(`${requset.response}`,"success");
+                alert(request.response.message);
                 console.log(request.response.massage)
+            } else {
+                alert(`删除失败`);
             }
-            else {
-                show_alert(`上传文件失败`, "danger");
-            }
-            reset();
         })
-        request.addEventListener("error",function (e) {
-            reset();
-            show_alert(`上传文件失败`, "danger");
+        request.addEventListener("error", function (e) {
+            alert(`删除失败`);
         })
-        request.open("post", url);
-        request.send(data);
-        cancel_btn.addEventListener("click",function (e) {
-            request.abort();
-            show_alert(`取消上传`,"warning");
-            reset();
-        })
-    }
-    function reset() {
-        input.value = null;
-        input.disabled = false;
-        cancel_btn.className="no-display";
-        loading_btn.className="no-display";
-        upload_btn.className = "btn btn-primary";
-        progress_wrapper.className="no-display";
-        progress.setAttribute("style", `with: 0%`);
-        input_lable1.innerText = "选择文件";
     }
 </script>
 </html>

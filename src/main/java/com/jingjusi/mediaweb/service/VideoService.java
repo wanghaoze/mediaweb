@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE)
 public interface VideoService {
     public String addVideo(Video video);
+    public String deleteVideo(Long videoID);
     public Video getVideoInfoById(Long videoID);
     public PageInfo<Video> getVideosByName(String keyword, Integer pageNo, Integer pageSize);
     public PageInfo<Video> getVideosByCourse(Long courseId, Integer pageNo, Integer pageSize);

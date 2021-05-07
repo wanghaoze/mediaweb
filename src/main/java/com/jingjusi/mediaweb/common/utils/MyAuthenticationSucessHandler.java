@@ -1,6 +1,9 @@
 package com.jingjusi.mediaweb.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jingjusi.mediaweb.common.domain.User;
+import com.jingjusi.mediaweb.mapper.UserMapper;
+import com.jingjusi.mediaweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,14 +26,16 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
 
     @Autowired
     private ObjectMapper objectMapper;
-
+    @Autowired
+    private UserService userService;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         //response.setContentType("application/json;charset=utf-8");
         //response.getWriter().write(objectMapper.writeValueAsString(authentication));
         SavedRequest savedRequest = requestCache.getRequest(request, response);
-        String user = ((UserDetails)authentication.getPrincipal()).getUsername();
+        String username = ((UserDetails)authentication.getPrincipal()).getUsername();
+        User user = userService.findUser(username);
         request.getSession().setAttribute("user", user);
         if (savedRequest == null){
             redirectStrategy.sendRedirect(request, response, "/index");

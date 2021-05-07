@@ -7,8 +7,6 @@ public class CourseVideo {
 
     private Long videoId;
 
-    private Integer num;
-
     public Long getId() {
         return id;
     }
@@ -31,13 +29,5 @@ public class CourseVideo {
 
     public void setVideoId(Long videoId) {
         this.videoId = videoId;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
     }
 }

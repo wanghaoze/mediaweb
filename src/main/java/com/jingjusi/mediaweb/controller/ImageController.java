@@ -17,7 +17,9 @@ import java.util.Hashtable;
 @Api(value="图片controller",tags={"图片操作接口"})
 public class ImageController {
     @RequestMapping(value = "/imageUpload", method = {RequestMethod.POST, RequestMethod.GET})
-    public CommonResult<String> videoUpload(@RequestParam(value = "file") MultipartFile file, @RequestParam(value = "my_chooses") String my_chooses, HttpServletRequest request) {
+    public CommonResult<String> videoUpload(@RequestParam(value = "file") MultipartFile file,
+                                            @RequestParam(value = "my_chooses") String my_chooses,
+                                            HttpServletRequest request) {
         System.out.println(request.getMethod());
         if (file.isEmpty()) {
             return new CommonResult<>(300,"空文件");
