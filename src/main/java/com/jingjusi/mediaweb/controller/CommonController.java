@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -76,9 +77,11 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/videos/add", method = {RequestMethod.POST, RequestMethod.GET})
-    public String addvideopage(ModelMap model)
+    public String addvideopage(HttpServletRequest request, ModelMap model)
     {
         model.addAttribute("kcgl", "课程管理");
+        String user = (String) request.getSession().getAttribute("user");
+        model.addAttribute("user",user);
         return "upload";
     }
     @RequestMapping(value = "/course/{cid}/video/{vid}")

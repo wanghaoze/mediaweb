@@ -117,42 +117,41 @@ create table jing_course_user_info(
 )engine = InnoDB comment '课程-用户信息表';
 
 create table jing_library_book(
-        `book_id` int(11) NOT NULL AUTO_INCREMENT,
-        `ISBN` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-        `location` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-        `state` int(11) NOT NULL,
-        `operator` int(11) NOT NULL,
-        PRIMARY KEY (`book_id`),
-        UNIQUE KEY `BID_UNIQUE` (`book_id`),
-        KEY `op2_idx` (`operator`),
-        KEY `bo_idx` (`ISBN`)
+        id int(11) not null auto_increment comment '主键',
+        ISBN varchar(32) not null comment 'ISBN编号',
+        location varchar(45) default null comment '位置',
+        state int(11) not null comment '状态',
+        operator int(11) not null comment '操作员',
+        PRIMARY KEY (id),
+        UNIQUE KEY BID_UNIQUE (id),
+        KEY op2_idx (operator),
+        KEY bo_idx (ISBN)
 )engine = InnoDB comment '书籍信息';
 
-CREATE TABLE `booklist` (
-                            `ISBN` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-                            `bname` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-                            `publisher` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-                            `writer` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-                            `ptime` date DEFAULT NULL,
-                            `number` int(11) NOT NULL DEFAULT '0',
-                            `operator` int(11) NOT NULL,
-                            `is_popular` int(11) NOT NULL DEFAULT '0',
-                            PRIMARY KEY (`ISBN`),
-                            UNIQUE KEY `ISBN_UNIQUE` (`ISBN`),
-                            KEY `op_idx` (`operator`)
+CREATE TABLE booklist (
+                            ISBN varchar(30) not null auto_increment comment '主键',
+                            bname varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+                            publisher varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+                            writer varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+                            ptime date DEFAULT NULL,
+                            number int(11) NOT NULL DEFAULT '0',
+                            operator int(11) NOT NULL,
+                            PRIMARY KEY (ISBN),
+                            UNIQUE KEY ISBN_UNIQUE (ISBN),
+                            KEY op_idx (operator)
 );
 
-CREATE TABLE `borrow` (
-                          `borrow_id` int(11) NOT NULL AUTO_INCREMENT,
-                          `book_id` int(11) NOT NULL,
-                          `user_id` int(11) NOT NULL,
-                          `btime` datetime NOT NULL,
-                          `deadline` datetime NOT NULL,
-                          `rtime` datetime DEFAULT NULL,
-                          `operator` int(11) DEFAULT NULL,
-                          PRIMARY KEY (`borrow_id`),
-                          UNIQUE KEY `BWID_UNIQUE` (`borrow_id`),
-                          KEY `boo_idx` (`book_id`),
-                          KEY `re_idx` (`user_id`),
-                          KEY `op3_idx` (`operator`)
+CREATE TABLE borrow (
+                          borrow_id int(11) NOT NULL AUTO_INCREMENT,
+                          book_id int(11) NOT NULL,
+                          user_id int(11) NOT NULL,
+                          btime datetime NOT NULL,
+                          deadline datetime NOT NULL,
+                          rtime datetime DEFAULT NULL,
+                          operator int(11) DEFAULT NULL,
+                          PRIMARY KEY (borrow_id),
+                          UNIQUE KEY BWID_UNIQUE (borrow_id),
+                          KEY boo_idx (book_id),
+                          KEY re_idx (user_id),
+                          KEY op3_idx (operator)
 ) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
