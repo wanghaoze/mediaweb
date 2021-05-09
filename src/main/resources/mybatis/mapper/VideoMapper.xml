@@ -8,7 +8,7 @@
     <result column="video_size" jdbcType="VARCHAR" property="videoSize" />
     <result column="video_time" jdbcType="TIME" property="videoTime" />
     <result column="speaker" jdbcType="VARCHAR" property="speaker" />
-    <result column="frame_path" jdbcType="VARCHAR" property="framePath" />
+    <result column="framePath" jdbcType="VARCHAR" property="framepath" />
     <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
     <result column="upload_user" jdbcType="VARCHAR" property="uploadUser" />
     <result column="last_request" jdbcType="TIMESTAMP" property="lastRequest" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, video_url, video_name, video_size, video_time, speaker, frame_path, upload_time, 
+    id, video_url, video_name, video_size, video_time, speaker, framePath, upload_time, 
     upload_user, last_request, cnt_visit, remarks
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.VideoExample" resultMap="BaseResultMap">
@@ -110,12 +110,12 @@
   <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Video">
     insert into jing_video_info (id, video_url, video_name, 
       video_size, video_time, speaker, 
-      frame_path, upload_time, upload_user, 
+      framePath, upload_time, upload_user, 
       last_request, cnt_visit, remarks
       )
     values (#{id,jdbcType=BIGINT}, #{videoUrl,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
       #{videoSize,jdbcType=VARCHAR}, #{videoTime,jdbcType=TIME}, #{speaker,jdbcType=VARCHAR}, 
-      #{framePath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{uploadUser,jdbcType=VARCHAR}, 
+      #{framepath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{uploadUser,jdbcType=VARCHAR}, 
       #{lastRequest,jdbcType=TIMESTAMP}, #{cntVisit,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}
       )
   </insert>
@@ -140,8 +140,8 @@
       <if test="speaker != null">
         speaker,
       </if>
-      <if test="framePath != null">
-        frame_path,
+      <if test="framepath != null">
+        framePath,
       </if>
       <if test="uploadTime != null">
         upload_time,
@@ -178,8 +178,8 @@
       <if test="speaker != null">
         #{speaker,jdbcType=VARCHAR},
       </if>
-      <if test="framePath != null">
-        #{framePath,jdbcType=VARCHAR},
+      <if test="framepath != null">
+        #{framepath,jdbcType=VARCHAR},
       </if>
       <if test="uploadTime != null">
         #{uploadTime,jdbcType=TIMESTAMP},
@@ -225,8 +225,8 @@
       <if test="record.speaker != null">
         speaker = #{record.speaker,jdbcType=VARCHAR},
       </if>
-      <if test="record.framePath != null">
-        frame_path = #{record.framePath,jdbcType=VARCHAR},
+      <if test="record.framepath != null">
+        framePath = #{record.framepath,jdbcType=VARCHAR},
       </if>
       <if test="record.uploadTime != null">
         upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
@@ -256,7 +256,7 @@
       video_size = #{record.videoSize,jdbcType=VARCHAR},
       video_time = #{record.videoTime,jdbcType=TIME},
       speaker = #{record.speaker,jdbcType=VARCHAR},
-      frame_path = #{record.framePath,jdbcType=VARCHAR},
+      framePath = #{record.framepath,jdbcType=VARCHAR},
       upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
       upload_user = #{record.uploadUser,jdbcType=VARCHAR},
       last_request = #{record.lastRequest,jdbcType=TIMESTAMP},
@@ -284,8 +284,8 @@
       <if test="speaker != null">
         speaker = #{speaker,jdbcType=VARCHAR},
       </if>
-      <if test="framePath != null">
-        frame_path = #{framePath,jdbcType=VARCHAR},
+      <if test="framepath != null">
+        framePath = #{framepath,jdbcType=VARCHAR},
       </if>
       <if test="uploadTime != null">
         upload_time = #{uploadTime,jdbcType=TIMESTAMP},
@@ -312,7 +312,7 @@
       video_size = #{videoSize,jdbcType=VARCHAR},
       video_time = #{videoTime,jdbcType=TIME},
       speaker = #{speaker,jdbcType=VARCHAR},
-      frame_path = #{framePath,jdbcType=VARCHAR},
+      framePath = #{framepath,jdbcType=VARCHAR},
       upload_time = #{uploadTime,jdbcType=TIMESTAMP},
       upload_user = #{uploadUser,jdbcType=VARCHAR},
       last_request = #{lastRequest,jdbcType=TIMESTAMP},

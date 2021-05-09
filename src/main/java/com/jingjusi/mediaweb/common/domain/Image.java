@@ -25,8 +25,6 @@ public class Image {
 
     private String remarks;
 
-    private Long videoId;
-
     public Long getId() {
         return id;
     }
@@ -113,13 +111,5 @@ public class Image {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
-    }
-
-    public Long getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(Long videoId) {
-        this.videoId = videoId;
     }
 }

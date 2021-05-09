@@ -11,6 +11,7 @@ import com.jingjusi.mediaweb.service.VideoService;
 import io.swagger.annotations.Api;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +25,9 @@ import java.util.*;
 public class VideoController {
     static int page_size = 20;
 
+    @Value("${file.uploadFolder}")
+    private String uploadFolder;
+
     @Autowired
     private VideoService videoService;
     @Autowired
@@ -36,8 +40,8 @@ public class VideoController {
                                             HttpServletRequest request) throws Exception {
         System.out.println(file);
         String fileName = file.getOriginalFilename();  // 文件名
-        String filePath = "C:\\Users\\WangHaoze\\Desktop\\mediaweb\\src\\main\\resources\\static\\video\\";// 上传后的路径
-        String imgPath = "C:\\Users\\WangHaoze\\Desktop\\mediaweb\\src\\main\\resources\\static\\image\\";
+        String filePath = uploadFolder+"static\\video\\";// 上传后的路径
+        String imgPath = uploadFolder+"static\\image\\";
         String res = FileUtils.saveFile(file,filePath);
         long filesize = file.getSize()/1024/1024;
         Video newVideo = new Video();
@@ -52,7 +56,7 @@ public class VideoController {
         File file1 = new File(filePath+fileName);
         VideoUtil.fetchPic(file1,imgPath+VideoName+".jpg");
 //        newVideo.setFramePath((String) map.get("imgPath"));
-        newVideo.setVideoUrl("/static/video/"+fileName);
+        newVideo.setVideoUrl("static/video/"+fileName);
         if (filesize<1024)
             newVideo.setVideoSize(filesize+"MB");
         else
@@ -61,9 +65,9 @@ public class VideoController {
         newVideo.setCntVisit(0L);
         newVideo.setUploadUser("uploadUser");
         newVideo.setUploadTime(now);
-        newVideo.setFramePath("/static/"+VideoName+".jpg");
+        newVideo.setFramepath("static/image/"+VideoName+".jpg");
         newVideo.setLastRequest(now);
-        newVideo.setRemarks("/static/video/"+fileName);
+        newVideo.setRemarks("static/video/"+fileName);
         if (res.equals("空文件")) {
             return new CommonResult<>(300,"空文件");
         } else if (res.equals("保存失败")) {
@@ -92,14 +96,44 @@ public class VideoController {
         }
     }
 
+    @RequestMapping(value = "/manage/update/video", method = {RequestMethod.POST, RequestMethod.GET})
+    public CommonResult<String> vud(@RequestParam(value = "视频id")Long vid,
+                                    @RequestParam(value = "视频名称")String videoName,
+                                    @RequestParam(value = "主讲人")String speaker,
+                                    @RequestParam(value = "视频时长")Date videoTime,
+                                    @RequestParam(value = "视频文件")MultipartFile file,
+                                    HttpServletRequest request) {
 
+        String file_name = "";
+        System.out.println(request.getMethod());
+        if (file.isEmpty()&& speaker.isEmpty() && videoTime==null) {
+            return new CommonResult<>(300,"未选择更新项");
+        } else {
+            VideoExample videoExample = new VideoExample();
+            videoExample.createCriteria().andSpeakerEqualTo(speaker).andVideoTimeEqualTo(videoTime).andVideoNameEqualTo(videoName);
+            Video video = new Video();
+            if (!videoName.isEmpty()){
+                video.setVideoName(videoName);
+                file_name = videoName;
+            }
+            if (!speaker.isEmpty()) {
+                video.setSpeaker(speaker);
+            }
+            if (!file.isEmpty()) {
+                String res = FileUtils.saveFile(file,uploadFolder+"video//");
+                if (!file_name.equals(""))file_name = file.getOriginalFilename();
+            }
+            videoService.updateVideoById(vid,video);
+            return new CommonResult<>(200,"上传成功",file_name);
+        }
+    }
     @RequestMapping(value = "/manage/video/delete", method = RequestMethod.POST)
     public CommonResult<String> deletevideo(Long id) {
         Video video = videoService.getVideoInfoById(id);
         String videoPath = video.getVideoUrl();
-        String imgPath = video.getFramePath();
-        FileUtils.deleteFile(videoPath);
-        FileUtils.deleteFile(imgPath);
+        String imgPath = video.getFramepath();
+        FileUtils.deleteFile(uploadFolder+videoPath);
+        FileUtils.deleteFile(uploadFolder+imgPath);
         String message = videoService.deleteVideo(id);
         System.out.println(message);
         return new CommonResult<>(200,message);

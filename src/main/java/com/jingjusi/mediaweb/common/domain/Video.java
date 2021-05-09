@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.common.domain;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Video {
@@ -11,11 +12,11 @@ public class Video {
 
     private String videoSize;
 
-    private Date videoTime;
+    private Time videoTime;
 
     private String speaker;
 
-    private String framePath;
+    private String framepath;
 
     private Date uploadTime;
 
@@ -59,11 +60,11 @@ public class Video {
         this.videoSize = videoSize == null ? null : videoSize.trim();
     }
 
-    public Date getVideoTime() {
+    public Time getVideoTime() {
         return videoTime;
     }
 
-    public void setVideoTime(Date videoTime) {
+    public void setVideoTime(Time videoTime) {
         this.videoTime = videoTime;
     }
 
@@ -75,12 +76,12 @@ public class Video {
         this.speaker = speaker == null ? null : speaker.trim();
     }
 
-    public String getFramePath() {
-        return framePath;
+    public String getFramepath() {
+        return framepath;
     }
 
-    public void setFramePath(String framePath) {
-        this.framePath = framePath == null ? null : framePath.trim();
+    public void setFramepath(String framepath) {
+        this.framepath = framepath == null ? null : framepath.trim();
     }
 
     public Date getUploadTime() {

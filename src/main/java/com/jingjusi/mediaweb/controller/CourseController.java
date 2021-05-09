@@ -3,42 +3,66 @@ package com.jingjusi.mediaweb.controller;
 import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.Course;
 import com.jingjusi.mediaweb.common.domain.CourseExample;
+import com.jingjusi.mediaweb.common.domain.Image;
 import com.jingjusi.mediaweb.common.domain.User;
 import com.jingjusi.mediaweb.common.utils.CommonResult;
+import com.jingjusi.mediaweb.common.utils.FileUtils;
 import com.jingjusi.mediaweb.service.CourseService;
+import com.jingjusi.mediaweb.service.ImageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @Api(value="课程controller",tags={"课程操作接口"})
-public class StudyController {
+public class CourseController {
     @Autowired
     CourseService courseService;
+    @Autowired
+    ImageService imageService;
+    @Value("${file.uploadFolder}")
+    private String uploadFolder;
 
     @RequestMapping(value = "/study/add")
     public CommonResult<String> addCourse(String className, String speaker, String summary, @RequestParam(value = "file") MultipartFile file
                         ,HttpServletRequest request) {
-        Course course = new Course();
-        String fileName = file.getOriginalFilename();  // 文件名
-        course.setClassName(className);
-        course.setSpeaker(speaker);
-        course.setSummary(summary);
-        course.setIndexImage(indexImage);
-        course.setOpenTime(new Date());
-        course.setRemarks("");
-        String message = courseService.addCourse(course);
-        return new CommonResult<>(200,message, className);
+
+            try {
+                Course course = new Course();
+                String fileName = file.getOriginalFilename();  // 文件名
+                if (file.isEmpty()) {
+                    course.setIndexImage("static/dist/img/photo"+(RandomUtils.nextInt(4) %4+1)+".jpg");
+                } else {
+                    String imgPath = uploadFolder+"static\\image\\";
+                    Image image = FileUtils.saveImage(file,imgPath);
+                    imageService.addImage(image);
+                }
+                course.setClassName(className);
+                course.setSpeaker(speaker);
+                course.setSummary(summary);
+                course.setIndexImage("static/image/"+file.getOriginalFilename());
+                course.setOpenTime(new Date());
+                course.setRemarks("");
+                String message = courseService.addCourse(course);
+                return new CommonResult<>(200,message, className);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("保存失败");
+                return new CommonResult<>(400,"保存失败");
+            }
+
+
+
     }
 
     @RequestMapping(value = "/study/update")

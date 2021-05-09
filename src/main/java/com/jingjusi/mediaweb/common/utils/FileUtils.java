@@ -12,8 +12,9 @@ import java.io.IOException;
 import java.util.Date;
 
 public class FileUtils {
+
     public static String deleteFile(String path) {
-        File file = new File("C:\\Users\\WangHaoze\\Desktop\\mediaweb\\src\\main\\resources"+path);
+        File file = new File(path);
         if(file.exists()) {
             file.delete();
             return "删除文件成功";
@@ -23,8 +24,8 @@ public class FileUtils {
     public static Image saveImage(MultipartFile file, String path) throws IOException {
         saveFile(file,path);
         Image image = new Image();
-        image.setImageUrl(path);
         image.setImageName(file.getOriginalFilename());
+        image.setImageUrl("/static/image/"+file.getOriginalFilename());
         long filesize = file.getSize()/1024;
         if (filesize<1024)
             image.setImageSize(filesize+"KB");
@@ -42,7 +43,6 @@ public class FileUtils {
         image.setLastRequest(now);
         image.setCntVisit(0L);
         image.setRemarks("");
-        image.setVideoId(-1L);
         return image;
     }
     public static String saveFile(MultipartFile file, String path) {

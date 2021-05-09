@@ -23,11 +23,11 @@ create table jing_auth_user(
                                id bigint not null auto_increment comment '主键',
                                password varchar(20) comment '密码',
                                last_login timestamp comment '上次登录时间' default now(),
-                               roles varchar(20) comment '权限',
-                               username varchar(20) unique comment '用户名',
+                               roles varchar(128) comment '权限',
+                               username varchar(64) unique comment '用户名',
                                first_name varchar(10) comment '名',
                                last_name varchar(10) comment '姓',
-                               email varchar(20) unique comment '邮箱地址',
+                               email varchar(64) unique comment '邮箱地址',
                                number varchar(20) unique comment '手机号',
                                is_staff boolean comment '是否职员',
                                is_active boolean comment '是否在线',
@@ -50,7 +50,7 @@ create table jing_video_info(
                                 video_size varchar(32) not null comment '视频大小',
                                 video_time time not null comment '视频时长',
                                 speaker varchar(64) comment '主讲人',
-                                framePath varchar(32) comment '视频预览图',
+                                framePath varchar(128) comment '视频预览图',
                                 upload_time timestamp comment '上传时间' default now(),
                                 upload_user varchar(32) comment '上传用户',
                                 last_request timestamp comment '上次访问时间' default now(),
@@ -75,11 +75,9 @@ create table jing_image_info(
                                 last_request timestamp comment '上次访问时间' default now(),
                                 cnt_visit bigint comment '访问次数',
                                 remarks varchar(256) comment '备注说明',
-                                video_id bigint comment '对应视频',
                                 primary key (id),
                                 unique key idx_url(image_url),
                                 key idx_name(image_name),
-                                key idx_video_id(video_id),
                                 key idx_upload(upload_time)
 )engine = InnoDB comment '图片信息表';
 
@@ -106,52 +104,43 @@ create table jing_course_video_info(
 )engine = InnoDB comment '课程-视频信息表';
 
 create table jing_course_user_info(
-                                         id bigint not null auto_increment comment '主键',
-                                         course_id bigint not null comment '课程id',
-                                         user_id bigint not null comment '学生id',
-                                         roles varchar(20) comment '权限',
-                                         primary key (id),
-                                         unique key idx_course_video(course_id, user_id),
-                                         key idx_course(course_id),
-                                         key idx_video(user_id)
+                                      id bigint not null auto_increment comment '主键',
+                                      course_id bigint not null comment '课程id',
+                                      user_id bigint not null comment '学生id',
+                                      roles varchar(128) comment '权限',
+                                      primary key (id),
+                                      unique key idx_course_video(course_id, user_id),
+                                      key idx_course(course_id),
+                                      key idx_video(user_id)
 )engine = InnoDB comment '课程-用户信息表';
 
-create table jing_library_book(
-        id int(11) not null auto_increment comment '主键',
-        ISBN varchar(32) not null comment 'ISBN编号',
-        location varchar(45) default null comment '位置',
-        state int(11) not null comment '状态',
-        operator int(11) not null comment '操作员',
-        PRIMARY KEY (id),
-        UNIQUE KEY BID_UNIQUE (id),
-        KEY op2_idx (operator),
-        KEY bo_idx (ISBN)
+create table jing_book_info(
+                                  id bigint not null auto_increment comment '主键',
+                                  `ISBN` varchar(32) unique not null comment 'ISBN编号',
+                                  location varchar(64) default null comment '位置',
+                                  state bigint not null comment '状态',
+                                  book_name varchar(45) not null comment '书名',
+                                  publisher varchar(45) default null comment '出版单位',
+                                  writer varchar(45) default null comment '作者',
+                                  publish_time date default null comment '出版时间',
+                                  number bigint not null default 0 comment '余量',
+                                  operator varchar(64) not null comment '记录员',
+                                  primary key (id),
+                                  unique key idx_book (id),
+                                  key idx_operator (operator),
+                                  key bo_idx (ISBN)
 )engine = InnoDB comment '书籍信息';
 
-CREATE TABLE booklist (
-                            ISBN varchar(30) not null auto_increment comment '主键',
-                            bname varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-                            publisher varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-                            writer varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-                            ptime date DEFAULT NULL,
-                            number int(11) NOT NULL DEFAULT '0',
-                            operator int(11) NOT NULL,
-                            PRIMARY KEY (ISBN),
-                            UNIQUE KEY ISBN_UNIQUE (ISBN),
-                            KEY op_idx (operator)
-);
-
-CREATE TABLE borrow (
-                          borrow_id int(11) NOT NULL AUTO_INCREMENT,
-                          book_id int(11) NOT NULL,
-                          user_id int(11) NOT NULL,
-                          btime datetime NOT NULL,
-                          deadline datetime NOT NULL,
-                          rtime datetime DEFAULT NULL,
-                          operator int(11) DEFAULT NULL,
-                          PRIMARY KEY (borrow_id),
-                          UNIQUE KEY BWID_UNIQUE (borrow_id),
-                          KEY boo_idx (book_id),
-                          KEY re_idx (user_id),
-                          KEY op3_idx (operator)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+create table jing_borrow_info (
+                        id bigint not null auto_increment comment '主键',
+                        book_id bigint not null comment '书号',
+                        user_id bigint not null comment '用户号',
+                        borrow_time timestamp not null comment '借书时间',
+                        deadline timestamp not null comment '期限',
+                        return_time timestamp default null comment '还书时间',
+                        operator varchar(64) default null comment '记录员',
+                        primary key (id),
+                        key idx_book (book_id),
+                        key idx_user (user_id),
+                        key idx_operator (operator)
+)engine = InnoDB comment '借还信息';

@@ -77,15 +77,6 @@ public class ImageServiceImpl implements ImageService{
         return "更新失败";
     }
 
-    @Override
-    public PageInfo<Image> getImagesByVideoId(Long videoId, Integer pageNo, Integer pageSize) {
-        PageHelper.startPage(pageNo,pageSize);
-        ImageExample imageExample = new ImageExample();
-        imageExample.createCriteria().andVideoIdEqualTo(videoId);
-        List<Image> images = new ArrayList<>(imageMapper.selectByExample(imageExample));
-        if (images.isEmpty())
-            return null;
-        return new PageInfo<>(images);
-    }
+
 
 }

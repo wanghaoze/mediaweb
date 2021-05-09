@@ -427,9 +427,9 @@
                                 </div>
                                 <div class="col-md-12 col-lg-6 col-xl-4" th:each="w:${courseList}">
                                     <div class="card mb-2 bg-gradient-dark">
-                                        <img class="card-img-top" src="../static/dist/img/photo1.jpg" alt="Dist Photo 1">
+                                        <img class="card-img-top"  th:src="'../'+${w.indexImage}" alt="Dist Photo 1">
                                         <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                            <h5 class="card-title text-primary text-white"><span th:text="${w.className}"></span></h5>
+                                            <h5 th:id="${w.id}+'w'" onclick="manageCourse(this)" class="card-title text-primary text-white"><span th:text="${w.className}"></span></h5>
                                             <p class="card-text text-white pb-2 pt-1"><span th:text="${w.speaker}"></span></p>
                                             <a th:id="${w.id}+'d'" onclick="deletecourse(this)" href="#" class="text-white">删除课程</a>
                                         </div>
@@ -474,7 +474,12 @@
 </body>
 
 <script>
-   function deletecourse(a) {
+    function manageCourse(a) {
+
+        var  id = a.id.split("w")[0];
+        self.location.href = "/course/" + id;
+    }
+    function deletecourse(a) {
        var  id = a.id.split("d")[0];
        console.log(id);
        var data = new FormData();

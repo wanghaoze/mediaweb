@@ -5,6 +5,7 @@ import com.jingjusi.mediaweb.common.utils.FileUtils;
 import com.jingjusi.mediaweb.common.utils.VideoUtil;
 import com.jingjusi.mediaweb.mapper.CourseMapper;
 import com.jingjusi.mediaweb.service.CourseService;
+import org.apache.commons.lang.math.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,8 @@ public class CourseTests {
     void delete() {
         FileUtils.deleteFile("/static/video/01-项目演示.mp4");
     }
-
+    @Test
+    void sadf() {
+        System.out.println(RandomUtils.nextInt(4));
+}
 }

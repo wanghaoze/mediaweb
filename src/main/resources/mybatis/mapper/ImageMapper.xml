@@ -13,7 +13,6 @@
     <result column="last_request" jdbcType="TIMESTAMP" property="lastRequest" />
     <result column="cnt_visit" jdbcType="BIGINT" property="cntVisit" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="video_id" jdbcType="BIGINT" property="videoId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, image_url, image_name, image_size, image_width, image_height, upload_time, upload_user, 
-    last_request, cnt_visit, remarks, video_id
+    last_request, cnt_visit, remarks
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.ImageExample" resultMap="BaseResultMap">
     select
@@ -111,13 +110,11 @@
     insert into jing_image_info (id, image_url, image_name, 
       image_size, image_width, image_height, 
       upload_time, upload_user, last_request, 
-      cnt_visit, remarks, video_id
-      )
+      cnt_visit, remarks)
     values (#{id,jdbcType=BIGINT}, #{imageUrl,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR}, 
       #{imageSize,jdbcType=VARCHAR}, #{imageWidth,jdbcType=INTEGER}, #{imageHeight,jdbcType=INTEGER}, 
       #{uploadTime,jdbcType=TIMESTAMP}, #{uploadUser,jdbcType=VARCHAR}, #{lastRequest,jdbcType=TIMESTAMP}, 
-      #{cntVisit,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{videoId,jdbcType=BIGINT}
-      )
+      #{cntVisit,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.Image">
     insert into jing_image_info
@@ -155,9 +152,6 @@
       <if test="remarks != null">
         remarks,
       </if>
-      <if test="videoId != null">
-        video_id,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -192,9 +186,6 @@
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="videoId != null">
-        #{videoId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -240,9 +231,6 @@
       <if test="record.remarks != null">
         remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
-      <if test="record.videoId != null">
-        video_id = #{record.videoId,jdbcType=BIGINT},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -260,8 +248,7 @@
       upload_user = #{record.uploadUser,jdbcType=VARCHAR},
       last_request = #{record.lastRequest,jdbcType=TIMESTAMP},
       cnt_visit = #{record.cntVisit,jdbcType=BIGINT},
-      remarks = #{record.remarks,jdbcType=VARCHAR},
-      video_id = #{record.videoId,jdbcType=BIGINT}
+      remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -299,9 +286,6 @@
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
       </if>
-      <if test="videoId != null">
-        video_id = #{videoId,jdbcType=BIGINT},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -316,8 +300,7 @@
       upload_user = #{uploadUser,jdbcType=VARCHAR},
       last_request = #{lastRequest,jdbcType=TIMESTAMP},
       cnt_visit = #{cntVisit,jdbcType=BIGINT},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      video_id = #{videoId,jdbcType=BIGINT}
+      remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

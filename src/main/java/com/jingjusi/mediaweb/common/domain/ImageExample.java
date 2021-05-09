@@ -814,66 +814,6 @@ public class ImageExample {
             addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
-
-        public Criteria andVideoIdIsNull() {
-            addCriterion("video_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdIsNotNull() {
-            addCriterion("video_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdEqualTo(Long value) {
-            addCriterion("video_id =", value, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdNotEqualTo(Long value) {
-            addCriterion("video_id <>", value, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdGreaterThan(Long value) {
-            addCriterion("video_id >", value, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("video_id >=", value, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdLessThan(Long value) {
-            addCriterion("video_id <", value, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdLessThanOrEqualTo(Long value) {
-            addCriterion("video_id <=", value, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdIn(List<Long> values) {
-            addCriterion("video_id in", values, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdNotIn(List<Long> values) {
-            addCriterion("video_id not in", values, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdBetween(Long value1, Long value2) {
-            addCriterion("video_id between", value1, value2, "videoId");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoIdNotBetween(Long value1, Long value2) {
-            addCriterion("video_id not between", value1, value2, "videoId");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {

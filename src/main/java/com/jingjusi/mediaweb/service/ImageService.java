@@ -13,5 +13,4 @@ public interface ImageService {
     public PageInfo<Image> getImageByName(String imName, Integer pageNo, Integer pageSize);
     public String deleteImageById(Long imageID);
     public String updateImageById(Long imageID, Image image);
-    public PageInfo<Image> getImagesByVideoId(Long videoId, Integer pageNo, Integer pageSize);
 }

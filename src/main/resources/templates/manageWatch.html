@@ -415,27 +415,10 @@
                         <div><span ></span></div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12 col-lg-6 col-xl-4">
-                                    <div class="card mb-2 bg-gradient-dark">
-                                        <img class="card-img-top" src="../static/dist/img/newphoto.png" alt="Dist Photo 1">
-                                        <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                            <!--                                            <h5 class="card-title text-primary text-white"><span th:text="${w.className}"></span></h5>-->
-                                            <!--                                            <p class="card-text text-white pb-2 pt-1"><span th:text="${w.summary}"></span></p>-->
-                                            <a href="/videos/add" class="card-title text-primary text-black-50">添加视频</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-lg-6 col-xl-4" th:each="w:${list_video}">
-                                    <div class="card mb-2 bg-gradient-dark">
-                                        <img class="card-img-top" th:src="'../'+${w.framepath}" alt="Dist Photo 1">
-                                        <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                            <h5 th:id="${w.id}+'w'" onclick="manageVideo(this)"  class="card-title text-primary text-white"><span th:text="${w.videoName}"></span></h5>
-                                            <p class="card-text text-white pb-2 pt-1"><span th:text="${w.videoTime}"></span></p>
-                                            <a th:id="${w.id}+'d'" onclick="deletevideo(this)" href="#" class="text-white">删除视频</a>
-                                            <a onclick="" class="text-white">替换视频</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h1 th:text="${video.videoName}"></h1>
+                                <video width="100%" height="100%" controls>
+                                    <source th:src="'../'+${video.videoUrl}" type="video/mp4">
+                                </video>
                             </div>
                         </div>
                     </div>
@@ -475,30 +458,5 @@
 </body>
 
 <script>
-    function manageVideo(a) {
-        var id = a.id.split("w")[0];
-        self.location.href = "/manage/video/" + id;
-    }
-    function deletevideo(a) {
-        var id = a.id.split("d")[0];
-        console.log(id);
-        var data = new FormData();
-        data.append("id", id);
-        var request = new XMLHttpRequest();
-        request.open("post", "/manage/video/delete");
-        request.send(data);
-        request.addEventListener("load", function (e) {
-            if (request.status === 200) {
-                // alert(`${requset.response}`,"success");
-                alert(request.response.message);
-                console.log(request.response.massage)
-            } else {
-                alert(`删除失败`);
-            }
-        })
-        request.addEventListener("error", function (e) {
-            alert(`删除失败`);
-        })
-    }
 </script>
 </html>

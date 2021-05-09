@@ -532,73 +532,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andFramePathIsNull() {
-            addCriterion("frame_path is null");
+        public Criteria andFramepathIsNull() {
+            addCriterion("framePath is null");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathIsNotNull() {
-            addCriterion("frame_path is not null");
+        public Criteria andFramepathIsNotNull() {
+            addCriterion("framePath is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathEqualTo(String value) {
-            addCriterion("frame_path =", value, "framePath");
+        public Criteria andFramepathEqualTo(String value) {
+            addCriterion("framePath =", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathNotEqualTo(String value) {
-            addCriterion("frame_path <>", value, "framePath");
+        public Criteria andFramepathNotEqualTo(String value) {
+            addCriterion("framePath <>", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathGreaterThan(String value) {
-            addCriterion("frame_path >", value, "framePath");
+        public Criteria andFramepathGreaterThan(String value) {
+            addCriterion("framePath >", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathGreaterThanOrEqualTo(String value) {
-            addCriterion("frame_path >=", value, "framePath");
+        public Criteria andFramepathGreaterThanOrEqualTo(String value) {
+            addCriterion("framePath >=", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathLessThan(String value) {
-            addCriterion("frame_path <", value, "framePath");
+        public Criteria andFramepathLessThan(String value) {
+            addCriterion("framePath <", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathLessThanOrEqualTo(String value) {
-            addCriterion("frame_path <=", value, "framePath");
+        public Criteria andFramepathLessThanOrEqualTo(String value) {
+            addCriterion("framePath <=", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathLike(String value) {
-            addCriterion("frame_path like", value, "framePath");
+        public Criteria andFramepathLike(String value) {
+            addCriterion("framePath like", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathNotLike(String value) {
-            addCriterion("frame_path not like", value, "framePath");
+        public Criteria andFramepathNotLike(String value) {
+            addCriterion("framePath not like", value, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathIn(List<String> values) {
-            addCriterion("frame_path in", values, "framePath");
+        public Criteria andFramepathIn(List<String> values) {
+            addCriterion("framePath in", values, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathNotIn(List<String> values) {
-            addCriterion("frame_path not in", values, "framePath");
+        public Criteria andFramepathNotIn(List<String> values) {
+            addCriterion("framePath not in", values, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathBetween(String value1, String value2) {
-            addCriterion("frame_path between", value1, value2, "framePath");
+        public Criteria andFramepathBetween(String value1, String value2) {
+            addCriterion("framePath between", value1, value2, "framepath");
             return (Criteria) this;
         }
 
-        public Criteria andFramePathNotBetween(String value1, String value2) {
-            addCriterion("frame_path not between", value1, value2, "framePath");
+        public Criteria andFramepathNotBetween(String value1, String value2) {
+            addCriterion("framePath not between", value1, value2, "framepath");
             return (Criteria) this;
         }
 
