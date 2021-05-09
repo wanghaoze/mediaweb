@@ -235,6 +235,76 @@ public class TabletExample {
             return (Criteria) this;
         }
 
+        public Criteria andDistributionIsNull() {
+            addCriterion("distribution is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionIsNotNull() {
+            addCriterion("distribution is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionEqualTo(String value) {
+            addCriterion("distribution =", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionNotEqualTo(String value) {
+            addCriterion("distribution <>", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionGreaterThan(String value) {
+            addCriterion("distribution >", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionGreaterThanOrEqualTo(String value) {
+            addCriterion("distribution >=", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionLessThan(String value) {
+            addCriterion("distribution <", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionLessThanOrEqualTo(String value) {
+            addCriterion("distribution <=", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionLike(String value) {
+            addCriterion("distribution like", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionNotLike(String value) {
+            addCriterion("distribution not like", value, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionIn(List<String> values) {
+            addCriterion("distribution in", values, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionNotIn(List<String> values) {
+            addCriterion("distribution not in", values, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionBetween(String value1, String value2) {
+            addCriterion("distribution between", value1, value2, "distribution");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistributionNotBetween(String value1, String value2) {
+            addCriterion("distribution not between", value1, value2, "distribution");
+            return (Criteria) this;
+        }
+
         public Criteria andRowNumIsNull() {
             addCriterion("row_num is null");
             return (Criteria) this;
@@ -352,66 +422,6 @@ public class TabletExample {
 
         public Criteria andColNumNotBetween(Integer value1, Integer value2) {
             addCriterion("col_num not between", value1, value2, "colNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightIsNull() {
-            addCriterion("height is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightIsNotNull() {
-            addCriterion("height is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightEqualTo(Integer value) {
-            addCriterion("height =", value, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightNotEqualTo(Integer value) {
-            addCriterion("height <>", value, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightGreaterThan(Integer value) {
-            addCriterion("height >", value, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightGreaterThanOrEqualTo(Integer value) {
-            addCriterion("height >=", value, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightLessThan(Integer value) {
-            addCriterion("height <", value, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightLessThanOrEqualTo(Integer value) {
-            addCriterion("height <=", value, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightIn(List<Integer> values) {
-            addCriterion("height in", values, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightNotIn(List<Integer> values) {
-            addCriterion("height not in", values, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightBetween(Integer value1, Integer value2) {
-            addCriterion("height between", value1, value2, "height");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeightNotBetween(Integer value1, Integer value2) {
-            addCriterion("height not between", value1, value2, "height");
             return (Criteria) this;
         }
 

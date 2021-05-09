@@ -161,9 +161,9 @@ create table jing_transaction_info(
 create table jing_tablet_info(
                         id bigint not null auto_increment comment '主键',
                         location varchar(64) not null comment '位置',
+                        distribution varchar(32) default null comment '分区号',
                         row_num int not null comment '行数',
                         col_num int not null comment '列数',
-                        height int default null comment '层数',
                         donors varchar(64) comment '捐赠人',
                         tablet_type varchar(128) comment '牌位种类',
                         create_time timestamp comment '开始时间',

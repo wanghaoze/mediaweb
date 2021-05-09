@@ -7,11 +7,11 @@ public class Tablet {
 
     private String location;
 
+    private String distribution;
+
     private Integer rowNum;
 
     private Integer colNum;
-
-    private Integer height;
 
     private String donors;
 
@@ -39,6 +39,14 @@ public class Tablet {
         this.location = location == null ? null : location.trim();
     }
 
+    public String getDistribution() {
+        return distribution;
+    }
+
+    public void setDistribution(String distribution) {
+        this.distribution = distribution == null ? null : distribution.trim();
+    }
+
     public Integer getRowNum() {
         return rowNum;
     }
@@ -53,14 +61,6 @@ public class Tablet {
 
     public void setColNum(Integer colNum) {
         this.colNum = colNum;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
     }
 
     public String getDonors() {

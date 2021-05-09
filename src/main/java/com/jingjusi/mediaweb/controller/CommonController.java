@@ -1,14 +1,8 @@
 package com.jingjusi.mediaweb.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.jingjusi.mediaweb.common.domain.Course;
-import com.jingjusi.mediaweb.common.domain.User;
-import com.jingjusi.mediaweb.common.domain.Video;
-import com.jingjusi.mediaweb.common.domain.VideoExample;
-import com.jingjusi.mediaweb.common.utils.CommonResult;
-import com.jingjusi.mediaweb.common.utils.FileUtils;
-import com.jingjusi.mediaweb.service.CourseService;
-import com.jingjusi.mediaweb.service.VideoService;
+import com.jingjusi.mediaweb.common.domain.*;
+import com.jingjusi.mediaweb.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -25,12 +18,18 @@ import java.util.*;
 @Controller
 @Api(value="公共controller",tags={"公共操作接口"})
 public class CommonController {
-    @Value("${file.uploadFolder}"+"video//")
-    private String videoFolder;
     @Autowired
     CourseService courseService;
     @Autowired
     VideoService videoService;
+    @Autowired
+    BookService bookService;
+    @Autowired
+    BorrowService borrowService;
+    @Autowired
+    MyTransactionService myTransactionService;
+    @Autowired
+    TabletService tabletService;
 
     @RequestMapping(value = "/errors", method = {RequestMethod.POST, RequestMethod.GET})
     public String error() {
@@ -41,9 +40,14 @@ public class CommonController {
     @RequestMapping(value = "/mwatch/{vid}")
     public String wv(@ApiParam(name = "videoId",value = "视频id",required = true)@PathVariable Long vid,ModelMap model,HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
         model.addAttribute("user",user);
         Video video =  videoService.getVideoInfoById(vid);
         model.addAttribute("video",video);
+
         return "manageWatch";
     }
 
@@ -52,7 +56,13 @@ public class CommonController {
     public String courses(HttpServletRequest request,Model model) {
         PageInfo<Course> coursePageInfo = courseService.findCourseByCourseName("",0,20);
         List<Course> courseList = coursePageInfo.getList();
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
         model.addAttribute("courseList",courseList);
+        model.addAttribute("user",user);
         return "courseManagement";
     }
     @RequestMapping(value = "/manage/videos")
@@ -63,6 +73,10 @@ public class CommonController {
         map.put("课程列表",videoPageInfo);
         model.addAttribute("list_video",new ArrayList<>(videoPageInfo.getList()));
         User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
         model.addAttribute("user",user);
         return "videoManagement";
     }
@@ -74,6 +88,10 @@ public class CommonController {
         map.put("课程列表",coursePageInfo);
         model.addAttribute("list_course",new ArrayList<>(coursePageInfo.getList()));
         User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
         model.addAttribute("user",user);
         return "courseList";
 
@@ -160,5 +178,41 @@ public class CommonController {
         model.addAttribute("user",user);
         model.addAttribute("list_course",new ArrayList<>(videoPageInfo.getList()));
         return "videoList";
+    }
+    @GetMapping(value = "/admin/books")
+    public String showBook(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user", user);
+        List<Book> list = bookService.getBooksByName("").getList();
+        model.addAttribute("list", list);
+        return "book-management";
+    }
+    @GetMapping(value = "/admin/transaction")
+    public String showTransaction(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user", user);
+        List<Transaction> list = myTransactionService.getTransactionByTargrt("").getList();
+        model.addAttribute("list", list);
+        return "transactionManagement";
+    }
+    @GetMapping(value = "/admin/tablet")
+    public String showTablet(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user", user);
+        List<Tablet> list = tabletService.findTabletByDonors("",0,20).getList();
+        model.addAttribute("list", list);
+        return "book-management";
     }
 }

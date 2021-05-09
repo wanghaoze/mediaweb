@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.Tablet">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="distribution" jdbcType="VARCHAR" property="distribution" />
     <result column="row_num" jdbcType="INTEGER" property="rowNum" />
     <result column="col_num" jdbcType="INTEGER" property="colNum" />
-    <result column="height" jdbcType="INTEGER" property="height" />
     <result column="donors" jdbcType="VARCHAR" property="donors" />
     <result column="tablet_type" jdbcType="VARCHAR" property="tabletType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, location, row_num, col_num, height, donors, tablet_type, create_time, expire_time, 
+    id, location, distribution, row_num, col_num, donors, tablet_type, create_time, expire_time, 
     remarks
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.TabletExample" resultMap="BaseResultMap">
@@ -106,12 +106,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Tablet">
-    insert into jing_tablet_info (id, location, row_num, 
-      col_num, height, donors, 
+    insert into jing_tablet_info (id, location, distribution, 
+      row_num, col_num, donors, 
       tablet_type, create_time, expire_time, 
       remarks)
-    values (#{id,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, #{rowNum,jdbcType=INTEGER}, 
-      #{colNum,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, #{donors,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, #{distribution,jdbcType=VARCHAR}, 
+      #{rowNum,jdbcType=INTEGER}, #{colNum,jdbcType=INTEGER}, #{donors,jdbcType=VARCHAR}, 
       #{tabletType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, 
       #{remarks,jdbcType=VARCHAR})
   </insert>
@@ -124,14 +124,14 @@
       <if test="location != null">
         location,
       </if>
+      <if test="distribution != null">
+        distribution,
+      </if>
       <if test="rowNum != null">
         row_num,
       </if>
       <if test="colNum != null">
         col_num,
-      </if>
-      <if test="height != null">
-        height,
       </if>
       <if test="donors != null">
         donors,
@@ -156,14 +156,14 @@
       <if test="location != null">
         #{location,jdbcType=VARCHAR},
       </if>
+      <if test="distribution != null">
+        #{distribution,jdbcType=VARCHAR},
+      </if>
       <if test="rowNum != null">
         #{rowNum,jdbcType=INTEGER},
       </if>
       <if test="colNum != null">
         #{colNum,jdbcType=INTEGER},
-      </if>
-      <if test="height != null">
-        #{height,jdbcType=INTEGER},
       </if>
       <if test="donors != null">
         #{donors,jdbcType=VARCHAR},
@@ -197,14 +197,14 @@
       <if test="record.location != null">
         location = #{record.location,jdbcType=VARCHAR},
       </if>
+      <if test="record.distribution != null">
+        distribution = #{record.distribution,jdbcType=VARCHAR},
+      </if>
       <if test="record.rowNum != null">
         row_num = #{record.rowNum,jdbcType=INTEGER},
       </if>
       <if test="record.colNum != null">
         col_num = #{record.colNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.height != null">
-        height = #{record.height,jdbcType=INTEGER},
       </if>
       <if test="record.donors != null">
         donors = #{record.donors,jdbcType=VARCHAR},
@@ -230,9 +230,9 @@
     update jing_tablet_info
     set id = #{record.id,jdbcType=BIGINT},
       location = #{record.location,jdbcType=VARCHAR},
+      distribution = #{record.distribution,jdbcType=VARCHAR},
       row_num = #{record.rowNum,jdbcType=INTEGER},
       col_num = #{record.colNum,jdbcType=INTEGER},
-      height = #{record.height,jdbcType=INTEGER},
       donors = #{record.donors,jdbcType=VARCHAR},
       tablet_type = #{record.tabletType,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -248,14 +248,14 @@
       <if test="location != null">
         location = #{location,jdbcType=VARCHAR},
       </if>
+      <if test="distribution != null">
+        distribution = #{distribution,jdbcType=VARCHAR},
+      </if>
       <if test="rowNum != null">
         row_num = #{rowNum,jdbcType=INTEGER},
       </if>
       <if test="colNum != null">
         col_num = #{colNum,jdbcType=INTEGER},
-      </if>
-      <if test="height != null">
-        height = #{height,jdbcType=INTEGER},
       </if>
       <if test="donors != null">
         donors = #{donors,jdbcType=VARCHAR},
@@ -278,9 +278,9 @@
   <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.Tablet">
     update jing_tablet_info
     set location = #{location,jdbcType=VARCHAR},
+      distribution = #{distribution,jdbcType=VARCHAR},
       row_num = #{rowNum,jdbcType=INTEGER},
       col_num = #{colNum,jdbcType=INTEGER},
-      height = #{height,jdbcType=INTEGER},
       donors = #{donors,jdbcType=VARCHAR},
       tablet_type = #{tabletType,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
