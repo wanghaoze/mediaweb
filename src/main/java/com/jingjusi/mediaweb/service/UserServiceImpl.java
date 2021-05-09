@@ -27,8 +27,28 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String addUser(User user) {
-        int a =  userMapper.insert(user);
-        if (a!=0) return "添加成功";
+        UserExample a = new UserExample();
+        a.createCriteria().andUsernameEqualTo(user.getUsername());
+
+        List<User> aa = userMapper.selectByExample(a);
+        if (!aa.isEmpty())
+            return "用户名重复";
+        if (!user.getEmail().equals("")&&user.getEmail()!=null) {
+            a.clear();
+            a.createCriteria().andEmailEqualTo(user.getEmail());
+            aa = userMapper.selectByExample(a);
+            if (!aa.isEmpty())
+                return "邮箱重复";
+        }
+        if (!user.getNumber().equals("")&&user.getNumber()!=null) {
+            a.clear();
+            a.createCriteria().andNumberEqualTo(user.getNumber());
+            aa = userMapper.selectByExample(a);
+            if (!aa.isEmpty())
+                return "手机号重复";
+        }
+        int c =  userMapper.insert(user);
+        if (c!=0) return "添加成功";
         else return "添加失败";
     }
 

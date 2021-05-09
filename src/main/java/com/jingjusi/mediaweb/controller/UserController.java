@@ -1,16 +1,15 @@
 package com.jingjusi.mediaweb.controller;
 
+import com.jingjusi.mediaweb.common.domain.Book;
 import com.jingjusi.mediaweb.common.domain.User;
 import com.jingjusi.mediaweb.common.utils.CommonResult;
 import com.jingjusi.mediaweb.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @RestController
 @Api(value="用户controller",tags={"用户操作接口"})
@@ -18,40 +17,62 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @RequestMapping(value = "/userManager/addUser",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public CommonResult<String> addUser(HttpServletRequest request,
+                                        @RequestBody User newUser) {
+        try{
+            User user = (User) request.getSession().getAttribute("user");
+            if (user==null) {
+                return new CommonResult<>(200,"登录过期，请重新登录");
+            }
+            if (!user.getRoles().contains("ROLE_ADMIN")) {
+                return new CommonResult<>(200,"只有系统管理才能添加用户");
+            }
+            CommonResult<String> ar;
+            if (newUser.getRoles().equals("") ||newUser.getRoles()==null) {
+                newUser.setRoles("ROLE_USER");
+            }
+            newUser.setDateJoined(new Date());
+            String message = userService.addUser(newUser);
+            ar = new CommonResult<>(200, message);
+            return ar;
+        }catch (Exception e){
+            System.out.println(e);
+            return new CommonResult<>(200,"用户添加失败");
+        }
 
-    @RequestMapping(value = "/addUser", method = {RequestMethod.GET, RequestMethod.POST})
-    public CommonResult<String> addUser(@RequestParam(value = "username")String username,
-                                        @RequestParam(value = "password") String pswd,
-                                        @RequestParam(value = "email") String email,
-                                        @RequestParam(value = "number") String number,
-                                        @RequestParam(value = "firstname")String firstname,
-                                        @RequestParam(value = "lastname")String lastname,
-                                        HttpServletRequest request
-    ) {
-        User new_user = new User();
-        new_user.setUsername(username);
-        new_user.setPassword(pswd);
-        new_user.setEmail(email);
-        new_user.setNumber(number);
-        new_user.setFirstName(firstname);
-        new_user.setLastName(lastname);
-        new_user.setIsStaff(false);
-        new_user.setIsActive(false);
-        new_user.setRemarks(null);
-        String message = userService.addUser(new_user);
-        return new CommonResult<>(200,message, username);
     }
 
-//    @RequestMapping(value = "/gateway", method = {RequestMethod.GET, RequestMethod.POST})
-//    public CommonResult<String> checkUser(@RequestParam(value = "username")String username,
-//                                          @RequestParam(value = "password")String password,
-//                                          HttpServletRequest request) {
-//        User user = userService.findUser(username);
-//        if (user.getPassword().equals(password)) {
-//            return new CommonResult<>(200,username+"登录成功", username);
-//        } else {
-//            return new CommonResult<>(404, "用户名或密码错误", username);
-//        }
-//    }
+    @RequestMapping(value = "/userManager/deleteUser",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public CommonResult<String> deleteUser(HttpServletRequest request,
+                                        @RequestBody User newUser) {
+        try{
+            User user = (User) request.getSession().getAttribute("user");
+            if (user==null) {
+                return new CommonResult<>(200,"登录过期，请重新登录");
+            }
+            if (!user.getRoles().contains("ROLE_ADMIN")) {
+                return new CommonResult<>(200,"只有系统管理才能删除用户");
+            }
+            CommonResult<String> ar;
+            User u = userService.findUser(newUser.getUsername());
+            if (u==null){
+                return new CommonResult<>(200,"用户不存在");
+            }
+            String message = userService.removeUser(u.getId());
+            ar = new CommonResult<>(200, message);
+            return ar;
+        }catch (Exception e){
+            return new CommonResult<>(200,"添加失败");
+        }
+
+    }
+
 
 }

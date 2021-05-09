@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.controller;
 
+import com.jingjusi.mediaweb.common.domain.User;
 import com.jingjusi.mediaweb.common.domain.Video;
 import com.jingjusi.mediaweb.common.domain.VideoExample;
 import com.jingjusi.mediaweb.common.utils.CommonResult;
@@ -35,9 +36,14 @@ public class VideoController {
     @RequestMapping(value = "/videoUpload", method = {RequestMethod.POST, RequestMethod.GET})
     public CommonResult<String> videoUpload(@RequestParam(value = "file") MultipartFile file,
                                             String my_chooses,
-//                                            @RequestParam(value = "speaker") String speaker,
-//                                            @RequestParam(value = "uploadUser") String uploadUser,
                                             HttpServletRequest request) throws Exception {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            return new CommonResult<>(200,"登录过期，请重新登录");
+        }
+        if (!user.getRoles().contains("ROLE_ADMIN")&&!user.getRoles().contains("ROLE_STUDY")) {
+            return new CommonResult<>(200,"只有系统管理和网上学习管理员才能添加视频");
+        }
         System.out.println(file);
         String fileName = file.getOriginalFilename();  // 文件名
         String filePath = uploadFolder+"static\\video\\";// 上传后的路径
@@ -63,7 +69,7 @@ public class VideoController {
             newVideo.setVideoSize((filesize/1024)+"GB");
         newVideo.setVideoTime(videoTime);
         newVideo.setCntVisit(0L);
-        newVideo.setUploadUser("uploadUser");
+        newVideo.setUploadUser(user.getUsername());
         newVideo.setUploadTime(now);
         newVideo.setFramepath("static/image/"+VideoName+".jpg");
         newVideo.setLastRequest(now);
