@@ -385,16 +385,16 @@
                                         <div class="form-group mb-3">
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <label for="InputEmail1">课程命名</label>
-                                                    <input type="text" class="form-control" id="InputEmail1" placeholder="输入视频名字">
+                                                    <label for="InputCourseName">课程命名</label>
+                                                    <input type="text" class="form-control" id="InputCourseName" placeholder="输入课程名字">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="InputEmail1">简介</label>
+                                                    <label for="InputSummary">简介</label>
                                                     <input type="text" class="form-control" id="InputSummary" placeholder="输入简介">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="InputEmail1">主讲人</label>
+                                                    <label for="InputSpeaker">主讲人</label>
                                                     <input type="text" class="form-control" id="InputSpeaker" placeholder="输入主讲人">
 
                                                 </div>
@@ -405,7 +405,7 @@
                                                             <input type="file" class="custom-file-input" id="file_input"
                                                                    oninput="input_filename();"
                                                                    accept="*/*">
-                                                            <label class="custom-file-label" id='file_input_lable1' for="file_input">选择视频</label>
+                                                            <label class="custom-file-label" id='file_input_lable1' for="file_input">选择图片</label>
                                                         </div>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">浏览文件</span>
@@ -494,60 +494,13 @@
     var input_lable1 = document.getElementById("file_input_lable1");
 
 
-        //获取复选框元素
-    var checkbox = document.all('course');
-    var checkall = document.getElementById('courseAll');
 
     /*点击全选按钮全部选中的情况*/
-    checkall.addEventListener('click', function () {
-
-        if (checkbox.length == undefined) {//一个选项时
-            checkbox.checked = checkall.checked;
-        } else {
-            for (var i = 0; i < checkbox.length; i++) {//多个选项时
-                checkbox[i].checked = this.checked;
-            }
-        }
-    }, false);
+  
 
 
     //全部按钮什么时候被自动选中以及自动取消
-    if (checkbox.length == undefined) {//一个选项时
-        checkbox.addEventListener('click', function () {
-            checkall.checked = checkbox.checked;
-        }, false);
-    } else {
-        for (var i = 0; i < checkbox.length; i++) {//多个选项时
-            checkbox[i].addEventListener('click', function () {
-                for (var i = 0; i < checkbox.length; i++) {
-                    if (!checkbox[i].checked) {
-                        checkall.checked = false; //全选自动取消
-                        break;
-                    } else {
-                        if (i == checkbox.length - 1) {
-                            checkall.checked = true;
-                        }
-                        ; //全选自动勾选
-                    }
-                }
-            }, false);
-        }
-    }
-    // //打印您所有的选择
-    // document.getElementById('upload_btn').addEventListener('click',function() {
-    //
-    //     /*一个个去选择时的情况*/
-    //     var yourchoose = "您选择的爱好有：";
-    //     if (checkbox.length == undefined) {//一个选项时
-    //         if (checkbox.checked) yourchoose = yourchoose + checkbox.value;
-    //     }else{
-    //         for (var i = 0; i < checkbox.length; i++) {//多个选项时
-    //             if (checkbox[i].checked) yourchoose = yourchoose + checkbox[i].value + "、";
-    //         };
-    //     }
-    //     alert(yourchoose);
-    // },false);
-    //
+    
 
 
     function show_alert(message, alert) {
@@ -586,24 +539,7 @@
         var filesize = file.size;
         document.cookie = `filesize=${filesize}`;
         data.append("file", file);
-        var my_chooses = "{";
-        var is_first = true;
-        if (checkbox.length == undefined) {//一个选项时
-            if (checkbox.checked) my_chooses = my_chooses + checkbox.value;
-        }else{
-            for (var i = 0; i < checkbox.length; i++) {//多个选项时
-                if (checkbox[i].checked) {
-                    if (is_first) {
-                        my_chooses = my_chooses + "\"" + checkbox[i].id.split("course")[1] + "\": \"" + checkbox[i].value + "\"";
-                        is_first = false;
-                    } else {
-                        my_chooses = my_chooses + ", \"" + checkbox[i].id.split("course")[1] + "\": \"" + checkbox[i].value + "\"";
-                    }
-                }
-            };
-        }
-        my_chooses = my_chooses + "}"
-        data.append("my_chooses", my_chooses);
+        
         request.upload.addEventListener("progress",function (e) {
             var loaded = e.loaded;
             var total = e.total;
@@ -614,18 +550,17 @@
         })
         request.addEventListener("load", function (e) {
             if (request.status === 200) {
-                // show_alert(`${requset.response}`,"success");
                 show_alert(`${request.response.message}`, "success");
                 console.log(request.response.massage)
             }
             else {
-                show_alert(`上传文件失败`, "danger");
+                show_alert(`新建课程失败`, "danger");
             }
             reset();
         })
         request.addEventListener("error",function (e) {
             reset();
-            show_alert(`上传文件失败`, "danger");
+            show_alert(`新建课程失败`, "danger");
         })
         request.open("post", url);
         request.send(data);

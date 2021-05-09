@@ -33,8 +33,11 @@ public class CourseController {
     @Value("${file.uploadFolder}")
     private String uploadFolder;
 
-    @RequestMapping(value = "/study/add")
-    public CommonResult<String> addCourse(String className, String speaker, String summary, @RequestParam(value = "file") MultipartFile file
+    @RequestMapping(value = "/manage/courseUpload")
+    public CommonResult<String> addCourse(@RequestParam(value = "courseName")String className,
+                                          @RequestParam(value = "speaker")String speaker,
+                                          @RequestParam(value = "summary")String summary,
+                                          @RequestParam(value = "file") MultipartFile file
                         ,HttpServletRequest request) {
 
             try {
@@ -54,6 +57,7 @@ public class CourseController {
                 course.setOpenTime(new Date());
                 course.setRemarks("");
                 String message = courseService.addCourse(course);
+                System.out.println(course.getClassName()+"开设成功");
                 return new CommonResult<>(200,message, className);
             } catch (IOException e) {
                 e.printStackTrace();

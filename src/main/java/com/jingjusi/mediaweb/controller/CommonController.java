@@ -29,6 +29,8 @@ public class CommonController {
     @Autowired
     MyTransactionService myTransactionService;
     @Autowired
+    UserService userService;
+    @Autowired
     TabletService tabletService;
 
     @RequestMapping(value = "/errors", method = {RequestMethod.POST, RequestMethod.GET})
@@ -67,7 +69,10 @@ public class CommonController {
     }
     @RequestMapping(value = "/manage/videos")
     public String videos(HttpServletRequest request,Model model) {
-        model.addAttribute("");
+
+        PageInfo<Course> coursePageInfo = courseService.findCourseByCourseName("",0,20);
+        List<Course> courses = coursePageInfo.getList();
+        model.addAttribute("courses",courses);
         PageInfo<Video> videoPageInfo = videoService.getVideosByName("",0,20);
         Map<String,Object> map = new HashMap<>();
         map.put("课程列表",videoPageInfo);
@@ -96,21 +101,7 @@ public class CommonController {
         return "courseList";
 
     }
-    @RequestMapping(value = "/videos/add", method = {RequestMethod.POST, RequestMethod.GET})
-    public String addvideopage(HttpServletRequest request, ModelMap model)
-    {
-        PageInfo<Course> coursePageInfo = courseService.findCourseByCourseName("",0,20);
-        List<Course> courses = coursePageInfo.getList();
-        model.addAttribute("courses",courses);
-        model.addAttribute("kcgl", "课程管理");
-        User user = (User) request.getSession().getAttribute("user");
-        if (user==null) {
-            user = new User();
-            user.setUsername("游客");
-        }
-        model.addAttribute("user",user);
-        return "uploadVideo";
-    }
+
     @RequestMapping(value = "/course/{cid}")
     public String manageCourse(@ApiParam(name = "courseId",value = "课程id",required = true)@PathVariable Long cid,
                                HttpServletRequest request,
@@ -179,7 +170,7 @@ public class CommonController {
         model.addAttribute("list_course",new ArrayList<>(videoPageInfo.getList()));
         return "videoList";
     }
-    @GetMapping(value = "/admin/books")
+    @GetMapping(value = "/manage/books")
     public String showBook(Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {
@@ -191,7 +182,7 @@ public class CommonController {
         model.addAttribute("list", list);
         return "book-management";
     }
-    @GetMapping(value = "/admin/transaction")
+    @GetMapping(value = "/manage/transaction")
     public String showTransaction(Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {
@@ -203,7 +194,7 @@ public class CommonController {
         model.addAttribute("list", list);
         return "transactionManagement";
     }
-    @GetMapping(value = "/admin/tablet")
+    @GetMapping(value = "/manage/tablet")
     public String showTablet(Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {
@@ -213,6 +204,18 @@ public class CommonController {
         model.addAttribute("user", user);
         List<Tablet> list = tabletService.findTabletByDonors("",0,20).getList();
         model.addAttribute("list", list);
-        return "book-management";
+        return "tabletManagement";
+    }
+    @GetMapping(value = "/manage/users")
+    public String showUser(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user", user);
+        List<User> list = userService.findUsersByPage(0,20).getList();
+        model.addAttribute("list", list);
+        return "userManagement";
     }
 }

@@ -39,13 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/manage").hasAnyRole("ADMIN","MANAGER")
+                .antMatchers("/manage/**").hasAnyRole("ADMIN","MANAGER")
+                .antMatchers("/manage/books").hasAnyRole("ADMIN","BOOKMANAGER")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/videos/add").hasRole("ADMIN")
                 .antMatchers("/videoUpload").hasRole("ADMIN")
-                .antMatchers("/").permitAll()
+//                .antMatchers("/").permitAll()
                 .and().formLogin()
-                .successHandler(myAuthenticationSuccessHandler);
+                .successHandler(myAuthenticationSuccessHandler)
+                .and().sessionManagement().invalidSessionUrl("/login");
         http.cors().and().csrf().disable();
     }
 

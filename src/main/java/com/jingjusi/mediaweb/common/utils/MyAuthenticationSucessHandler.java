@@ -37,6 +37,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         String username = ((UserDetails)authentication.getPrincipal()).getUsername();
         User user = userService.findUser(username);
         request.getSession().setAttribute("user", user);
+        request.getSession().setMaxInactiveInterval(120*60);
         if (savedRequest == null){
             redirectStrategy.sendRedirect(request, response, "/");
         }else {
