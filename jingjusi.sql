@@ -144,3 +144,33 @@ create table jing_borrow_info (
                         key idx_user (user_id),
                         key idx_operator (operator)
 )engine = InnoDB comment '借还信息';
+
+create table jing_transaction_info(
+                        id bigint not null auto_increment comment '主键',
+                        cnt bigint not null comment '金额',
+                        create_time timestamp not null comment '账务时间' default now(),
+                        reason varchar(64) comment '事由',
+                        target varchar(64) comment '收款方',
+                        is_positive varchar(4) comment '是否收入',
+                        operator varchar(64) not null comment '记账员',
+                        primary key (id),
+                        key idx_time(create_time),
+                        key idx_target(target)
+)engine = InnoDB comment '记账信息';
+
+create table jing_tablet_info(
+                        id bigint not null auto_increment comment '主键',
+                        location varchar(64) not null comment '位置',
+                        row_num int not null comment '行数',
+                        col_num int not null comment '列数',
+                        height int default null comment '层数',
+                        donors varchar(64) comment '捐赠人',
+                        tablet_type varchar(128) comment '牌位种类',
+                        create_time timestamp comment '开始时间',
+                        expire_time timestamp comment '过期时间',
+                        remarks varchar(128) comment '备注',
+                        primary key (id),
+                        key idx_location(location),
+                        key idx_donors(donors),
+                        key idx_type(tablet_type)
+)engine = InnoDB comment '排位信息';

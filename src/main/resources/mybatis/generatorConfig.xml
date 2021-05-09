@@ -41,6 +41,10 @@
         <table tableName="jing_course_info" domainObjectName="Course"/>
         <table tableName="jing_course_video_info" domainObjectName="CourseVideo"/>
         <table tableName="jing_course_user_info" domainObjectName="CourseUser"/>
+        <table tableName="jing_book_info" domainObjectName="Book"/>
+        <table tableName="jing_borrow_info" domainObjectName="Borrow"/>
+        <table tableName="jing_transaction_info" domainObjectName="Transaction"/>
+        <table tableName="jing_tablet_info" domainObjectName="Tablet"/>
 
 
 
