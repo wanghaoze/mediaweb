@@ -1,9 +1,9 @@
 package com.jingjusi.mediaweb.service;
 
 import com.github.pagehelper.PageInfo;
-import com.jingjusi.mediaweb.common.domain.Transaction;
-import com.jingjusi.mediaweb.common.domain.TransactionExample;
-import com.jingjusi.mediaweb.mapper.TransactionMapper;
+import com.jingjusi.mediaweb.common.domain.MyTransaction;
+import com.jingjusi.mediaweb.common.domain.MyTransactionExample;
+import com.jingjusi.mediaweb.mapper.MyTransactionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class MyTransactionServiceImpl implements MyTransactionService {
     @Autowired
-    TransactionMapper mapper;
+    MyTransactionMapper mapper;
     @Override
-    public String addTransaction(Transaction transaction) {
+    public String addTransaction(MyTransaction transaction) {
         try {
             mapper.insert(transaction);
             return "添加成功";
@@ -37,15 +37,15 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     }
 
     @Override
-    public PageInfo<Transaction> getTransactionByTargrt(String target) {
+    public PageInfo<MyTransaction> getTransactionByTargrt(String target) {
         try {
-            TransactionExample example = new TransactionExample();
+            MyTransactionExample example = new MyTransactionExample();
             example.createCriteria().andTargetLike("%"+target+"%");
-            List<Transaction> list = new ArrayList<>(mapper.selectByExample(example));
-            return new PageInfo<Transaction>(list);
+            List<MyTransaction> list = new ArrayList<>(mapper.selectByExample(example));
+            return new PageInfo<MyTransaction>(list);
         } catch (Exception e) {
             System.out.println(e);
-            return new PageInfo<Transaction>();
+            return new PageInfo<MyTransaction>();
         }
     }
 }

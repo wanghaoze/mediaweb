@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jingjusi.mediaweb.mapper.TransactionMapper">
-  <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.Transaction">
+<mapper namespace="com.jingjusi.mediaweb.mapper.MyTransactionMapper">
+  <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.MyTransaction">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="cnt" jdbcType="BIGINT" property="cnt" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, cnt, create_time, reason, target, is_positive, operator
   </sql>
-  <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.TransactionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.MyTransactionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
     delete from jing_transaction_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jingjusi.mediaweb.common.domain.TransactionExample">
+  <delete id="deleteByExample" parameterType="com.jingjusi.mediaweb.common.domain.MyTransactionExample">
     delete from jing_transaction_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Transaction">
+  <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.MyTransaction">
     insert into jing_transaction_info (id, cnt, create_time, 
       reason, target, is_positive, 
       operator)
@@ -109,7 +109,7 @@
       #{reason,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{isPositive,jdbcType=VARCHAR}, 
       #{operator,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.Transaction">
+  <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.MyTransaction">
     insert into jing_transaction_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jingjusi.mediaweb.common.domain.TransactionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.jingjusi.mediaweb.common.domain.MyTransactionExample" resultType="java.lang.Long">
     select count(*) from jing_transaction_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jingjusi.mediaweb.common.domain.Transaction">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jingjusi.mediaweb.common.domain.MyTransaction">
     update jing_transaction_info
     <set>
       <if test="cnt != null">
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.Transaction">
+  <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.MyTransaction">
     update jing_transaction_info
     set cnt = #{cnt,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

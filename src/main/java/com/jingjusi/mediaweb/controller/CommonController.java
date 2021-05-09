@@ -199,7 +199,7 @@ public class CommonController {
             user.setUsername("游客");
         }
         model.addAttribute("user", user);
-        List<Transaction> list = myTransactionService.getTransactionByTargrt("").getList();
+        List<MyTransaction> list = myTransactionService.getTransactionByTargrt("").getList();
         model.addAttribute("list", list);
         return "transactionManagement";
     }

@@ -38,7 +38,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         User user = userService.findUser(username);
         request.getSession().setAttribute("user", user);
         if (savedRequest == null){
-            redirectStrategy.sendRedirect(request, response, "/index");
+            redirectStrategy.sendRedirect(request, response, "/");
         }else {
             System.out.println(savedRequest.getRedirectUrl());
             redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());

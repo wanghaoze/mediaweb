@@ -2,7 +2,7 @@ package com.jingjusi.mediaweb.common.domain;
 
 import java.util.Date;
 
-public class Transaction {
+public class MyTransaction {
     private Long id;
 
     private Long cnt;
