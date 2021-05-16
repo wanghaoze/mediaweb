@@ -362,7 +362,7 @@
         <section class="content">
             <div class="container">
 
-                <div id="add" class="modal fade">
+                <div id="add" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -422,7 +422,6 @@
                                                             <button onclick="upload('/videoUpload')" id="upload_btn"
                                                                     class="btn btn-primary">提交</button>
 
-                                                            <button class="btn btn-danger" data-dismiss="modal">关闭</button>
                                                             <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
                                                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                                 上传中……
@@ -461,7 +460,7 @@
                                         <div class="card-img-overlay d-flex flex-column justify-content-end">
                                             <!--                                            <h5 class="card-title text-primary text-white"><span th:text="${w.className}"></span></h5>-->
                                             <!--                                            <p class="card-text text-white pb-2 pt-1"><span th:text="${w.summary}"></span></p>-->
-                                            <a href="#add" class="card-title text-primary text-black-50" data-toggle="modal" data-target="#add">添加视频</a>
+                                            <a href="/manage/uploadV" class="card-title text-primary text-black-50" >添加视频</a>
                                         </div>
                                     </div>
                                 </div>
@@ -517,7 +516,7 @@
 <script>
     function manageVideo(a) {
         var id = a.id.split("w")[0];
-        self.location.href = "/manage/video/" + id;
+        self.location.href = "/mwatch/" + id;
     }
     function deletevideo(a) {
         var id = a.id.split("d")[0];

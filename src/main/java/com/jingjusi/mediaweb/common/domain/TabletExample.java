@@ -495,6 +495,76 @@ public class TabletExample {
             return (Criteria) this;
         }
 
+        public Criteria andContactsIsNull() {
+            addCriterion("contacts is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsIsNotNull() {
+            addCriterion("contacts is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsEqualTo(String value) {
+            addCriterion("contacts =", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotEqualTo(String value) {
+            addCriterion("contacts <>", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsGreaterThan(String value) {
+            addCriterion("contacts >", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsGreaterThanOrEqualTo(String value) {
+            addCriterion("contacts >=", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsLessThan(String value) {
+            addCriterion("contacts <", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsLessThanOrEqualTo(String value) {
+            addCriterion("contacts <=", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsLike(String value) {
+            addCriterion("contacts like", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotLike(String value) {
+            addCriterion("contacts not like", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsIn(List<String> values) {
+            addCriterion("contacts in", values, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotIn(List<String> values) {
+            addCriterion("contacts not in", values, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsBetween(String value1, String value2) {
+            addCriterion("contacts between", value1, value2, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotBetween(String value1, String value2) {
+            addCriterion("contacts not between", value1, value2, "contacts");
+            return (Criteria) this;
+        }
+
         public Criteria andTabletTypeIsNull() {
             addCriterion("tablet_type is null");
             return (Criteria) this;

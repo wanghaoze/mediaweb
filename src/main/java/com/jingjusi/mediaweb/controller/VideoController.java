@@ -37,13 +37,13 @@ public class VideoController {
     public CommonResult<String> videoUpload(@RequestParam(value = "file") MultipartFile file,
                                             String my_chooses,
                                             HttpServletRequest request) throws Exception {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user==null) {
-            return new CommonResult<>(200,"登录过期，请重新登录");
-        }
-        if (!user.getRoles().contains("ROLE_ADMIN")&&!user.getRoles().contains("ROLE_STUDY")) {
-            return new CommonResult<>(200,"只有系统管理和网上学习管理员才能添加视频");
-        }
+//        User user = (User) request.getSession().getAttribute("user");
+//        if (user==null) {
+//            return new CommonResult<>(200,"登录过期，请重新登录");
+//        }
+//        if (!user.getRoles().contains("ROLE_ADMIN")&&!user.getRoles().contains("ROLE_STUDY")) {
+//            return new CommonResult<>(200,"只有系统管理和网上学习管理员才能添加视频");
+//        }
         System.out.println(file);
         String fileName = file.getOriginalFilename();  // 文件名
         String filePath = uploadFolder+"static\\video\\";// 上传后的路径
@@ -69,7 +69,7 @@ public class VideoController {
             newVideo.setVideoSize((filesize/1024)+"GB");
         newVideo.setVideoTime(videoTime);
         newVideo.setCntVisit(0L);
-        newVideo.setUploadUser(user.getUsername());
+        newVideo.setUploadUser("s");
         newVideo.setUploadTime(now);
         newVideo.setFramepath("static/image/"+VideoName+".jpg");
         newVideo.setLastRequest(now);
@@ -145,27 +145,4 @@ public class VideoController {
         return new CommonResult<>(200,message);
     }
 
-
-
-
-
-//    @RequestMapping(value = "/getVideos", method = {RequestMethod.GET,RequestMethod.POST})
-//    public Object getVideos(@ApiParam(name = "keyword", value = "关键字", required = true) @PathVariable String video_class,
-//                                     @ApiParam(name = "page_no", value = "页码", required = true)@PathVariable Integer page_no) {
-//        Map<String, Object> map = new HashMap<>();
-//        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
-//        videoService = ctx.getBean(VideoService.class);
-//        PageInfo<Video> videos = videoService.getVideos(page_no,20, video_class);
-//        if (videos!=null) {
-//            map.put("msg",1);   //账户存在
-//            map.put("page_no",page_no);
-//            map.put("page_size",videos.getSize());
-//            map.put("videos_info", videos);
-//        } else {
-//            map.put("msg",0);   //账户不存在
-//        }
-//        return map;
-//    }
-
-//    @RequestMapping(value = "")
 }

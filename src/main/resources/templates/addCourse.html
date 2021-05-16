@@ -202,19 +202,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/manage/courses" class="nav-link">
+                                <a href="/manage/courses" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>课程管理</p>
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a href="/manage/users" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>用户管理</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/manage/videos" class="nav-link active">
+                                <a href="/manage/videos" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>视频管理</p>
                                 </a>
@@ -231,6 +226,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                            <li class="nav-item">
+                                <a href="/manage/users" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>用户管理</p>
+                                </a>
+                            </li>
                                 <a href="pages/layout/top-nav.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>纪律管理</p>
@@ -417,7 +418,7 @@
                                                 <div>
 <!--                                                    <button onclick="upload('{{ request.url }}')" id="upload_btn"-->
 
-                                                    <button onclick="uploadVideo('/videoUpload')" id="upload_btn"
+                                                    <button onclick="uploadCourse('/manage/courseUpload')" id="upload_btn"
                                                             class="btn btn-primary">提交</button>
                                                     <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
                                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -479,6 +480,7 @@
 
 </body>
 
+
 <script>
     var progress = document.getElementById("progress");
     var progress_wrapper = document.getElementById("progress_wrapper");
@@ -492,15 +494,18 @@
 
     var input = document.getElementById("file_input");
     var input_lable1 = document.getElementById("file_input_lable1");
+    var courseName = document.getElementById("InputCourseName");
+    var mysummary = document.getElementById("InputSummary");
+    var myspeaker = document.getElementById("InputSpeaker");
 
 
 
     /*点击全选按钮全部选中的情况*/
-  
+
 
 
     //全部按钮什么时候被自动选中以及自动取消
-    
+
 
 
     function show_alert(message, alert) {
@@ -518,7 +523,7 @@
         input_lable1.innerText = input.files[0].name;
     }
 
-    function upload(url) {
+    function uploadCourse(url) {
         if (!input.value) {
             show_alert("No file Selected", "warning");
             return;
@@ -539,7 +544,10 @@
         var filesize = file.size;
         document.cookie = `filesize=${filesize}`;
         data.append("file", file);
-        
+        data.append("className",courseName.value);
+        console.log(courseName.value);
+        data.append("summary", mysummary.value);
+        data.append("speaker",myspeaker.value);
         request.upload.addEventListener("progress",function (e) {
             var loaded = e.loaded;
             var total = e.total;

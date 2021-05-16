@@ -269,7 +269,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="book-management.html" class="nav-link active">
+                        <a href="book-management.html" class="nav-link">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>
                                 图书管理
@@ -306,7 +306,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link  active">
                             <i class="nav-icon fas fa-tree"></i>
                             <p>
                                 海会塔
@@ -351,7 +351,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>净居寺网络学习后台管理 -- 图书管理</h1>
+                        <h1>净居寺网络学习后台管理 -- 海会塔</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -368,10 +368,10 @@
             <div class="container">
                 <div>
                     <div class=" col"><button class="btn btn-success"
-                                              data-toggle="modal" data-target="#add">添加图书
+                                              data-toggle="modal" data-target="#add">添加牌位
                     </button>
                         <button class="btn btn-danger"
-                                data-toggle="modal" data-target="#delete">删除图书
+                                data-toggle="modal" data-target="#delete">删除牌位
                         </button></div>
 
                 </div>
@@ -386,15 +386,15 @@
                                 </button>
                             </div>
                             <div class="modal-title">
-                                <h1 class="text-center">添加图书</h1>
+                                <h1 class="text-center">添加牌位</h1>
                             </div>
                             <div class="modal-body">
                                 <form id="form-login">
                                     <div class="form-group has-feedback">
-                                        <label for="ad-isbn">isbn</label>
+                                        <label for="ad-distribution">区号</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                                            <input id="ad-isbn" class="form-control" placeholder="请输入ISBN" maxlength="13" type="text">
+                                            <input id="ad-distribution" class="form-control" placeholder="请输入区号" maxlength="1" type="text">
                                         </div>
                                         <span style="color:red;display: none;" class="tips"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -402,10 +402,10 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-bname">书名</label>
+                                        <label for="ad-row_num">行数</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                                            <input id="ad-bname" class="form-control" placeholder="请输入书名" maxlength="20">
+                                            <input id="ad-row_num" class="form-control" placeholder="请输入行数" maxlength="3">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -414,10 +414,10 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-publisher">出版社</label>
+                                        <label for="ad-col_num">列数</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-info-sign"></span></span>
-                                            <input id="ad-publisher" class="form-control" placeholder="请输入出版社" maxlength="10">
+                                            <input id="ad-col_num" class="form-control" placeholder="请输入列数" maxlength="3">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -426,10 +426,10 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-writer">作者</label>
+                                        <label for="ad-donors">供养人</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                            <input id="ad-writer" class="form-control" placeholder="请输入作者" maxlength="10">
+                                            <input id="ad-donors" class="form-control" placeholder="请输入供养人" maxlength="20">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -438,10 +438,32 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-ptime">出版时间</label>
+                                        <label for="ad-createTime">开始时间</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            <input id="ad-ptime" class="form-control" placeholder="请输入出版时间" maxlength="10">
+                                            <input id="ad-createTime" class="form-control" placeholder="请输入开始时间" maxlength="10">
+                                        </div>
+
+                                        <span style="color:red;display: none;" class="tips"></span>
+                                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="ad-expireTime">到期时间</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            <input id="ad-expireTime" class="form-control" placeholder="请输入到期时间" maxlength="10">
+                                        </div>
+
+                                        <span style="color:red;display: none;" class="tips"></span>
+                                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="ad-contacts">联系方式</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            <input id="ad-contacts" class="form-control" placeholder="请输入联系方式" maxlength="20">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -450,10 +472,10 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-num">数量</label>
+                                        <label for="ad-detail">备注</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
-                                            <input id="ad-num" class="form-control" placeholder="请输入数量" maxlength="4">
+                                            <textarea id="ad-detail" class="form-control" rows="3" placeholder="请输入备注"></textarea>
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -481,16 +503,38 @@
                                 </button>
                             </div>
                             <div class="modal-title">
-                                <h1 class="text-center">删除图书</h1>
+                                <h1 class="text-center">删除牌位</h1>
                             </div>
                             <div class="modal-body">
                                 <form id="form-delete">
                                     <div class="form-group has-feedback">
-                                        <label for="dl-isbn">isbn</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                                            <input id="dl-isbn" class="form-control" placeholder="请输入ISBN" maxlength="13" type="text">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <label for="dl-distribution" >区号</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                                                    <input id="dl-distribution" class="form-control" placeholder="请输入区号" maxlength="13" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <label for="dl-row" >行</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                                                    <input id="dl-row" class="form-control" placeholder="请输入行数" maxlength="13" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <label for="dl-col" >列</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                                                    <input id="dl-col" class="form-control" placeholder="请输入列数" maxlength="13" type="text">
+                                                </div>
+                                            </div>
                                         </div>
+
+
                                         <span style="color:red;display: none;" class="tips"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
@@ -509,26 +553,30 @@
 
                 <div class="panel panel-default" style="width: 90%;margin-left: 5%">
                     <div class="panel-heading">
-                        <h3 class="panel-title" style="text-align:center">图书信息</h3>
+                        <h3 class="panel-title" style="text-align:center">牌位信息</h3>
                     </div>
                     <div class="panel-body">
                         <table class="table table-hover" style="text-align:center">
                             <thead>
                             <tr>
-                                <th>isbn</th>
-                                <th>书名</th>
-                                <th>出版社</th>
-                                <th>作者</th>
-                                <th>出版时间</th>
+                                <th>区号</th>
+                                <th>行数</th>
+                                <th>列数</th>
+                                <th>供养人</th>
+                                <th>联系方式</th>
+                                <th>开始时间</th>
+                                <th>到期时间</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="booklist: ${list}">
-                                <td th:text="${booklist.isbn}"></td>
-                                <td th:text="${booklist.bname}"></td>
-                                <td th:text="${booklist.publisher}"></td>
-                                <td th:text="${booklist.writer}"></td>
-                                <td th:text="(${booklist.ptime.getYear()}+1900)+'年'"></td>
+                            <tr th:each="tabletlist: ${list}">
+                                <td th:text="${tabletlist.distribution}"></td>
+                                <td th:text="${tabletlist.rowNum}"></td>
+                                <td th:text="${tabletlist.colNum}"></td>
+                                <td th:text="${tabletlist.donors}"></td>
+                                <td th:text="${tabletlist.contacts}"></td>
+                                <td th:text="${tabletlist.createTime}"></td>
+                                <td th:text="${tabletlist.expireTime}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -592,32 +640,34 @@
 
     //添加图书逻辑
 
-    //ISBN
-    var regISBN = /^[0-9]{13}$/;
+    //区号
+    var regDistribution = /^[a-zA-Z]+$/;
     $('#add').find('input').eq(0).change(function () {
-        if (regISBN.test($(this).val())) {
+        if (regDistribution.test($(this).val())) {
             success($(this), 0, checkadd, 0);
         } else {
-            fail($(this), 0, 'ISBN只能为13位数字', checkadd, 0);
+            fail($(this), 0, '区号只能为字母', checkadd, 0);
         }
     });
-    //bname
+    //row_num
+    var regRow = / ^\d+$/;
     $('#add').find('input').eq(1).change(function () {
-        if ($(this).val().length < 3) {
-            fail($(this), 1, '书名太短，不能少于3个字符', checkadd, 0);
+        if (regRow.test($(this).val())) {
+            fail($(this), 1, '行数只能为3位以下非负整数', checkadd, 0);
         } else {
             success($(this), 1, checkadd, 0);
         }
     });
-    //publisher
+    //col_num
+    var regCol = / ^\d+$/;
     $('#add').find('input').eq(2).change(function () {
-        if ($(this).val().length < 3) {
-            fail($(this), 2, '出版社名太短，不能少于3个字符', checkadd, 0);
+        if (regCol.test($(this).val())) {
+            fail($(this), 2, '列数只能为3位以下非负整数', checkadd, 0);
         } else {
             success($(this), 2, checkadd, 0);
         }
     });
-    //writer
+    //donors
     $('#add').find('input').eq(3).change(function () {
         if ($(this).val().length < 1) {
             fail($(this), 3, '姓名太短', checkadd, 0);
@@ -625,7 +675,7 @@
             success($(this), 3, checkadd, 0);
         }
     });
-    //ptime
+    //createTime
     var regtime = /^[0-9]{4}[\-]{1}[0-9]{2}[\-]{1}[0-9]{2}$/;
     $('#add').find('input').eq(4).change(function () {
         if (regtime.test($(this).val())) {
@@ -634,13 +684,12 @@
             fail($(this), 4, '日期应形如XXXX-XX-XX', checkadd, 0);
         }
     });
-    //num
-    var regnum = /^[0-9]*$/;
+    // expireTime
     $('#add').find('input').eq(5).change(function () {
-        if (regnum.test($(this).val())) {
+        if (regtime.test($(this).val())) {
             success($(this), 5, checkadd, 0);
         } else {
-            fail($(this), 5, '请输入数字', checkadd, 0);
+            fail($(this), 5, '日期应形如XXXX-XX-XX', checkadd, 0);
         }
     });
 
@@ -657,18 +706,23 @@
                 }
             }
         } else {
-            var ISBN = document.getElementById("ad-isbn").value;
-            var bname = document.getElementById("ad-bname").value;
-            var publisher = document.getElementById("ad-publisher").value;
-            var writer = document.getElementById("ad-writer").value;
-            var ptime = document.getElementById("ad-ptime").value;
-            var number = document.getElementById("ad-num").value;
-            var booklist = {
-                'isbn': ISBN, 'bname': bname,
-                'publisher': publisher, 'writer': writer,
-                'ptime': ptime, 'number': number
+            var distribution = document.getElementById("ad-distribution").value;
+            var row_num = document.getElementById("ad-row_num").value;
+            var col_num = document.getElementById("ad-col_num").value;
+            var donors = document.getElementById("ad-donors").value;
+            var createTime = document.getElementById("ad-createTime").value;
+
+            var expireTime = document.getElementById("ad-expireTime").value;
+
+            var contacts = document.getElementById("ad-contacts").value;
+            var remarks = document.getElementById("ad-detail").value;
+            var tabletlist = {
+                'distribution': distribution, 'rowNum': row_num,
+                'colNum': col_num, 'donors': donors,
+                'createTime': createTime, 'expireTime':expireTime,
+                'contacts':contacts, 'remarks': remarks
             };
-            var JSONdata = JSON.stringify(booklist);
+            var JSONdata = JSON.stringify(tabletlist);
             $.ajax({
                 type: "post",
                 url: "/managebooks/admin/books",
@@ -676,26 +730,38 @@
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
-                    if (result['success']) {
-                        alert("添加成功");
-                    } else {
-                        alert("添加失败");
-                    }
+                    alert(result.message);
                 }
             });
         }
     });
 
     //delete
-    var regISBN = /^[0-9]{13}$/;
+    var regDistribution = /^[a-zA-Z]+$/;
     $('#delete').find('input').eq(0).change(function () {
-        if (regISBN.test($(this).val())) {
-            success($(this), 0, checkdel, 6);
+        if (regDistribution.test($(this).val())) {
+            success($(this), 0, checkdel, 0);
         } else {
-            fail($(this), 0, 'ISBN只能为13位数字', checkdel, 6);
+            fail($(this), 0, '区号只能为纯字母', checkdel, 0);
         }
     });
-
+    var regRow = / ^\d+$/;
+    $('#add').find('input').eq(1).change(function () {
+        if (regRow.test($(this).val())) {
+            fail($(this), 1, '行数只能为3位以下非负整数', checkadd, 0);
+        } else {
+            success($(this), 1, checkadd, 0);
+        }
+    });
+    //col_num
+    var regCol = / ^\d+$/;
+    $('#add').find('input').eq(2).change(function () {
+        if (regCol.test($(this).val())) {
+            fail($(this), 2, '列数只能为3位以下非负整数', checkadd, 0);
+        } else {
+            success($(this), 2, checkadd, 0);
+        }
+    });
     $('#btn-delete').click(function (e) {
         if (!checkadd.every(function (value) {
             return value == true
@@ -707,11 +773,16 @@
                 }
             }
         } else {
-            var ISBN = document.getElementById("dl-isbn").value;
-            var booklist = {
-                'isbn': ISBN
+            var distribution = document.getElementById("dl-distribution").value;
+
+            var col_num = document.getElementById("dl-col").value;
+            var row_num = document.getElementById("dl-row").value;
+            var tabletlist = {
+                'distribution': distribution,
+                'colNum':col_num,
+                'rowNum':row_num
             };
-            var JSONdata = JSON.stringify(booklist);
+            var JSONdata = JSON.stringify(tabletlist);
             $.ajax({
                 type: "post",
                 url: "/managebooks/admin/delete",
@@ -719,11 +790,7 @@
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
-                    if (result['success']) {
-                        alert("删除成功");
-                    } else {
-                        alert("删除失败");
-                    }
+                    alert(result.message);
                 }
             });
         }

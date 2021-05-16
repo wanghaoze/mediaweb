@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.unit.DataSize;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -21,6 +22,8 @@ public class MediawebApplication {
     @Bean
     MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
+//        factory.setMaxFileSize(DataSize.ofBytes(102400000));
+//        factory.setMaxRequestSize(DataSize.ofBytes(102400000));
         System.out.println(uploadFolder);
         factory.setLocation(uploadFolder);
         return factory.createMultipartConfig();

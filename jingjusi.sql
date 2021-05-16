@@ -83,7 +83,7 @@ create table jing_image_info(
 
 create table jing_course_info(
                                  id bigint not null auto_increment comment '主键',
-                                 class_name varchar(64) comment '课程名',
+                                 class_name varchar(64) not null comment '课程名',
                                  speaker varchar(64) comment '主讲人',
                                  open_time timestamp comment '开设时间' default now(),
                                  summary varchar(1024) comment '课程简介',
@@ -165,6 +165,7 @@ create table jing_tablet_info(
                         row_num int not null comment '行数',
                         col_num int not null comment '列数',
                         donors varchar(64) comment '捐赠人',
+                        contacts varchar(64) comment '联系方式',
                         tablet_type varchar(128) comment '牌位种类',
                         create_time timestamp comment '开始时间',
                         expire_time timestamp comment '过期时间',

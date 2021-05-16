@@ -52,7 +52,24 @@ public class CommonController {
 
         return "manageWatch";
     }
-
+    @RequestMapping(value = "manage/videos", method = {RequestMethod.POST, RequestMethod.GET})
+    public String video_up(
+                           HttpServletRequest request,Model model) {
+        PageInfo<Course> coursePageInfo = courseService.findCourseByCourseName("",0,20);
+        List<Course> courses = coursePageInfo.getList();
+        model.addAttribute("courses",courses);
+        PageInfo<Video> videoPageInfo = videoService.getVideosByName("",0,20);
+        Map<String,Object> map = new HashMap<>();
+        map.put("课程列表",videoPageInfo);
+        model.addAttribute("list_video",new ArrayList<>(videoPageInfo.getList()));
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user",user);
+        return "videoManagement";
+    }
 
     @RequestMapping(value = "/manage/courses")
     public String courses(HttpServletRequest request,Model model) {
@@ -67,7 +84,19 @@ public class CommonController {
         model.addAttribute("user",user);
         return "courseManagement";
     }
-    @RequestMapping(value = "/manage/videos")
+
+    @RequestMapping(value = "/course/add")
+    public String addCourse(HttpServletRequest request,Model model) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user",user);
+        return "addCourse";
+    }
+
+    @RequestMapping(value = "/manage/uploadV")
     public String videos(HttpServletRequest request,Model model) {
 
         PageInfo<Course> coursePageInfo = courseService.findCourseByCourseName("",0,20);
@@ -83,7 +112,7 @@ public class CommonController {
             user.setUsername("游客");
         }
         model.addAttribute("user",user);
-        return "videoManagement";
+        return "uploadVideo";
     }
 
     @RequestMapping(value = "/study/{page}")

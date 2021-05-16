@@ -86,7 +86,6 @@ public class TabletServiceImpl implements TabletService{
             if (tablet.getColNum()!=null)
                 tabletExample.or().andRowNumEqualTo(tablet.getColNum());
             List<Tablet> tables = new ArrayList<>(tabletMapper.selectByExample(tabletExample));
-
             return new PageInfo<>(tables);
         } catch (Exception e) {
             System.out.println(e);

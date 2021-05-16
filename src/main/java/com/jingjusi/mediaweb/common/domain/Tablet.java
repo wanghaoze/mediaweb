@@ -15,6 +15,8 @@ public class Tablet {
 
     private String donors;
 
+    private String contacts;
+
     private String tabletType;
 
     private Date createTime;
@@ -69,6 +71,14 @@ public class Tablet {
 
     public void setDonors(String donors) {
         this.donors = donors == null ? null : donors.trim();
+    }
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts == null ? null : contacts.trim();
     }
 
     public String getTabletType() {

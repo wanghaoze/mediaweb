@@ -34,7 +34,7 @@ public class CourseController {
     private String uploadFolder;
 
     @RequestMapping(value = "/manage/courseUpload")
-    public CommonResult<String> addCourse(@RequestParam(value = "courseName")String className,
+    public CommonResult<String> addCourse(@RequestParam(value = "className")String className,
                                           @RequestParam(value = "speaker")String speaker,
                                           @RequestParam(value = "summary")String summary,
                                           @RequestParam(value = "file") MultipartFile file

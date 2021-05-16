@@ -8,6 +8,7 @@
     <result column="row_num" jdbcType="INTEGER" property="rowNum" />
     <result column="col_num" jdbcType="INTEGER" property="colNum" />
     <result column="donors" jdbcType="VARCHAR" property="donors" />
+    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
     <result column="tablet_type" jdbcType="VARCHAR" property="tabletType" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, location, distribution, row_num, col_num, donors, tablet_type, create_time, expire_time, 
-    remarks
+    id, location, distribution, row_num, col_num, donors, contacts, tablet_type, create_time, 
+    expire_time, remarks
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.TabletExample" resultMap="BaseResultMap">
     select
@@ -108,12 +109,12 @@
   <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Tablet">
     insert into jing_tablet_info (id, location, distribution, 
       row_num, col_num, donors, 
-      tablet_type, create_time, expire_time, 
-      remarks)
+      contacts, tablet_type, create_time, 
+      expire_time, remarks)
     values (#{id,jdbcType=BIGINT}, #{location,jdbcType=VARCHAR}, #{distribution,jdbcType=VARCHAR}, 
       #{rowNum,jdbcType=INTEGER}, #{colNum,jdbcType=INTEGER}, #{donors,jdbcType=VARCHAR}, 
-      #{tabletType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, 
-      #{remarks,jdbcType=VARCHAR})
+      #{contacts,jdbcType=VARCHAR}, #{tabletType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{expireTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jingjusi.mediaweb.common.domain.Tablet">
     insert into jing_tablet_info
@@ -135,6 +136,9 @@
       </if>
       <if test="donors != null">
         donors,
+      </if>
+      <if test="contacts != null">
+        contacts,
       </if>
       <if test="tabletType != null">
         tablet_type,
@@ -167,6 +171,9 @@
       </if>
       <if test="donors != null">
         #{donors,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
       </if>
       <if test="tabletType != null">
         #{tabletType,jdbcType=VARCHAR},
@@ -209,6 +216,9 @@
       <if test="record.donors != null">
         donors = #{record.donors,jdbcType=VARCHAR},
       </if>
+      <if test="record.contacts != null">
+        contacts = #{record.contacts,jdbcType=VARCHAR},
+      </if>
       <if test="record.tabletType != null">
         tablet_type = #{record.tabletType,jdbcType=VARCHAR},
       </if>
@@ -234,6 +244,7 @@
       row_num = #{record.rowNum,jdbcType=INTEGER},
       col_num = #{record.colNum,jdbcType=INTEGER},
       donors = #{record.donors,jdbcType=VARCHAR},
+      contacts = #{record.contacts,jdbcType=VARCHAR},
       tablet_type = #{record.tabletType,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
@@ -260,6 +271,9 @@
       <if test="donors != null">
         donors = #{donors,jdbcType=VARCHAR},
       </if>
+      <if test="contacts != null">
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
       <if test="tabletType != null">
         tablet_type = #{tabletType,jdbcType=VARCHAR},
       </if>
@@ -282,6 +296,7 @@
       row_num = #{rowNum,jdbcType=INTEGER},
       col_num = #{colNum,jdbcType=INTEGER},
       donors = #{donors,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
       tablet_type = #{tabletType,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       expire_time = #{expireTime,jdbcType=TIMESTAMP},

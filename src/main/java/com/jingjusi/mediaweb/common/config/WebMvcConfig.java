@@ -25,4 +25,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 addResourceLocations("file:C:\\Users\\WangHaoze\\Desktop\\mediaweb\\src\\main\\resources\\static\\");
     }
 
+
 }

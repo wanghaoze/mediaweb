@@ -19,7 +19,7 @@ import java.util.Date;
 public class BookController {
     @Autowired
     BookService bookService;
-    @RequestMapping(value = "/admin/books",
+    @RequestMapping(value = "/admin/addBook",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -30,7 +30,7 @@ public class BookController {
             if (user==null) {
                 return new CommonResult<>(200,"登录过期，请重新登录");
             }
-            CommonResult<String> ar;
+            CommonResult<String> scresa;
             System.out.println(book.getPublishTime());
             book.setOperator(user.getUsername());
             if (book.getPublishTime()==null){
@@ -42,27 +42,27 @@ public class BookController {
                 book.setState(1L);
             }
             String message = bookService.addBook(book);
-            ar = new CommonResult<>(200, message);
-            return ar;
+            scresa = new CommonResult<>(200, message);
+            return scresa;
         }catch (Exception e){
             return new CommonResult<>(200,"添加失败");
         }
 
     }
     @GetMapping(
-            value = "/admin/delete")
+            value = "/admin/deleteBook")
     @ResponseBody
     public CommonResult<String> delBook(
             Model model,
             HttpServletRequest request,@RequestBody Book book) {
         User user = (User) request.getSession().getAttribute("user");
-        CommonResult<String> pr;
+        CommonResult<String> scres;
         try{
             String message = bookService.deleteBookByISBN(book.getIsbn());
-            pr=new CommonResult<>(200,message);
+            scres=new CommonResult<>(200,message);
         }catch (Exception e){
-            pr=new CommonResult<>(200,"删除失败");
+            scres=new CommonResult<>(200,"删除失败");
         }
-        return pr;
+        return scres;
     }
 }
