@@ -10,5 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface MyTransactionService {
     public String addTransaction(MyTransaction transaction);
     public String deleteTransaction(Long id);
+    public Boolean testTransaction(Long id);
     PageInfo<MyTransaction> getTransactionByTargrt(String target);
 }

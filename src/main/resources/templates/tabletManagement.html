@@ -618,7 +618,7 @@
 
 <script>
     var checkadd = [false, false, false, false];
-    var checkdel = [false];
+    var checkdel = [false,false,false];
     //校验成功函数
     function success(Obj, counter, check, offset) {
         Obj.parent().parent().removeClass('has-error').addClass('has-success');
@@ -725,7 +725,7 @@
             var JSONdata = JSON.stringify(tabletlist);
             $.ajax({
                 type: "post",
-                url: "/managebooks/admin/books",
+                url: "/tabletManage/addTablet",
                 data: JSONdata,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
@@ -748,31 +748,21 @@
     var regRow = / ^\d+$/;
     $('#add').find('input').eq(1).change(function () {
         if (regRow.test($(this).val())) {
-            fail($(this), 1, '行数只能为3位以下非负整数', checkadd, 0);
+            fail($(this), 1, '行数只能为3位以下非负整数', checkdel, 0);
         } else {
-            success($(this), 1, checkadd, 0);
+            success($(this), 1, checkdel, 0);
         }
     });
     //col_num
     var regCol = / ^\d+$/;
     $('#add').find('input').eq(2).change(function () {
         if (regCol.test($(this).val())) {
-            fail($(this), 2, '列数只能为3位以下非负整数', checkadd, 0);
+            fail($(this), 2, '列数只能为3位以下非负整数', checkdel, 0);
         } else {
-            success($(this), 2, checkadd, 0);
+            success($(this), 2, checkdel, 0);
         }
     });
     $('#btn-delete').click(function (e) {
-        if (!checkadd.every(function (value) {
-            return value == true
-        })) {
-            e.preventDefault();
-            for (key in checkdel) {
-                if (!checkdel[key]) {
-                    $('#delete').find('input').eq(key).parent().parent().removeClass('has-success').addClass('has-error')
-                }
-            }
-        } else {
             var distribution = document.getElementById("dl-distribution").value;
 
             var col_num = document.getElementById("dl-col").value;
@@ -785,7 +775,7 @@
             var JSONdata = JSON.stringify(tabletlist);
             $.ajax({
                 type: "post",
-                url: "/managebooks/admin/delete",
+                url: "/tabletManage/deleteTablet",
                 data: JSONdata,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
@@ -793,7 +783,6 @@
                     alert(result.message);
                 }
             });
-        }
     });
 
 </script>

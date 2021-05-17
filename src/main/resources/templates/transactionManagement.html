@@ -355,7 +355,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>净居寺网络学习后台管理 -- 图书管理</h1>
+                        <h1>净居寺网络学习后台管理 -- 财务管理</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -372,10 +372,10 @@
             <div class="container">
                 <div>
                     <div class=" col"><button class="btn btn-success"
-                                              data-toggle="modal" data-target="#add">添加图书
+                                              data-toggle="modal" data-target="#add">添加记账
                     </button>
                         <button class="btn btn-danger"
-                                data-toggle="modal" data-target="#delete">删除图书
+                                data-toggle="modal" data-target="#delete">删除记账
                         </button></div>
 
                 </div>
@@ -390,15 +390,15 @@
                                 </button>
                             </div>
                             <div class="modal-title">
-                                <h1 class="text-center">添加图书</h1>
+                                <h1 class="text-center">添加记账</h1>
                             </div>
                             <div class="modal-body">
                                 <form id="form-login">
                                     <div class="form-group has-feedback">
-                                        <label for="ad-isbn">isbn</label>
+                                        <label for="ad-cnt">金额</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                                            <input id="ad-isbn" class="form-control" placeholder="请输入ISBN" maxlength="13" type="text">
+                                            <input id="ad-cnt" class="form-control" placeholder="请输入记账金额" maxlength="13" type="text">
                                         </div>
                                         <span style="color:red;display: none;" class="tips"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -406,10 +406,10 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-bname">书名</label>
+                                        <label for="ad-target">收款方</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-book"></span></span>
-                                            <input id="ad-bname" class="form-control" placeholder="请输入书名" maxlength="20">
+                                            <input id="ad-target" class="form-control" placeholder="请输入收款方" maxlength="20">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -418,10 +418,10 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-publisher">出版社</label>
+                                        <label for="ad-reason">事由</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-info-sign"></span></span>
-                                            <input id="ad-publisher" class="form-control" placeholder="请输入出版社" maxlength="10">
+                                            <input id="ad-reason" class="form-control" placeholder="请输入事由" maxlength="10">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
@@ -430,41 +430,16 @@
                                     </div>
 
                                     <div class="form-group has-feedback">
-                                        <label for="ad-writer">作者</label>
+                                        <label for="ad-createTime">账务时间</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                            <input id="ad-writer" class="form-control" placeholder="请输入作者" maxlength="10">
+                                            <input id="ad-createTime" class="form-control" placeholder="请输入账务时间" maxlength="10">
                                         </div>
 
                                         <span style="color:red;display: none;" class="tips"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
                                     </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label for="ad-ptime">出版时间</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            <input id="ad-ptime" class="form-control" placeholder="请输入出版时间" maxlength="10">
-                                        </div>
-
-                                        <span style="color:red;display: none;" class="tips"></span>
-                                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label for="ad-num">数量</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
-                                            <input id="ad-num" class="form-control" placeholder="请输入数量" maxlength="4">
-                                        </div>
-
-                                        <span style="color:red;display: none;" class="tips"></span>
-                                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
-                                    </div>
-
 
                                     <div class="text-right">
                                         <button class="btn btn-primary" type="button" id="btn-add">添加</button>
@@ -485,15 +460,15 @@
                                 </button>
                             </div>
                             <div class="modal-title">
-                                <h1 class="text-center">删除图书</h1>
+                                <h1 class="text-center">删除记账</h1>
                             </div>
                             <div class="modal-body">
                                 <form id="form-delete">
                                     <div class="form-group has-feedback">
-                                        <label for="dl-isbn">isbn</label>
+                                        <label for="dl-id">id</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                                            <input id="dl-isbn" class="form-control" placeholder="请输入ISBN" maxlength="13" type="text">
+                                            <input id="dl-id" class="form-control" placeholder="请输入账务编号" maxlength="13" type="text">
                                         </div>
                                         <span style="color:red;display: none;" class="tips"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -519,20 +494,20 @@
                         <table class="table table-hover" style="text-align:center">
                             <thead>
                             <tr>
-                                <th>isbn</th>
-                                <th>书名</th>
-                                <th>出版社</th>
-                                <th>作者</th>
-                                <th>出版时间</th>
+                                <th>账务编号</th>
+                                <th>账务金额</th>
+                                <th>收款方</th>
+                                <th>记账人</th>
+                                <th>记账时间</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="booklist: ${list}">
-                                <td th:text="${booklist.isbn}"></td>
-                                <td th:text="${booklist.bname}"></td>
-                                <td th:text="${booklist.publisher}"></td>
-                                <td th:text="${booklist.writer}"></td>
-                                <td th:text="(${booklist.ptime.getYear()}+1900)+'年'"></td>
+                            <tr th:each="transactionList: ${list}">
+                                <td th:text="${transactionList.id}"></td>
+                                <td th:text="${transactionList.cnt}"></td>
+                                <td th:text="${transactionList.createTime}"></td>
+                                <td th:text="${transactionList.target}"></td>
+                                <td th:text="${transactionList.operator}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -596,55 +571,38 @@
 
     //添加图书逻辑
 
-    //ISBN
-    var regISBN = /^[0-9]{13}$/;
+    //cnt
+    var regcnt = /^[0-9]{13}$/;
     $('#add').find('input').eq(0).change(function () {
-        if (regISBN.test($(this).val())) {
+        if (regcnt.test($(this).val())) {
             success($(this), 0, checkadd, 0);
         } else {
-            fail($(this), 0, 'ISBN只能为13位数字', checkadd, 0);
+            fail($(this), 0, '金额最多精确到两位小数', checkadd, 0);
         }
     });
-    //bname
+    //target
     $('#add').find('input').eq(1).change(function () {
-        if ($(this).val().length < 3) {
-            fail($(this), 1, '书名太短，不能少于3个字符', checkadd, 0);
+        if ($(this).val().length > 64) {
+            fail($(this), 1, '收款方不能大于64个字符', checkadd, 0);
         } else {
             success($(this), 1, checkadd, 0);
         }
     });
-    //publisher
+    //reason
     $('#add').find('input').eq(2).change(function () {
-        if ($(this).val().length < 3) {
-            fail($(this), 2, '出版社名太短，不能少于3个字符', checkadd, 0);
+        if ($(this).val().length > 64) {
+            fail($(this), 2, '事由不能大于64个字符', checkadd, 0);
         } else {
             success($(this), 2, checkadd, 0);
         }
     });
-    //writer
-    $('#add').find('input').eq(3).change(function () {
-        if ($(this).val().length < 1) {
-            fail($(this), 3, '姓名太短', checkadd, 0);
-        } else {
-            success($(this), 3, checkadd, 0);
-        }
-    });
-    //ptime
+    //createTime
     var regtime = /^[0-9]{4}[\-]{1}[0-9]{2}[\-]{1}[0-9]{2}$/;
-    $('#add').find('input').eq(4).change(function () {
+    $('#add').find('input').eq(3).change(function () {
         if (regtime.test($(this).val())) {
-            success($(this), 4, checkadd, 0);
+            success($(this), 3, checkadd, 0);
         } else {
-            fail($(this), 4, '日期应形如XXXX-XX-XX', checkadd, 0);
-        }
-    });
-    //num
-    var regnum = /^[0-9]*$/;
-    $('#add').find('input').eq(5).change(function () {
-        if (regnum.test($(this).val())) {
-            success($(this), 5, checkadd, 0);
-        } else {
-            fail($(this), 5, '请输入数字', checkadd, 0);
+            fail($(this), 3, '日期应形如XXXX-XX-XX', checkadd, 0);
         }
     });
 
@@ -661,21 +619,18 @@
                 }
             }
         } else {
-            var ISBN = document.getElementById("ad-isbn").value;
-            var bname = document.getElementById("ad-bname").value;
-            var publisher = document.getElementById("ad-publisher").value;
-            var writer = document.getElementById("ad-writer").value;
-            var ptime = document.getElementById("ad-ptime").value;
-            var number = document.getElementById("ad-num").value;
-            var booklist = {
-                'isbn': ISBN, 'bname': bname,
-                'publisher': publisher, 'writer': writer,
-                'ptime': ptime, 'number': number
+            var cnt = document.getElementById("ad-cnt").value;
+            var target = document.getElementById("ad-target").value;
+            var reason = document.getElementById("ad-reason").value;
+            var createTime = document.getElementById("ad-createTime").value;
+            var transactionList = {
+                'cnt': cnt, 'target': target,
+                'reason': reason, 'createTime': createTime
             };
-            var JSONdata = JSON.stringify(booklist);
+            var JSONdata = JSON.stringify(transactionList);
             $.ajax({
                 type: "post",
-                url: "/managebooks/admin/books",
+                url: "/transactionManage/addTransaction",
                 data: JSONdata,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
@@ -691,46 +646,24 @@
     });
 
     //delete
-    var regISBN = /^[0-9]{13}$/;
-    $('#delete').find('input').eq(0).change(function () {
-        if (regISBN.test($(this).val())) {
-            success($(this), 0, checkdel, 6);
-        } else {
-            fail($(this), 0, 'ISBN只能为13位数字', checkdel, 6);
-        }
-    });
+    
 
     $('#btn-delete').click(function (e) {
-        if (!checkadd.every(function (value) {
-            return value == true
-        })) {
-            e.preventDefault();
-            for (key in checkdel) {
-                if (!checkdel[key]) {
-                    $('#delete').find('input').eq(key).parent().parent().removeClass('has-success').addClass('has-error')
-                }
-            }
-        } else {
-            var ISBN = document.getElementById("dl-isbn").value;
-            var booklist = {
-                'isbn': ISBN
+            var delid = document.getElementById("dl-id").value;
+            var transactionList = {
+                'id': delid
             };
-            var JSONdata = JSON.stringify(booklist);
+            var JSONdata = JSON.stringify(transactionList);
             $.ajax({
                 type: "post",
-                url: "/managebooks/admin/delete",
+                url: "/transactionManage/deleteTransaction",
                 data: JSONdata,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
-                    if (result['success']) {
-                        alert("删除成功");
-                    } else {
-                        alert("删除失败");
-                    }
+                    alert(result.message);
                 }
             });
-        }
     });
 
 </script>

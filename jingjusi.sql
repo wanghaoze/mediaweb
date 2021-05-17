@@ -147,7 +147,7 @@ create table jing_borrow_info (
 
 create table jing_transaction_info(
                         id bigint not null auto_increment comment '主键',
-                        cnt bigint not null comment '金额',
+                        cnt decimal(20,2) not null comment '金额',
                         create_time timestamp not null comment '账务时间' default now(),
                         reason varchar(64) comment '事由',
                         target varchar(64) comment '收款方',

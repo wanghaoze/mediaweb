@@ -3,7 +3,7 @@
 <mapper namespace="com.jingjusi.mediaweb.mapper.MyTransactionMapper">
   <resultMap id="BaseResultMap" type="com.jingjusi.mediaweb.common.domain.MyTransaction">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="cnt" jdbcType="BIGINT" property="cnt" />
+    <result column="cnt" jdbcType="DECIMAL" property="cnt" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
     <result column="target" jdbcType="VARCHAR" property="target" />
@@ -105,7 +105,7 @@
     insert into jing_transaction_info (id, cnt, create_time, 
       reason, target, is_positive, 
       operator)
-    values (#{id,jdbcType=BIGINT}, #{cnt,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{cnt,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
       #{reason,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{isPositive,jdbcType=VARCHAR}, 
       #{operator,jdbcType=VARCHAR})
   </insert>
@@ -139,7 +139,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="cnt != null">
-        #{cnt,jdbcType=BIGINT},
+        #{cnt,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -171,7 +171,7 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.cnt != null">
-        cnt = #{record.cnt,jdbcType=BIGINT},
+        cnt = #{record.cnt,jdbcType=DECIMAL},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -196,7 +196,7 @@
   <update id="updateByExample" parameterType="map">
     update jing_transaction_info
     set id = #{record.id,jdbcType=BIGINT},
-      cnt = #{record.cnt,jdbcType=BIGINT},
+      cnt = #{record.cnt,jdbcType=DECIMAL},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       reason = #{record.reason,jdbcType=VARCHAR},
       target = #{record.target,jdbcType=VARCHAR},
@@ -210,7 +210,7 @@
     update jing_transaction_info
     <set>
       <if test="cnt != null">
-        cnt = #{cnt,jdbcType=BIGINT},
+        cnt = #{cnt,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -232,7 +232,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jingjusi.mediaweb.common.domain.MyTransaction">
     update jing_transaction_info
-    set cnt = #{cnt,jdbcType=BIGINT},
+    set cnt = #{cnt,jdbcType=DECIMAL},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       reason = #{reason,jdbcType=VARCHAR},
       target = #{target,jdbcType=VARCHAR},

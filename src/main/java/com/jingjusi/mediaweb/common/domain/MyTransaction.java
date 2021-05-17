@@ -1,11 +1,12 @@
 package com.jingjusi.mediaweb.common.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class MyTransaction {
     private Long id;
 
-    private Long cnt;
+    private BigDecimal cnt;
 
     private Date createTime;
 
@@ -25,11 +26,11 @@ public class MyTransaction {
         this.id = id;
     }
 
-    public Long getCnt() {
+    public BigDecimal getCnt() {
         return cnt;
     }
 
-    public void setCnt(Long cnt) {
+    public void setCnt(BigDecimal cnt) {
         this.cnt = cnt;
     }
 

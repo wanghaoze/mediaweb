@@ -21,7 +21,7 @@ public class TabletController {
 
     @Autowired
     TabletService tabletService;
-    @RequestMapping(value = "/admin/addTablet",
+    @RequestMapping(value = "/tabletManage/addTablet",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -61,6 +61,7 @@ public class TabletController {
                 date.setYear(date.getYear()+1);
                 tablet.setExpireTime(date);
             }
+            tablet.setLocation("海会塔");
             String message = tabletService.addTablet(tablet);
             scresa = new CommonResult<>(200, message);
             return scresa;
@@ -69,8 +70,9 @@ public class TabletController {
         }
 
     }
-    @GetMapping(
-            value = "/admin/deleteTablet")
+    @RequestMapping(value = "/tabletManage/deleteTablet",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public CommonResult<String> delTablet(
             Model model,

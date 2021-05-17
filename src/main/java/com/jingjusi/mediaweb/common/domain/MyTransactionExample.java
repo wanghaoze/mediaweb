@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.common.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -175,52 +176,52 @@ public class MyTransactionExample {
             return (Criteria) this;
         }
 
-        public Criteria andCntEqualTo(Long value) {
+        public Criteria andCntEqualTo(BigDecimal value) {
             addCriterion("cnt =", value, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntNotEqualTo(Long value) {
+        public Criteria andCntNotEqualTo(BigDecimal value) {
             addCriterion("cnt <>", value, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntGreaterThan(Long value) {
+        public Criteria andCntGreaterThan(BigDecimal value) {
             addCriterion("cnt >", value, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntGreaterThanOrEqualTo(Long value) {
+        public Criteria andCntGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("cnt >=", value, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntLessThan(Long value) {
+        public Criteria andCntLessThan(BigDecimal value) {
             addCriterion("cnt <", value, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntLessThanOrEqualTo(Long value) {
+        public Criteria andCntLessThanOrEqualTo(BigDecimal value) {
             addCriterion("cnt <=", value, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntIn(List<Long> values) {
+        public Criteria andCntIn(List<BigDecimal> values) {
             addCriterion("cnt in", values, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntNotIn(List<Long> values) {
+        public Criteria andCntNotIn(List<BigDecimal> values) {
             addCriterion("cnt not in", values, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntBetween(Long value1, Long value2) {
+        public Criteria andCntBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("cnt between", value1, value2, "cnt");
             return (Criteria) this;
         }
 
-        public Criteria andCntNotBetween(Long value1, Long value2) {
+        public Criteria andCntNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("cnt not between", value1, value2, "cnt");
             return (Criteria) this;
         }

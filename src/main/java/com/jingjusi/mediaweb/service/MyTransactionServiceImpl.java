@@ -17,6 +17,7 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     @Override
     public String addTransaction(MyTransaction transaction) {
         try {
+
             mapper.insert(transaction);
             return "添加成功";
         } catch (Exception e) {
@@ -28,11 +29,24 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     @Override
     public String deleteTransaction(Long id) {
         try {
+            if (!testTransaction(id)) {
+                return "数据库中不存在该项记录";
+            }
             mapper.deleteByPrimaryKey(id);
             return "删除成功";
         } catch (Exception e) {
             System.out.println(e);
             return "删除失败";
+        }
+    }
+
+    @Override
+    public Boolean testTransaction(Long id) {
+        try {
+            return mapper.selectByPrimaryKey(id) != null;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
         }
     }
 
