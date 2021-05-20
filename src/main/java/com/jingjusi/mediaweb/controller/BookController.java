@@ -1,6 +1,7 @@
 package com.jingjusi.mediaweb.controller;
 
 import com.jingjusi.mediaweb.common.domain.Book;
+import com.jingjusi.mediaweb.common.domain.BorrowInfo;
 import com.jingjusi.mediaweb.common.domain.User;
 import com.jingjusi.mediaweb.common.utils.CommonResult;
 import com.jingjusi.mediaweb.common.utils.ProcessResult;
@@ -49,7 +50,7 @@ public class BookController {
         }
 
     }
-    @GetMapping(
+    @RequestMapping(
             value = "/bookManage/deleteBook")
     @ResponseBody
     public CommonResult<String> delBook(
@@ -64,5 +65,31 @@ public class BookController {
             scres=new CommonResult<>(200,"删除失败");
         }
         return scres;
+    }
+
+    @RequestMapping(value = "/bookManage/borrowBook")
+    @ResponseBody
+    public CommonResult<String> borrowBook(Model model,
+                                       HttpServletRequest request, @RequestBody BorrowInfo borrowInfo) {
+        try{
+            User user = (User) request.getSession().getAttribute("user");
+            if (user==null) {
+                return new CommonResult<>(200,"登录过期，请重新登录");
+            }
+            CommonResult<String> scresa;
+            if (borrowInfo.getBookId()==null) {
+
+            }
+        }catch (Exception e){
+            return new CommonResult<>(200,"添加失败");
+        }
+        return new CommonResult<>(200,"失败");
+    }
+
+    @RequestMapping(value = "/bookManage/returnBook")
+    @ResponseBody
+    public CommonResult<String> returnBook(Model model,
+                                       HttpServletRequest request, @RequestBody BorrowInfo borrowInfo) {
+        return new CommonResult<>(200,"失败");
     }
 }

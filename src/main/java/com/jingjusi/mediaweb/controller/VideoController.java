@@ -51,6 +51,17 @@ public class VideoController {
         String filePath = uploadFolder+"static\\video\\";// 上传后的路径
         String imgPath = uploadFolder+"static\\image\\";
         String res;
+
+        if (new_name!=null&& !new_name.equals("")) {
+            if (new_name.contains(".")) {
+                new_name = new_name.substring(0,new_name.lastIndexOf("."));
+            }
+            assert fileName != null;
+            String[] sp = fileName.split("\\.");
+            String postfix = sp[sp.length-1];
+            new_name = new_name + "." + postfix;
+            fileName = new_name;
+        }
         if (new_name==null||new_name.equals(""))
              res = FileUtils.saveFile(file,filePath,null);
         else

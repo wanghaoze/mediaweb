@@ -51,16 +51,8 @@ public class FileUtils {
         } else {
             String fileOriginName = file.getOriginalFilename();  // 文件名
             String fileName = file.getOriginalFilename();  // 文件名
-            if (filen!=null) {
-                if (filen.contains("."))
-                    fileName = filen;
-                else {
-                    assert fileName != null;
-                    String[] sp = fileName.split("\\.");
-                    String postfix = sp[sp.length-1];
-                    fileName = filen + postfix;
-                }
-            }
+            if (filen!=null&&!filen.equals(""))
+                fileName = filen;
             assert fileName != null;
 //            String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
             //fileName = UUID.randomUUID().toString().replace("-", "") + suffixName; // 新文件名
