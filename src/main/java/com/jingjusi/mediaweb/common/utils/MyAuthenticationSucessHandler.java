@@ -39,7 +39,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         request.getSession().setAttribute("user", user);
         request.getSession().setMaxInactiveInterval(120*60);
         if (savedRequest == null){
-            redirectStrategy.sendRedirect(request, response, "/");
+            redirectStrategy.sendRedirect(request, response, "/manage/courses");
         }else {
             System.out.println(savedRequest.getRedirectUrl());
             redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());

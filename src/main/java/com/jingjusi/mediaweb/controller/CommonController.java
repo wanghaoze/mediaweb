@@ -40,7 +40,9 @@ public class CommonController {
 
 
     @RequestMapping(value = "/mwatch/{vid}")
-    public String wv(@ApiParam(name = "videoId",value = "视频id",required = true)@PathVariable Long vid,ModelMap model,HttpServletRequest request) {
+    public String wv(
+            @ApiParam(name = "videoId",value = "视频id",required = true)@PathVariable Long vid,
+            ModelMap model,HttpServletRequest request,String s) {
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {
             user = new User();
@@ -211,7 +213,7 @@ public class CommonController {
         model.addAttribute("list", list);
         return "book-management";
     }
-    @GetMapping(value = "/manage/transaction")
+    @GetMapping(value = "/manage/transactions")
     public String showTransaction(Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {
@@ -223,7 +225,7 @@ public class CommonController {
         model.addAttribute("list", list);
         return "transactionManagement";
     }
-    @GetMapping(value = "/manage/tablet")
+    @GetMapping(value = "/manage/tablets")
     public String showTablet(Model model, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {

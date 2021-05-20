@@ -45,12 +45,22 @@ public class FileUtils {
         image.setRemarks("");
         return image;
     }
-    public static String saveFile(MultipartFile file, String path) {
+    public static String saveFile(MultipartFile file, String path,String filename) {
         if (file.isEmpty()) {
             return "空文件";
         } else {
             String fileOriginName = file.getOriginalFilename();  // 文件名
             String fileName = file.getOriginalFilename();  // 文件名
+            if (filename!=null) {
+                if (filename.contains("."))
+                    fileName = filename;
+                else {
+                    assert fileName != null;
+                    String[] sp = fileName.split("\\.");
+                    String postfix =
+                    fileName = filename + fileName.split("\\.")[];
+                }
+            }
             assert fileName != null;
 //            String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
             //fileName = UUID.randomUUID().toString().replace("-", "") + suffixName; // 新文件名

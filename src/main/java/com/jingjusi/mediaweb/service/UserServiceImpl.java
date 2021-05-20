@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService{
     public String removeUser(Long id) {
         try {
             userMapper.deleteByPrimaryKey(id);
-            return "删除用户"+id+"成功！";
+            return "删除成功！";
         } catch (Exception e) {
             System.out.println(e);
             return "用户不存在";

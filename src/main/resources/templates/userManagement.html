@@ -180,7 +180,7 @@
                     <img src="../static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block" th:text="${user.username}"></a>
+                    <a href="/login" class="d-block" th:text="${user.username}"></a>
                 </div>
             </div>
 
@@ -216,6 +216,7 @@
                                     <p>课程管理</p>
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="/manage/videos" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -224,7 +225,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item menu-open">
+                    <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-male"></i>
                             <p>
@@ -232,39 +233,39 @@
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview ">
-                            <li class="nav-item">
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item menu-open">
                                 <a href="/manage/users" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>用户管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>纪律管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>考勤管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/boxed.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>卫生管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>消防管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>接待管理</p>
                                 </a>
@@ -272,7 +273,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="book-management.html" class="nav-link">
+                        <a href="/manage/books" class="nav-link">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>
                                 图书管理
@@ -289,19 +290,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/forms/general.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>仓储管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/forms/advanced.html" class="nav-link">
+                                <a href="/manage/transactions" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>财务管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/forms/editors.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>基建管理</p>
                                 </a>
@@ -309,7 +310,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="/manage/tablets" class="nav-link">
                             <i class="nav-icon fas fa-tree"></i>
                             <p>
                                 海会塔
@@ -327,13 +328,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>合同管理</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>票据管理</p>
                                 </a>
@@ -761,7 +762,7 @@
             var JSONdata = JSON.stringify(userlist);
             $.ajax({
                 type: "post",
-                url: "/userManager/addUser",
+                url: "/userManage/addUser",
                 data: JSONdata,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
@@ -773,26 +774,15 @@
     });
 
     //delete
-    var regusername = /^[0-9]{13}$/;
     $('#delete').find('input').eq(0).change(function () {
-        if (regusername.test($(this).val())) {
+        if ($(this).val().length<20) {
             success($(this), 0, checkdel, 6);
         } else {
-            fail($(this), 0, 'username只能为13位数字', checkdel, 6);
+            fail($(this), 0, '用户名只能小于20位', checkdel, 6);
         }
     });
 
     $('#btn-delete').click(function (e) {
-        if (!checkadd.every(function (value) {
-            return value == true
-        })) {
-            e.preventDefault();
-            for (key in checkdel) {
-                if (!checkdel[key]) {
-                    $('#delete').find('input').eq(key).parent().parent().removeClass('has-success').addClass('has-error')
-                }
-            }
-        } else {
             var username = document.getElementById("dl-username").value;
             var userlist = {
                 'username': username
@@ -800,19 +790,14 @@
             var JSONdata = JSON.stringify(userlist);
             $.ajax({
                 type: "post",
-                url: "//userManager/deleteUser",
+                url: "/userManage/deleteUser",
                 data: JSONdata,
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
-                    if (result['success']) {
-                        alert("删除成功");
-                    } else {
-                        alert("删除失败");
-                    }
+                    alert(result.message)
                 }
             });
-        }
     });
 
 </script>

@@ -45,6 +45,7 @@ public class VideoController {
 //            return new CommonResult<>(200,"只有系统管理和网上学习管理员才能添加视频");
 //        }
         System.out.println(file);
+
         String fileName = file.getOriginalFilename();  // 文件名
         String filePath = uploadFolder+"static\\video\\";// 上传后的路径
         String imgPath = uploadFolder+"static\\image\\";

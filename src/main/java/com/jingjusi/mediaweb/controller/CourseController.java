@@ -33,7 +33,7 @@ public class CourseController {
     @Value("${file.uploadFolder}")
     private String uploadFolder;
 
-    @RequestMapping(value = "/manage/courseUpload")
+    @RequestMapping(value = "/courseManage/courseUpload")
     public CommonResult<String> addCourse(@RequestParam(value = "className")String className,
                                           @RequestParam(value = "speaker")String speaker,
                                           @RequestParam(value = "summary")String summary,
@@ -79,7 +79,7 @@ public class CourseController {
         return new CommonResult<>(200,message, className);
     }
 
-    @RequestMapping(value = "/manage/course/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/courseManage/deleteCourse", method = RequestMethod.POST)
     public CommonResult<String> deletecourse(Long id) {
         Course course = courseService.findCourseById(id);
         String imgpath = course.getIndexImage();

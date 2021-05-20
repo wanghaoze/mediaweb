@@ -17,7 +17,7 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @RequestMapping(value = "/userManager/addUser",
+    @RequestMapping(value = "/userManage/addUser",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -46,7 +46,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/userManager/deleteUser",
+    @RequestMapping(value = "/userManage/deleteUser",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody

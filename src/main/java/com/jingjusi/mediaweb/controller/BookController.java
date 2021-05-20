@@ -19,7 +19,7 @@ import java.util.Date;
 public class BookController {
     @Autowired
     BookService bookService;
-    @RequestMapping(value = "/admin/addBook",
+    @RequestMapping(value = "/bookManage/addBook",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
@@ -50,7 +50,7 @@ public class BookController {
 
     }
     @GetMapping(
-            value = "/admin/deleteBook")
+            value = "/bookManage/deleteBook")
     @ResponseBody
     public CommonResult<String> delBook(
             Model model,
