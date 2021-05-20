@@ -22,7 +22,7 @@ public class FileUtils {
         return "文件不存在";
     }
     public static Image saveImage(MultipartFile file, String path) throws IOException {
-        saveFile(file,path);
+        saveFile(file,path,null);
         Image image = new Image();
         image.setImageName(file.getOriginalFilename());
         image.setImageUrl("/static/image/"+file.getOriginalFilename());
@@ -45,20 +45,20 @@ public class FileUtils {
         image.setRemarks("");
         return image;
     }
-    public static String saveFile(MultipartFile file, String path,String filename) {
+    public static String saveFile(MultipartFile file, String path,String filen) {
         if (file.isEmpty()) {
             return "空文件";
         } else {
             String fileOriginName = file.getOriginalFilename();  // 文件名
             String fileName = file.getOriginalFilename();  // 文件名
-            if (filename!=null) {
-                if (filename.contains("."))
-                    fileName = filename;
+            if (filen!=null) {
+                if (filen.contains("."))
+                    fileName = filen;
                 else {
                     assert fileName != null;
                     String[] sp = fileName.split("\\.");
-                    String postfix =
-                    fileName = filename + fileName.split("\\.")[];
+                    String postfix = sp[sp.length-1];
+                    fileName = filen + postfix;
                 }
             }
             assert fileName != null;
@@ -81,5 +81,9 @@ public class FileUtils {
             System.out.println(filename);
             return fileOriginName + "上传成功";
         }
+    }
+    public static void main(String[] args) {
+        String[] a = "aaaajpg".split("\\.");
+        System.out.println(a.length);
     }
 }

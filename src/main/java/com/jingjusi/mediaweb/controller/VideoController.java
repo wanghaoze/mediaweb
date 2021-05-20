@@ -36,6 +36,7 @@ public class VideoController {
     @RequestMapping(value = "/videoUpload", method = {RequestMethod.POST, RequestMethod.GET})
     public CommonResult<String> videoUpload(@RequestParam(value = "file") MultipartFile file,
                                             String my_chooses,
+                                            String new_name,
                                             HttpServletRequest request) throws Exception {
 //        User user = (User) request.getSession().getAttribute("user");
 //        if (user==null) {
@@ -49,7 +50,11 @@ public class VideoController {
         String fileName = file.getOriginalFilename();  // 文件名
         String filePath = uploadFolder+"static\\video\\";// 上传后的路径
         String imgPath = uploadFolder+"static\\image\\";
-        String res = FileUtils.saveFile(file,filePath);
+        String res;
+        if (new_name==null||new_name.equals(""))
+             res = FileUtils.saveFile(file,filePath,null);
+        else
+            res = FileUtils.saveFile(file,filePath,new_name);
         long filesize = file.getSize()/1024/1024;
         Video newVideo = new Video();
         long time = VideoUtil.getDuration(filePath+fileName);
@@ -127,7 +132,7 @@ public class VideoController {
                 video.setSpeaker(speaker);
             }
             if (!file.isEmpty()) {
-                String res = FileUtils.saveFile(file,uploadFolder+"video//");
+                String res = FileUtils.saveFile(file,uploadFolder+"video//",null);
                 if (!file_name.equals(""))file_name = file.getOriginalFilename();
             }
             videoService.updateVideoById(vid,video);
