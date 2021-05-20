@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.util.*;
 
 @Controller
@@ -136,11 +137,14 @@ public class CommonController {
     @RequestMapping(value = "/course/{cid}")
     public String manageCourse(@ApiParam(name = "courseId",value = "课程id",required = true)@PathVariable Long cid,
                                HttpServletRequest request,
-                               Model model) {
+                               ModelMap model) {
         Course course = courseService.findCourseById(cid);
         model.addAttribute("courseDetail", course);
         List<Video> videos = videoService.getVideosByCourse(cid,0,20).getList();
         model.addAttribute("list_video",videos);
+        for (Video video: videos) {
+            System.out.println(video.getVideoName());
+        }
         User user = (User) request.getSession().getAttribute("user");
         if (user==null) {
             user = new User();
@@ -248,5 +252,20 @@ public class CommonController {
         List<User> list = userService.findUsersByPage(0,20).getList();
         model.addAttribute("list", list);
         return "userManagement";
+    }
+
+    @GetMapping(value="/manage/borrows")
+    public String showBorrow(Model model, HttpServletRequest request,String bookName){
+        User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            user = new User();
+            user.setUsername("游客");
+        }
+        model.addAttribute("user", user);
+        if (bookName==null)
+            bookName="";
+        List<Borrow> list = borrowService.getBorrows(bookName).getList();
+        model.addAttribute("list",list);
+        return "borrowManagement";
     }
 }

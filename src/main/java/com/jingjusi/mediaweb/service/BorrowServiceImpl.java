@@ -1,8 +1,11 @@
 package com.jingjusi.mediaweb.service;
 
 import com.github.pagehelper.PageInfo;
+import com.jingjusi.mediaweb.common.domain.Book;
+import com.jingjusi.mediaweb.common.domain.BookExample;
 import com.jingjusi.mediaweb.common.domain.Borrow;
 import com.jingjusi.mediaweb.common.domain.BorrowExample;
+import com.jingjusi.mediaweb.mapper.BookMapper;
 import com.jingjusi.mediaweb.mapper.BorrowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,8 @@ import java.util.List;
 public class BorrowServiceImpl implements BorrowService{
     @Autowired
     BorrowMapper borrowMapper;
+    @Autowired
+    BookMapper bookMapper;
     @Override
     public String addBorrow(Borrow borrow) {
         try {
@@ -22,6 +27,27 @@ public class BorrowServiceImpl implements BorrowService{
         } catch (Exception e) {
             System.out.println(e);
             return "添加失败";
+        }
+    }
+
+    @Override
+    public PageInfo<Borrow> getBorrows(String bookName) {
+        try {
+            BorrowExample example = new BorrowExample();
+            BookExample bookExample = new BookExample();
+            bookExample.createCriteria().andBookNameLike("%"+bookName+"%");
+            List<Borrow> borrows = new ArrayList<>();
+            List<Book> books = bookMapper.selectByExample(bookExample);
+            for (Book book:books) {
+                BorrowExample borrowExample = new BorrowExample();
+                borrowExample.createCriteria().andBookIdEqualTo(book.getId());
+                List<Borrow> borrows_now = new ArrayList<>(borrowMapper.selectByExample(borrowExample));
+                borrows.addAll(borrows_now);
+            }
+            return new PageInfo<>(borrows);
+        }catch (Exception e) {
+            System.out.println(e);
+            return null;
         }
     }
 

@@ -35,6 +35,9 @@ public class VideoServiceImpl implements VideoService{
     public String deleteVideo(Long videoID) {
         try
         {
+            CourseVideoExample example = new CourseVideoExample();
+            example.createCriteria().andVideoIdEqualTo(videoID);
+            courseVideoMapper.deleteByExample(example);
             videoMapper.deleteByPrimaryKey(videoID);
             return "删除成功";
         }catch (Exception e) {
@@ -79,7 +82,12 @@ public class VideoServiceImpl implements VideoService{
             }
             List<Video> videos = new ArrayList<>();
             for (CourseVideo courseVideo:courseVideos) {
-                videos.add(videoMapper.selectByPrimaryKey(courseVideo.getVideoId()));
+                System.out.println(courseVideo.getVideoId());
+                try{
+                    videos.add(videoMapper.selectByPrimaryKey(courseVideo.getVideoId()));
+                } catch (Exception e) {
+                    continue;
+                }
             }
             return new PageInfo<>(videos);
         } catch (Exception e) {
