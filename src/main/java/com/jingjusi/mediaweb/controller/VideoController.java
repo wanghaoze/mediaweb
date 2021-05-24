@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +22,7 @@ import java.io.File;
 import java.sql.Time;
 import java.util.*;
 
-@RestController
+@Controller
 @Api(value="视频controller",tags={"视频操作接口"})
 public class VideoController {
     static int page_size = 20;

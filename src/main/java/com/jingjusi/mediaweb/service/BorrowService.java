@@ -12,4 +12,5 @@ public interface BorrowService {
     public PageInfo<Borrow> getBorrows(String bookName);
     public String updateBorrowByID(Long id, Borrow borrow);
     public PageInfo<Borrow> getBorrowByUserID(Long userID);
+    public Borrow getBorrow(Long id);
 }

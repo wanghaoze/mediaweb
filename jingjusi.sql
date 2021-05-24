@@ -131,10 +131,14 @@ create table jing_book_info(
                                   key bo_idx (ISBN)
 )engine = InnoDB comment '书籍信息';
 
+drop table if exists jing_borrow_info;
 create table jing_borrow_info (
                         id bigint not null auto_increment comment '主键',
                         book_id bigint not null comment '书号',
                         user_id bigint not null comment '用户号',
+                        `ISBN` varchar(32) unique not null comment 'ISBN编号',
+                        book_name varchar(45) not null comment '书名',
+                        user_name varchar(45) not null comment '用户名',
                         borrow_time timestamp not null comment '借书时间',
                         deadline timestamp not null comment '期限',
                         return_time timestamp default null comment '还书时间',

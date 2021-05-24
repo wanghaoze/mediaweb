@@ -5,6 +5,9 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="book_id" jdbcType="BIGINT" property="bookId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="ISBN" jdbcType="VARCHAR" property="isbn" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="borrow_time" jdbcType="TIMESTAMP" property="borrowTime" />
     <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
     <result column="return_time" jdbcType="TIMESTAMP" property="returnTime" />
@@ -69,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, book_id, user_id, borrow_time, deadline, return_time, operator
+    id, book_id, user_id, ISBN, book_name, user_name, borrow_time, deadline, return_time, 
+    operator
   </sql>
   <select id="selectByExample" parameterType="com.jingjusi.mediaweb.common.domain.BorrowExample" resultMap="BaseResultMap">
     select
@@ -103,9 +107,11 @@
   </delete>
   <insert id="insert" parameterType="com.jingjusi.mediaweb.common.domain.Borrow">
     insert into jing_borrow_info (id, book_id, user_id, 
+      ISBN, book_name, user_name, 
       borrow_time, deadline, return_time, 
       operator)
     values (#{id,jdbcType=BIGINT}, #{bookId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{isbn,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{borrowTime,jdbcType=TIMESTAMP}, #{deadline,jdbcType=TIMESTAMP}, #{returnTime,jdbcType=TIMESTAMP}, 
       #{operator,jdbcType=VARCHAR})
   </insert>
@@ -120,6 +126,15 @@
       </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="isbn != null">
+        ISBN,
+      </if>
+      <if test="bookName != null">
+        book_name,
+      </if>
+      <if test="userName != null">
+        user_name,
       </if>
       <if test="borrowTime != null">
         borrow_time,
@@ -143,6 +158,15 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isbn != null">
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="borrowTime != null">
         #{borrowTime,jdbcType=TIMESTAMP},
@@ -176,6 +200,15 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
+      <if test="record.isbn != null">
+        ISBN = #{record.isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookName != null">
+        book_name = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
       <if test="record.borrowTime != null">
         borrow_time = #{record.borrowTime,jdbcType=TIMESTAMP},
       </if>
@@ -198,6 +231,9 @@
     set id = #{record.id,jdbcType=BIGINT},
       book_id = #{record.bookId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
+      ISBN = #{record.isbn,jdbcType=VARCHAR},
+      book_name = #{record.bookName,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
       borrow_time = #{record.borrowTime,jdbcType=TIMESTAMP},
       deadline = #{record.deadline,jdbcType=TIMESTAMP},
       return_time = #{record.returnTime,jdbcType=TIMESTAMP},
@@ -214,6 +250,15 @@
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="isbn != null">
+        ISBN = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="borrowTime != null">
         borrow_time = #{borrowTime,jdbcType=TIMESTAMP},
@@ -234,6 +279,9 @@
     update jing_borrow_info
     set book_id = #{bookId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      book_name = #{bookName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
       borrow_time = #{borrowTime,jdbcType=TIMESTAMP},
       deadline = #{deadline,jdbcType=TIMESTAMP},
       return_time = #{returnTime,jdbcType=TIMESTAMP},

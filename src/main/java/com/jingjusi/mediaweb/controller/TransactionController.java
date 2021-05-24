@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Controller
@@ -41,7 +42,11 @@ public class TransactionController {
             if (myTransaction.getCreateTime()==null){
                 myTransaction.setCreateTime(new Date());
             }
-
+            if (myTransaction.getCnt().compareTo(new BigDecimal("0.00")) > 0) {
+                myTransaction.setIsPositive("是");
+            } else {
+                myTransaction.setIsPositive("否");
+            }
             String message = myTransactionService.addTransaction(myTransaction);
             scresa = new CommonResult<>(200, message);
             return scresa;

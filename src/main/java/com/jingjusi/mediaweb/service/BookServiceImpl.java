@@ -89,4 +89,17 @@ public class BookServiceImpl implements BookService{
         }
         return null;
     }
+
+    @Override
+    public String updateBookByID(Long id, Book book) {
+        try {
+            BookExample example =new BookExample();
+            example.createCriteria().andIdEqualTo(id);
+            bookMapper.updateByExampleSelective(book,example);
+            return "还书成功";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "还书失败";
+        }
+    }
 }

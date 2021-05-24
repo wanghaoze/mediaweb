@@ -57,10 +57,10 @@ public class BorrowServiceImpl implements BorrowService{
             BorrowExample borrowExample = new BorrowExample();
             borrowExample.createCriteria().andBookIdEqualTo(id);
             borrowMapper.updateByExampleSelective(borrow,borrowExample);
-            return "更新成功";
+            return "还书成功";
         } catch (Exception e) {
             System.out.println(e);
-            return "更新失败";
+            return "还书失败";
         }
     }
 
@@ -71,6 +71,16 @@ public class BorrowServiceImpl implements BorrowService{
             borrowExample.createCriteria().andUserIdEqualTo(userID);
             List<Borrow> borrows = new ArrayList<>(borrowMapper.selectByExample(borrowExample));
             return new PageInfo<>(borrows);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public Borrow getBorrow(Long id) {
+        try {
+            return borrowMapper.selectByPrimaryKey(id);
         } catch (Exception e) {
             System.out.println(e);
             return null;

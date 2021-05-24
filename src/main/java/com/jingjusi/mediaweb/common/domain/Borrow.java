@@ -9,6 +9,12 @@ public class Borrow {
 
     private Long userId;
 
+    private String isbn;
+
+    private String bookName;
+
+    private String userName;
+
     private Date borrowTime;
 
     private Date deadline;
@@ -39,6 +45,30 @@ public class Borrow {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn == null ? null : isbn.trim();
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName == null ? null : bookName.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public Date getBorrowTime() {

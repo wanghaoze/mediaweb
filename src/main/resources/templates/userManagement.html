@@ -272,13 +272,33 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a href="/manage/books" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>
                                 图书管理
+                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/manage/books" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        书籍管理
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/manage/borrows" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        借阅管理
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -564,7 +584,7 @@
                                 <td th:text="${userlist.number}"></td>
                                 <td th:text="${userlist.password}"></td>
                                 <td th:text="${userlist.roles}"></td>
-                                <td th:text="(${userlist.dateJoined.getYear()}+1900)+'年'"></td>
+                                <td th:text="${#dates.format(userlist.dateJoined,'yyyy-MM-dd')}"></td>
                             </tr>
                             </tbody>
                         </table>

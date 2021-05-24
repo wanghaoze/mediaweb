@@ -14,4 +14,5 @@ public interface BookService {
     public PageInfo<Book> getBooksByName(String bookName);
     public Book getBookByID(Long id);
     public Book getBookByISBN(String isbn);
+    public String updateBookByID(Long id, Book book);
 }

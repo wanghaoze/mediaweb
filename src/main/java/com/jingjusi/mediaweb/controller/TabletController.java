@@ -57,7 +57,7 @@ public class TabletController {
                 tablet.setCreateTime(new Date());
             }
             if (tablet.getExpireTime()==null){
-                Date date = new Date();
+                Date date = tablet.getCreateTime();
                 date.setYear(date.getYear()+1);
                 tablet.setExpireTime(date);
             }

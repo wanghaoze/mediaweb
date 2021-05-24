@@ -35,16 +35,16 @@
         </javaClientGenerator>
 
 <!--        <table tableName="user" domainObjectName="MyUSer"/>-->
-        <table tableName="jing_auth_user" domainObjectName="User"/>
-        <table tableName="jing_video_info" domainObjectName="Video"/>
-        <table tableName="jing_image_info" domainObjectName="Image"/>
-        <table tableName="jing_course_info" domainObjectName="Course"/>
-        <table tableName="jing_course_video_info" domainObjectName="CourseVideo"/>
-        <table tableName="jing_course_user_info" domainObjectName="CourseUser"/>
-        <table tableName="jing_book_info" domainObjectName="Book"/>
+<!--        <table tableName="jing_auth_user" domainObjectName="User"/>-->
+<!--        <table tableName="jing_video_info" domainObjectName="Video"/>-->
+<!--        <table tableName="jing_image_info" domainObjectName="Image"/>-->
+<!--        <table tableName="jing_course_info" domainObjectName="Course"/>-->
+<!--        <table tableName="jing_course_video_info" domainObjectName="CourseVideo"/>-->
+<!--        <table tableName="jing_course_user_info" domainObjectName="CourseUser"/>-->
+<!--        <table tableName="jing_book_info" domainObjectName="Book"/>-->
         <table tableName="jing_borrow_info" domainObjectName="Borrow"/>
-        <table tableName="jing_transaction_info" domainObjectName="MyTransaction"/>
-        <table tableName="jing_tablet_info" domainObjectName="Tablet"/>
+<!--        <table tableName="jing_transaction_info" domainObjectName="MyTransaction"/>-->
+<!--        <table tableName="jing_tablet_info" domainObjectName="Tablet"/>-->
 
 
 

@@ -17,7 +17,6 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     @Override
     public String addTransaction(MyTransaction transaction) {
         try {
-
             mapper.insert(transaction);
             return "添加成功";
         } catch (Exception e) {

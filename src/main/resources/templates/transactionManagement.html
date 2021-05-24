@@ -272,13 +272,33 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a href="/manage/books" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>
                                 图书管理
+                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/manage/books" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        书籍管理
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/manage/borrows" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        借阅管理
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link">
@@ -296,7 +316,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/manage/transactions" class="nav-link active">
+                                <a href="/manage/transactions" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>财务管理</p>
                                 </a>
@@ -398,7 +418,7 @@
                                         <label for="ad-cnt">金额</label>
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
-                                            <input id="ad-cnt" class="form-control" placeholder="请输入记账金额" maxlength="13" type="text">
+                                            <input id="ad-cnt" class="form-control" placeholder="请输入记账金额" maxlength="16" type="text">
                                         </div>
                                         <span style="color:red;display: none;" class="tips"></span>
                                         <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -488,7 +508,7 @@
 
                 <div class="panel panel-default" style="width: 90%;margin-left: 5%">
                     <div class="panel-heading">
-                        <h3 class="panel-title" style="text-align:center">图书信息</h3>
+                        <h3 class="panel-title" style="text-align:center">记账流水</h3>
                     </div>
                     <div class="panel-body">
                         <table class="table table-hover" style="text-align:center">
@@ -497,16 +517,19 @@
                                 <th>账务编号</th>
                                 <th>账务金额</th>
                                 <th>收款方</th>
-                                <th>记账人</th>
+                                <th>事由</th>
                                 <th>记账时间</th>
+                                <th>记账人</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="transactionList: ${list}">
                                 <td th:text="${transactionList.id}"></td>
                                 <td th:text="${transactionList.cnt}"></td>
-                                <td th:text="${transactionList.createTime}"></td>
                                 <td th:text="${transactionList.target}"></td>
+                                <td th:text="${transactionList.reason}"></td>
+                                <td th:text="(${#dates.format(transactionList.createTime,'yyyy-MM-dd')})"></td>
+
                                 <td th:text="${transactionList.operator}"></td>
                             </tr>
                             </tbody>
@@ -572,12 +595,12 @@
     //添加图书逻辑
 
     //cnt
-    var regcnt = /^[0-9]{13}$/;
+    var regcnt = /(^[0-9]{1,13}$)|(^[0-9]{1,13}[\.]{1}[0-9]{1,2}$)|(^-[0-9]{1,13}$)|(^-[0-9]{1,13}[\.]{1}[0-9]{1,2}$)/;
     $('#add').find('input').eq(0).change(function () {
         if (regcnt.test($(this).val())) {
             success($(this), 0, checkadd, 0);
         } else {
-            fail($(this), 0, '金额最多精确到两位小数', checkadd, 0);
+            fail($(this), 0, '金额最多到万亿级且最多精确到两位小数', checkadd, 0);
         }
     });
     //target
@@ -635,11 +658,7 @@
                 dataType: "json",
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
-                    if (result['success']) {
-                        alert("添加成功");
-                    } else {
-                        alert("添加失败");
-                    }
+                    alert(result.message)
                 }
             });
         }
