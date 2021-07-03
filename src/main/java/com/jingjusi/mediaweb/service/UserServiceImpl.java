@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,9 @@ public class UserServiceImpl implements UserService{
     public String removeUser(Long id) {
         try {
             userMapper.deleteByPrimaryKey(id);
+            CourseUserExample example = new CourseUserExample();
+            example.createCriteria().andUserIdEqualTo(id);
+            courseUserMapper.deleteByExample(example);
             return "删除成功！";
         } catch (Exception e) {
             System.out.println(e);
@@ -95,9 +99,27 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public String login(Long id, User user) {
+        try {
+            if (id==null || user==null)
+                return "用户参数缺失";
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andIdEqualTo(id);
+            user.setLastLogin(new Date());
+            userMapper.updateByExampleSelective(user, userExample);
+            return "成功";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "失败";
+        }
+
+    }
+
+    @Override
     public PageInfo<User> findUsersByName(String username, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
         UserExample userExample = new UserExample();
-        userExample.createCriteria().andUsernameLike(username);
+        userExample.createCriteria().andUsernameLike("%"+username+"%");
         List<User> users = new ArrayList<>(userMapper.selectByExample(userExample));
         if (users.isEmpty())
             return null;

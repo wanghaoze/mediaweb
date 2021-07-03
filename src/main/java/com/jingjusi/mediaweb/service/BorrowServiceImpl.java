@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.Book;
 import com.jingjusi.mediaweb.common.domain.BookExample;
@@ -31,8 +32,9 @@ public class BorrowServiceImpl implements BorrowService{
     }
 
     @Override
-    public PageInfo<Borrow> getBorrows(String bookName) {
+    public PageInfo<Borrow> getBorrows(String bookName, Integer pageNo, Integer pageSize) {
         try {
+            PageHelper.startPage(pageNo,pageSize);
             BorrowExample example = new BorrowExample();
             BookExample bookExample = new BookExample();
             bookExample.createCriteria().andBookNameLike("%"+bookName+"%");
@@ -65,8 +67,9 @@ public class BorrowServiceImpl implements BorrowService{
     }
 
     @Override
-    public PageInfo<Borrow> getBorrowByUserID(Long userID) {
+    public PageInfo<Borrow> getBorrowByUserID(Long userID, Integer pageNo, Integer pageSize) {
         try {
+            PageHelper.startPage(pageNo,pageSize);
             BorrowExample borrowExample = new BorrowExample();
             borrowExample.createCriteria().andUserIdEqualTo(userID);
             List<Borrow> borrows = new ArrayList<>(borrowMapper.selectByExample(borrowExample));

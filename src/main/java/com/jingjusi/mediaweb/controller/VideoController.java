@@ -22,7 +22,7 @@ import java.io.File;
 import java.sql.Time;
 import java.util.*;
 
-@Controller
+@RestController
 @Api(value="视频controller",tags={"视频操作接口"})
 public class VideoController {
     static int page_size = 20;

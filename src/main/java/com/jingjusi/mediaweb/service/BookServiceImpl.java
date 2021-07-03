@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.Book;
 import com.jingjusi.mediaweb.common.domain.BookExample;
@@ -52,8 +53,9 @@ public class BookServiceImpl implements BookService{
 
 
     @Override
-    public PageInfo<Book> getBooksByName(String bookName) {
+    public PageInfo<Book> getBooksByName(String bookName, Integer pageNo, Integer pageSize) {
         try {
+            PageHelper.startPage(pageNo,pageSize);
             BookExample bookExample = new BookExample();
             bookExample.createCriteria().andBookNameLike("%"+bookName+"%");
             List<Book>books = new ArrayList<>(bookMapper.selectByExample(bookExample)) ;

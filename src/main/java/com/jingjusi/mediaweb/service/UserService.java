@@ -15,6 +15,7 @@ public interface UserService extends UserDetailsService {
     public String updateUser(Long id, String username, String password, String email,String phone);
     public String removeUser(Long id);
     public User findUser(String userName);
+    public String login(Long id, User user);
     public PageInfo<User> findUsersByName(String username, Integer pageNo, Integer pageSize);
     public PageInfo<User> findUsersByCourse(Long courseId, Integer pageNo, Integer pageSize);
     public PageInfo<User> findUsersByPage(Integer pageNo, Integer pageSize);

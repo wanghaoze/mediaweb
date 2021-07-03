@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -21,26 +22,16 @@ public class MyUserDetails implements UserDetails {
         this.userName = user.getUsername();
         this.password = user.getPassword();
         this.active = user.getIsActive();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
+        this.authorities = new ArrayList<>(Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
     public MyUserDetails() {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))
-        && this.authorities.contains(new SimpleGrantedAuthority("ROLE_USER")) ) {
-            return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER"));
-        }
-        if (this.authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
-            return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-        }
-        if (this.authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-        return null;
+        return this.authorities;
     }
 
     @Override

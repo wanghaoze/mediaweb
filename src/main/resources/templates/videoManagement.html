@@ -189,7 +189,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item  menu-open">
@@ -488,13 +488,17 @@
                                     <div class="card mb-2 bg-gradient-dark">
                                         <img class="card-img-top" th:src="'../'+${w.framepath}" alt="Dist Photo 1">
                                         <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                            <h5 th:id="${w.id}+'w'" onclick="manageVideo(this)"  class="card-title text-primary text-white"><span th:text="${w.videoName}"></span></h5>
-                                            <p class="card-text text-white pb-2 pt-1"><span th:text="${w.videoTime}"></span></p>
-                                            <a th:id="${w.id}+'d'" onclick="deletevideo(this)" href="#" class="text-white">删除视频</a>
-                                            <a onclick="" class="text-white">替换视频</a>
+                                            <h5 th:id="${w.id}+'w'" onclick="manageVideo(this)"  class="card-title text-primary text-blue"><span th:text="${w.videoName}"></span></h5>
+                                            <p class="card-text text-blue pb-2 pt-1"><span th:text="${w.videoTime}"></span></p>
+                                            <a th:id="${w.id}+'d'" onclick="deletevideo(this)" href="#" class="text-blue">删除视频</a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col" style="margin-left: 35%">
+                                <button CLASS="btn btn-primary" onclick="lastPage()">上一页</button>
+                                <span id="pageNo" class="text-green" th:text="'  当前是第 '+${pageNo}+' 页  '" th:value="${pageNo}"></span>
+                                <button CLASS="btn btn-primary" onclick="nextPage()">下一页</button>
                             </div>
                         </div>
                     </div>
@@ -532,7 +536,24 @@
 <script src="../static/index/js/dropzone.js"></script>
 
 </body>
-
+<script>
+    function nextPage() {
+        var thisP = document.getElementById("pageNo").getAttribute("value");
+        var r_num = document.getElementsByTagName("tr").length;
+        if (r_num!==21)
+            alert("已经是最后一页了");
+        else this.location="/manage/videos?pageNo="+String(Number(thisP)+1);
+    }
+    function lastPage() {
+        var thisP = document.getElementById("pageNo").getAttribute("value");
+        // console.log(typeof number(thisP));
+        var pageNo = Number(thisP);
+        if (pageNo===1)
+            alert("已经是第一页了");
+        else
+            this.location="/manage/videos?pageNo="+String(Number(thisP)-1);
+    }
+</script>
 <script>
     function manageVideo(a) {
         var id = a.id.split("w")[0];

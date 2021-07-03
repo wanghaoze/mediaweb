@@ -33,10 +33,16 @@ public class UserController {
                 return new CommonResult<>(200,"只有系统管理才能添加用户");
             }
             CommonResult<String> ar;
+            newUser.setDateJoined(new Date());
+            newUser.setIsActive(true);
+            newUser.setIsStaff(true);
+            newUser.setLevel(0);
+            newUser.setRemarks("用户");
+            newUser.setLastLogin(new Date());
             if (newUser.getRoles().equals("") ||newUser.getRoles()==null) {
                 newUser.setRoles("ROLE_USER");
+                newUser.setIsStaff(false);
             }
-            newUser.setDateJoined(new Date());
             String message = userService.addUser(newUser);
             ar = new CommonResult<>(200, message);
             return ar;

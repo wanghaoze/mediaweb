@@ -36,10 +36,12 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         String username = ((UserDetails)authentication.getPrincipal()).getUsername();
         User user = userService.findUser(username);
+        if (user!=null)
+            userService.login(user.getId(),user);
         request.getSession().setAttribute("user", user);
         request.getSession().setMaxInactiveInterval(120*60);
         if (savedRequest == null){
-            redirectStrategy.sendRedirect(request, response, "/manage/courses");
+            redirectStrategy.sendRedirect(request, response, "/manage");
         }else {
             System.out.println(savedRequest.getRedirectUrl());
             redirectStrategy.sendRedirect(request, response, savedRequest.getRedirectUrl());

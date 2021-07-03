@@ -11,5 +11,5 @@ public interface MyTransactionService {
     public String addTransaction(MyTransaction transaction);
     public String deleteTransaction(Long id);
     public Boolean testTransaction(Long id);
-    PageInfo<MyTransaction> getTransactionByTargrt(String target);
+    PageInfo<MyTransaction> getTransactionByTargrt(String target, Integer pageNo, Integer pageSize);
 }

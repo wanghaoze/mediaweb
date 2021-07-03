@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.common.domain;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Video {
@@ -11,7 +12,7 @@ public class Video {
 
     private String videoSize;
 
-    private Date videoTime;
+    private Time videoTime;
 
     private String speaker;
 
@@ -59,11 +60,11 @@ public class Video {
         this.videoSize = videoSize == null ? null : videoSize.trim();
     }
 
-    public Date getVideoTime() {
+    public Time getVideoTime() {
         return videoTime;
     }
 
-    public void setVideoTime(Date videoTime) {
+    public void setVideoTime(Time videoTime) {
         this.videoTime = videoTime;
     }
 

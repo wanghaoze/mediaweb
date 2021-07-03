@@ -198,7 +198,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
@@ -316,7 +316,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/manage/transactions" class="nav-link">
+                                <a href="/manage/transactions" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>财务管理</p>
                                 </a>
@@ -534,6 +534,11 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="col" style="margin-left: 35%">
+                            <button CLASS="btn btn-primary" onclick="lastPage()">上一页</button>
+                            <span id="pageNo" class="text-green" th:text="'  当前是第 '+${pageNo}+' 页  '" th:value="${pageNo}"></span>
+                            <button CLASS="btn btn-primary" onclick="nextPage()">下一页</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -569,7 +574,24 @@
 <script src="../static/index/js/dropzone.js"></script>
 
 </body>
-
+<script>
+    function nextPage() {
+        var thisP = document.getElementById("pageNo").getAttribute("value");
+        var r_num = document.getElementsByTagName("tr").length;
+        if (r_num!==21)
+            alert("已经是最后一页了");
+        else this.location="/manage/transactions?pageNo="+String(Number(thisP)+1);
+    }
+    function lastPage() {
+        var thisP = document.getElementById("pageNo").getAttribute("value");
+        // console.log(typeof number(thisP));
+        var pageNo = Number(thisP);
+        if (pageNo===1)
+            alert("已经是第一页了");
+        else
+            this.location="/manage/transactions?pageNo="+String(Number(thisP)-1);
+    }
+</script>
 <script>
     var checkadd = [false, false, false, false];
     var checkdel = [false];

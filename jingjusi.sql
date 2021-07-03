@@ -136,7 +136,7 @@ create table jing_borrow_info (
                         id bigint not null auto_increment comment '主键',
                         book_id bigint not null comment '书号',
                         user_id bigint not null comment '用户号',
-                        `ISBN` varchar(32) unique not null comment 'ISBN编号',
+#                         `ISBN` varchar(32) not null comment 'ISBN编号',
                         book_name varchar(45) not null comment '书名',
                         user_name varchar(45) not null comment '用户名',
                         borrow_time timestamp not null comment '借书时间',

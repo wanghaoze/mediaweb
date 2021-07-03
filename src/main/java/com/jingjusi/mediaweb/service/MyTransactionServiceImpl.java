@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.MyTransaction;
 import com.jingjusi.mediaweb.common.domain.MyTransactionExample;
@@ -50,8 +51,9 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     }
 
     @Override
-    public PageInfo<MyTransaction> getTransactionByTargrt(String target) {
+    public PageInfo<MyTransaction> getTransactionByTargrt(String target, Integer pageNo, Integer pageSize) {
         try {
+            PageHelper.startPage(pageNo,pageSize);
             MyTransactionExample example = new MyTransactionExample();
             example.createCriteria().andTargetLike("%"+target+"%");
             List<MyTransaction> list = new ArrayList<>(mapper.selectByExample(example));

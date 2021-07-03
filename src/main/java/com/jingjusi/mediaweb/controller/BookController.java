@@ -2,7 +2,6 @@ package com.jingjusi.mediaweb.controller;
 
 import com.jingjusi.mediaweb.common.domain.Book;
 import com.jingjusi.mediaweb.common.domain.Borrow;
-import com.jingjusi.mediaweb.common.domain.BorrowInfo;
 import com.jingjusi.mediaweb.common.domain.User;
 import com.jingjusi.mediaweb.common.utils.CommonResult;
 import com.jingjusi.mediaweb.common.utils.ProcessResult;
@@ -113,6 +112,8 @@ public class BookController {
             borrow.setBookName(book.getBookName());
             borrow.setUserId(user1.getId());
             borrow.setBookId(book.getId());
+            book.setNumber(book.getNumber()-1);
+            bookService.updateBookByID(book.getId(),book);
             borrowService.addBorrow(borrow);
             return new CommonResult<>(200,"借书成功");
         }catch (Exception e){

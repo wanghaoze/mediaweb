@@ -1,5 +1,6 @@
 package com.jingjusi.mediaweb.service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.Tablet;
 import com.jingjusi.mediaweb.common.domain.TabletExample;
@@ -52,6 +53,7 @@ public class TabletServiceImpl implements TabletService{
     @Override
     public PageInfo<Tablet> findTabletByDonors(String donors, Integer pageNo, Integer pageSize) {
         try {
+            PageHelper.startPage(pageNo,pageSize);
             TabletExample example = new TabletExample();
             example.createCriteria().andDonorsLike("%"+donors+"%");
             List<Tablet> tablets = new ArrayList<>(tabletMapper.selectByExample(example));
@@ -65,26 +67,18 @@ public class TabletServiceImpl implements TabletService{
     @Override
     public PageInfo<Tablet> getTabletsByExample(Tablet tablet, Integer pageNo, Integer pageSize) {
         try {
+            PageHelper.startPage(pageNo,pageSize);
             TabletExample tabletExample = new TabletExample();
-            if (tablet.getLocation()!=null)
-                tabletExample.createCriteria().andLocationLike("%"+tablet.getLocation()+"%");
+            if (tablet.getDistribution()!=null)
+                tabletExample.createCriteria()
+                        .andDistributionEqualTo(tablet.getDistribution())
+                        .andRowNumEqualTo(tablet.getRowNum())
+                        .andColNumEqualTo(tablet.getColNum());
             else if (tablet.getDonors()!=null)
-                tabletExample.createCriteria().andDonorsLike("%"+tablet.getDonors()+"%");
-            else if (tablet.getTabletType()!=null)
-                tabletExample.createCriteria().andTabletTypeLike("%"+tablet.getTabletType()+"%");
-
-            if (tablet.getCreateTime()!=null)
-                 tabletExample.or().andCreateTimeEqualTo(tablet.getCreateTime());
-            if (tablet.getLocation()!=null)
-                tabletExample.or().andLocationLike("%"+tablet.getLocation()+"%");
-            if (tablet.getDonors()!=null)
-                tabletExample.or().andDonorsLike("%"+tablet.getDonors()+"%");
-            if (tablet.getTabletType()!=null)
-                tabletExample.or().andTabletTypeLike("%"+tablet.getTabletType()+"%");
-            if (tablet.getRowNum()!=null)
-                tabletExample.or().andRowNumEqualTo(tablet.getRowNum());
-            if (tablet.getColNum()!=null)
-                tabletExample.or().andRowNumEqualTo(tablet.getColNum());
+                tabletExample.createCriteria().andDonorsLike(tablet.getDonors());
+            else if (tablet.getContacts()!=null)
+                tabletExample.createCriteria().andContactsEqualTo(tablet.getContacts());
+            else tabletExample.createCriteria().andDonorsLike("%"+"%");
             List<Tablet> tables = new ArrayList<>(tabletMapper.selectByExample(tabletExample));
             return new PageInfo<>(tables);
         } catch (Exception e) {

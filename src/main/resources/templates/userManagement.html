@@ -198,7 +198,7 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
@@ -225,7 +225,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-male"></i>
                             <p>
@@ -396,10 +396,54 @@
                     </button>
                         <button class="btn btn-danger"
                                 data-toggle="modal" data-target="#delete">删除用户
-                        </button></div>
+                        </button>
+
+                        <button CLASS="btn btn-primary" data-toggle="modal" data-target="#find">查找用户</button></div>
 
                 </div>
 
+                <div id="find" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-title">
+                                <h1 class="text-center">查找用户</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form-find">
+                                    <div class="form-group has-feedback">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <label for="fd-userName" >用户名</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                                                    <input id="fd-userName" class="form-control" placeholder="请输入用户名" maxlength="13" type="text">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <span style="color:red;display: none;" class="tips"></span>
+                                        <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                        <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                                    </div>
+
+                                    <div class="text-right">
+                                        <button class="btn btn-primary" type="button" onclick="findU()">查找</button>
+                                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- 添加用户窗口 -->
                 <div id="add" class="modal fade">
                     <div class="modal-dialog">
@@ -588,6 +632,11 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="col" style="margin-left: 35%">
+                            <button CLASS="btn btn-primary" onclick="lastPage()">上一页</button>
+                            <span id="pageNo" class="text-green" th:text="'  当前是第 '+${pageNo}+' 页  '" th:value="${pageNo}"></span>
+                            <button CLASS="btn btn-primary" onclick="nextPage()">下一页</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -623,7 +672,35 @@
 <script src="../static/index/js/dropzone.js"></script>
 
 </body>
-
+<script>
+    function findU() {
+        var userName = document.getElementById("fd-userName").value;
+        if (userName==null){
+            alert("请输入用户名");
+        }else {
+            // console.log("/manage/tablets?distribution="+distribution+"&col_num="+col_num+"&row_num="+row_num);
+            this.location="/manage/users?userName="+userName;
+        }
+    }
+</script>
+<script>
+    function nextPage() {
+        var thisP = document.getElementById("pageNo").getAttribute("value");
+        var r_num = document.getElementsByTagName("tr").length;
+        if (r_num!==21)
+            alert("已经是最后一页了");
+        else this.location="/manage/users?pageNo="+String(Number(thisP)+1);
+    }
+    function lastPage() {
+        var thisP = document.getElementById("pageNo").getAttribute("value");
+        // console.log(typeof number(thisP));
+        var pageNo = Number(thisP);
+        if (pageNo===1)
+            alert("已经是第一页了");
+        else
+            this.location="/manage/users?pageNo="+String(Number(thisP)-1);
+    }
+</script>
 <script>
     var checkbox = document.all('course');
     var checkall = document.getElementById('isAdmin');

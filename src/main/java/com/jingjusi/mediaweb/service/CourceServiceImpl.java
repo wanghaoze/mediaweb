@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.jingjusi.mediaweb.common.domain.*;
 import com.jingjusi.mediaweb.mapper.CourseMapper;
 import com.jingjusi.mediaweb.mapper.CourseUserMapper;
+import com.jingjusi.mediaweb.mapper.CourseVideoMapper;
 import com.jingjusi.mediaweb.mapper.UserMapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class CourceServiceImpl implements CourseService{
     CourseUserMapper courseUserMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    CourseVideoMapper courseVideoMapper;
 
     @Override
     public String addCourse(Course course) {
@@ -60,6 +63,12 @@ public class CourceServiceImpl implements CourseService{
     public String deleteCourseById(Long courseId) {
         try {
             courseMapper.deleteByPrimaryKey(courseId);
+            CourseVideoExample example = new CourseVideoExample();
+            example.createCriteria().andCourseIdEqualTo(courseId);
+            courseVideoMapper.deleteByExample(example);
+            CourseUserExample example1 = new CourseUserExample();
+            example1.createCriteria().andCourseIdEqualTo(courseId);
+            courseUserMapper.deleteByExample(example1);
             return "删除成功";
         } catch (Exception e) {
             System.out.println(e);

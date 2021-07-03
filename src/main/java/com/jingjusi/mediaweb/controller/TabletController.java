@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,10 +57,13 @@ public class TabletController {
             if (tablet.getCreateTime()==null){
                 tablet.setCreateTime(new Date());
             }
+            System.out.println(tablet.getExpireTime());
             if (tablet.getExpireTime()==null){
                 Date date = tablet.getCreateTime();
-                date.setYear(date.getYear()+1);
-                tablet.setExpireTime(date);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.add(Calendar.YEAR, 1);
+                tablet.setExpireTime(cal.getTime());
             }
             tablet.setLocation("海会塔");
             String message = tabletService.addTablet(tablet);

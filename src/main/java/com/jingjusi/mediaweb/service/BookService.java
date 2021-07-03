@@ -11,7 +11,7 @@ public interface BookService {
     public String addBook(Book book);
     public String deleteBookByID(Long id);
     public String deleteBookByISBN(String isbn);
-    public PageInfo<Book> getBooksByName(String bookName);
+    public PageInfo<Book> getBooksByName(String bookName, Integer pageNo, Integer pageSize);
     public Book getBookByID(Long id);
     public Book getBookByISBN(String isbn);
     public String updateBookByID(Long id, Book book);

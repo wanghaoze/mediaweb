@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.util.unit.DataSize;
 
 import javax.servlet.MultipartConfigElement;
-
+//@EnableEurekaServer
 @SpringBootApplication
 @MapperScan(basePackages = "com.jingjusi.mediaweb.mapper")
 public class MediawebApplication {
